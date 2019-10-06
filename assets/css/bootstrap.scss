@@ -1,0 +1,52 @@
+$body-bg: #f0f0f0;
+@import "~bootstrap/scss/bootstrap";
+
+html,body {
+  height: 100%;
+}
+code,pre {
+  background: #f0f0f0;
+}
+.background-grey {
+  background: #f0f0f0;
+}
+.background-dark-grey {
+  background: #b0b0b0;
+}
+div.background-white {
+  background: #ffffff;
+}
+pre {
+  padding:0;
+  border-left: 4px solid #b0b0b0;
+  overflow:hidden;
+}
+
+code {
+  background-color:#eee;
+  overflow:auto;
+
+}
+
+code .line-number {
+  //font:normal normal 12px/14px "Courier New",Courier,Monospace;
+  color:black;
+  display:block;
+}
+
+code .line-number {
+  float:left;
+  margin:0 1em 0 -1em;
+  border-right:1px solid;
+  text-align:right;
+}
+
+code .line-number span {
+  display:block;
+  padding:0 .5em 0 1em;
+}
+
+code .cl {
+  display:block;
+  clear:both;
+}

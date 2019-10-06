@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            background-image: linear-gradient(to top, #F0F0F0, #F9F9F9);
+            background-repeat: no-repeat;
+        }
+        header{
+            /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+            flex: 0 0 auto;
+        }
+        .main-content{
+            /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+            flex: 1 0 auto;
+        }
+        footer{
+            /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+            flex: 0 0 auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="row m-0 justify-content-center">
+        <div class="col-8 m-0 p-0 shadow background-white">
+            <div class="row justify-content-between border-bottom p-4 m-0">
+                <div class="col-6">
+                    <h1><a href="/" class="text-dark">Блог одного программиста</a></h1>
+                </div>
+                <div class="col-6">
+                    <b>Заметки о программировании преимущественно на PHP,<br> заметки о системном администрировании</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+    <section class="main-content">
+        <div class="row  m-0 justify-content-center h-100">
+            <div class="col-8 shadow" style="background: white;">
+                {% for message in app.session.flashBag.get('notice') %}
+                    <div class="col-12 alert alert-success p-0 m-0" role="alert">
+                        {{ message|trans }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                {% for message in app.session.flashBag.get('error') %}
+                    <div class=" col-12 alert alert-danger p-3 mt-2" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                <div class="col-12 pt-3">
+                    <div class="row">
+                        <div class="col-9 pt-2 pl-4 pr-4 mt-0 ml-0 mr-0 mb-3">
+                            {% block body %}{% endblock %}
+                        </div>
+                        <div class="col-3 border-left pt-2 mt-0 ml-0 mr-0 mb-3">
+                            navigation
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="row m-0 justify-content-center ">
+            <div class="col-8 m-0 p-0 shadow background-white p-4 text-center border-top">
+                Все материалы принадлежат автору. Публикация возможна с согласия автора. 2019. <a href="mailto:s@istranet.ru">Анатолий Шадрин</a>
+            </div>
+        </div>
+    </footer>
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+    </body>
+</html>

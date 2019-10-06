@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-12 p-0">
+        <ul class="nav nav-pills mb-1 ml-0 mr-0">
+            <li class="nav-item p-1">
+                <a class="btn btn-sm bg-primary text-white" href="{{ path('section.add') }}">Section Add</a>
+            </li>
+        </ul>
+    </div>
+    <table class="table w-100 table-bordered">
+    <thead>
+    <tr>
+        <th class=" p-2 m-0">#</th>
+        <th class=" p-2 m-0">Machine name</th>
+        <th class=" p-2 m-0">Name</th>
+        <th class=" p-2 m-0">Actions</th>
+    </tr>
+    </thead>
+        <tbody>
+    {% for section in sections %}
+            <tr>
+                <td class=" p-2 m-0">{{ section.id }}</td>
+                <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': section.id}) }}">{{ section.machineName }}</a></td>
+                <td class=" p-2 m-0">{{ section.name }}</td>
+                <td class=" p-2 m-0">
+                    <ul class="nav nav-pills pb-1">
+                        <li class="nav-item p-1">
+                            <a class="btn btn-sm bg-primary text-white" href="{{ path('section.edit', {'section': section.id}) }}">Edit</a>
+                        </li>
+                        <li class="nav-item p-1">
+                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': section.id}) }}">Remove</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <div class="col-12 pt-2">{{ knp_pagination_render(sections, null, {}, {'align': 'center', 'size': 'small'}) }}</div>
+{% endblock %}
