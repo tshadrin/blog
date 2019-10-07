@@ -18,6 +18,7 @@
     "dependencies": {
         "bootstrap": "4",
         "ckeditor": "^4.12.1",
+        "highlight.js": "^9.15.10",
         "jquery": "^3.4.1",
         "popper.js": "^1.15.0"
     }

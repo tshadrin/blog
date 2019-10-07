@@ -1,5 +1,6 @@
 $body-bg: #f0f0f0;
 @import "~bootstrap/scss/bootstrap";
+@import "~highlight.js/scss/default";
 
 html,body {
   height: 100%;
@@ -19,13 +20,13 @@ div.background-white {
 pre {
   padding:0;
   border-left: 4px solid #b0b0b0;
-  overflow:hidden;
+  overflow:auto;
 }
 
 code {
   background-color:#eee;
   overflow:auto;
-
+  padding:0 !important;
 }
 
 code .line-number {
@@ -49,4 +50,7 @@ code .line-number span {
 code .cl {
   display:block;
   clear:both;
+}
+img {
+  padding-right:5px;
 }

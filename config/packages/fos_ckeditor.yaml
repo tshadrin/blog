@@ -10,4 +10,4 @@ fos_ck_editor:
         default:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            extraPlugins: 'lineutils,widget,dialog,codesnippet,widgetselection'
+            extraPlugins: 'codesnippet'

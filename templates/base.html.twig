@@ -28,7 +28,7 @@
 <body>
 <header>
     <div class="row m-0 justify-content-center">
-        <div class="col-8 m-0 p-0 shadow background-white">
+        <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 m-0 p-0 shadow background-white">
             <div class="row justify-content-between border-bottom p-4 m-0">
                 <div class="col-6">
                     <h1><a href="/" class="text-dark">Блог одного программиста</a></h1>
@@ -42,7 +42,7 @@
 </header>
     <section class="main-content">
         <div class="row  m-0 justify-content-center h-100">
-            <div class="col-8 shadow" style="background: white;">
+            <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 shadow" style="background: white;">
                 {% for message in app.session.flashBag.get('notice') %}
                     <div class="col-12 alert alert-success p-0 m-0" role="alert">
                         {{ message|trans }}
@@ -74,11 +74,12 @@
     </section>
     <footer>
         <div class="row m-0 justify-content-center ">
-            <div class="col-8 m-0 p-0 shadow background-white p-4 text-center border-top">
-                Все материалы принадлежат автору. Публикация возможна с согласия автора. 2019. <a href="mailto:s@istranet.ru">Анатолий Шадрин</a>
+            <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 m-0 p-0 shadow background-white p-4 text-center border-top">
+                Все материалы разрешено использовать на свое усмотрение. <br>Привествуется указание ссылки на первоисточник.<br> 2019 <a href="mailto:s@istranet.ru">ShAM</a>
             </div>
         </div>
     </footer>
     {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+<script type="text/javascript"></script>
     </body>
 </html>
