@@ -4,18 +4,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
-    <style>
-        html {
-            min-height: 100%;
-        }
-        body {
-            background-image: linear-gradient(to top, #F0F0F0, #F9F9F9);
-            background-repeat: no-repeat;
-        }
-
-    </style>
 </head>
-<body class="d-flex flex-column flex-grow-1 mr-auto">
+<body class="d-flex flex-column flex-grow-1 mr-auto w-100">
 <header class="main-header row justify-content-center no-gutters">
     <div class="col-12 col-xl-8 shadow b-green border-bottom">
         <div class="row justify-content-between p-3 m-0">

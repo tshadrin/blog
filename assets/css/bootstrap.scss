@@ -2,6 +2,13 @@ $body-bg: #f0f0f0;
 @import "~bootstrap/scss/bootstrap";
 @import "~highlight.js/scss/default";
 
+html {
+  min-height: 100%;
+}
+body {
+  background-image: linear-gradient(to top, #F0F0F0, #F9F9F9);
+  background-repeat: no-repeat;
+}
 
 code,pre {
   background: #f0f0f0;
@@ -60,4 +67,8 @@ img {
   pre {
     font-size: 0.7em;
   }
+}
+
+p {
+  text-indent: 20px;
 }
