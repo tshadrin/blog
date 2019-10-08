@@ -25,8 +25,9 @@
     </div>
 </nav>
 <section class="main row justify-content-center no-gutters flex-grow-1">
-    <div class="d-flex col-12 col-xl-8 p-0 m-0 shadow flex-shrink-1">
-            <div class="content b-white p-0 m-0 col-9">
+    <div class="col-12 col-xl-8 p-0 m-0 shadow b-white">
+        <div class="row no-gutters h-100">
+            <div class="content b-white p-0 m-0 col-12 col-xl-9">
                 {% for message in app.session.flashBag.get('notice') %}
                     <div class="col-12 alert alert-success p-0 m-0" role="alert">
                         {{ message|trans }}
@@ -45,14 +46,15 @@
                 {% endfor %}
                 {% block body %}{% endblock %}
             </div>
-            <div class="sidebar b-white border-left m-0 col-3 p-4">
+            <div class="sidebar b-white border-left m-0 col-12 col-xl-3 p-4">
                 {% if(is_granted("ROLE_ADMIN")) %}
-                <div>
-                    <strong>{{ 'Admin menu'|trans }}</strong>
-                    {{ knp_menu_render('admin') }}
-                </div>
+                    <div>
+                        <strong>{{ 'Admin menu'|trans }}</strong>
+                        {{ knp_menu_render('admin') }}
+                    </div>
                 {% endif %}
             </div>
+        </div>
     </div>
 </section>
 <footer class="row justify-content-center m-0">
