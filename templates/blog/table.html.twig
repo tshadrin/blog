@@ -5,12 +5,12 @@
     <thead>
     <tr>
         <th class=" p-2 m-0">#</th>
-        <th class=" p-2 m-0">Title</th>
-        <th class=" p-2 m-0">Created</th>
-        <th class=" p-2 m-0">Section</th>
-        <th class=" p-2 m-0">Author</th>
-        <th class=" p-2 m-0">Tags</th>
-        <th class=" p-2 m-0">Actions</th>
+        <th class=" p-2 m-0">{{ 'Title'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Created'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Section'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Author'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Tags'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
     </tr>
     </thead>
         <tbody>
@@ -31,10 +31,10 @@
                 <td class=" p-2 m-0">
                     <ul class="nav nav-pills pb-1">
                         <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Edit</a>
+                            <a class="btn btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Edit'|trans }}</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Remove</a>
+                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Remove'|trans }}</a>
                         </li>
                     </ul>
                 </td>

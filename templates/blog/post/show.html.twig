@@ -2,19 +2,19 @@
 
 {% block body %}
     <div class="p-4{% if not post.published %} background-grey{% endif %}">
-        {% if not post.published %}<div class="w-100 p-3 m-3 alert-info">Post is not published.</div>{% endif %}
         {% if is_granted("ROLE_ADMIN") %}
             <div class="col-12 pb-3">
                 <ul class="nav nav-pills border-bottom pb-1">
                     <li class="nav-item p-1">
-                        <a class="nav-link bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Edit</a>
+                        <a class="nav-link btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Edit'|trans }}</a>
                     </li>
                     <li class="nav-item p-1">
-                        <a class="nav-link bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Remove</a>
+                        <a class="nav-link btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Remove'|trans }}</a>
                     </li>
                 </ul>
             </div>
         {% endif %}
+        {% if not post.published %}<div class=" p-3 m-3 alert-info">{{ 'Post is not published'|trans }}</div>{% endif %}
         <div class="col-12"><h4 class="mb-0">{{ post.title }}</h4></div>
         <div class="col-12 pb-2"><i>{{ post.created|date("d-m-Y H:i") }}</i></div>
         <div class="col-12">{{ post.teaser|raw }}</div>
@@ -22,9 +22,9 @@
         {% if post.tags is not empty %}
             <div class="col-12">
                 <ul class="nav justify-content-start">
-                    <li class="nav-item"><a href="#" class="nav-link disabled  pr-1 pl-0">Метки: </a></li>
+                    <li class="nav-item"><a href="#" class="nav-link disabled  pr-1 pl-0">{{ 'Tags'|trans }}: </a></li>
             {% for tag in post.tags %}
-                <li class="nav-item"><a class="nav-link pr-1 pl-1" href="{{ path('blog.tag', {'tag': tag }) }}">{{ tag }}</a></li>
+                <li class="nav-item"><a class="nav-link pr-2 pl-2" href="{{ path('blog.tag', {'tag': tag }) }}">{{ tag }}</a></li>
             {% endfor %}
                 </ul>
             </div>

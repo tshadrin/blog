@@ -6,7 +6,7 @@
     {{ form_widget(form.machine_name, {'attr': {'class': 'mb-2'}}) }}
     {{ form_label(form.name) }}
     {{ form_widget(form.name, {'attr': {'class': 'mb-2'}}) }}
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
     {{ form_end(form) }}
     </div>
 {% endblock %}

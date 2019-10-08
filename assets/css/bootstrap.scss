@@ -2,7 +2,7 @@ $body-bg: #f0f0f0;
 @import "~bootstrap/scss/bootstrap";
 @import "~highlight.js/scss/default";
 
-/*
+
 code,pre {
   background: #f0f0f0;
 }
@@ -12,10 +12,10 @@ code,pre {
 .background-dark-grey {
   background: #b0b0b0;
 }
-.background-green {
+.b-green {
     background-color: #a8ffd2;
 }
-div.background-white {
+div.b-white {
   background: #ffffff;
 }
 pre {
@@ -61,9 +61,3 @@ img {
     font-size: 0.7em;
   }
 }
-@media (max-width: 640px ) {
-  pre {
-    font-size: 0.6em;
-  }
-}
-*/

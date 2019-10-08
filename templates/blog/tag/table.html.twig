@@ -4,7 +4,7 @@
     <div class="col-12 p-0">
         <ul class="nav nav-pills mb-1 ml-0 mr-0">
             <li class="nav-item p-1">
-                <a class="btn btn-sm bg-primary text-white" href="{{ path('tag.add') }}">Tag Add</a>
+                <a class="btn btn-sm bg-primary text-white" href="{{ path('tag.add') }}">{{ 'Add tag'|trans }}</a>
             </li>
         </ul>
     </div>
@@ -12,7 +12,8 @@
     <thead>
     <tr>
         <th class=" p-2 m-0">#</th>
-        <th class=" p-2 m-0">Name</th>
+        <th class=" p-2 m-0">{{ 'Name'|trans }}</th>
+        <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
     </tr>
     </thead>
         <tbody>
@@ -23,10 +24,10 @@
                 <td class=" p-2 m-0">
                     <ul class="nav nav-pills pb-1">
                         <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-primary text-white" href="{{ path('tag.edit', {'tag': tag.id}) }}">Edit</a>
+                            <a class="btn btn-sm bg-primary text-white" href="{{ path('tag.edit', {'tag': tag.id}) }}">{{ 'Edit'|trans }}</a>
                         </li>
                         <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': tag.id}) }}">Remove</a>
+                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': tag.id}) }}">{{ 'Remove'|trans }}</a>
                         </li>
                     </ul>
                 </td>
