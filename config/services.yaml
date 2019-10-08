@@ -23,5 +23,15 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    section.menu:
+        class: Knp\Menu\MenuItem
+        factory: ['App\Menu\SectionMenu', build]
+        tags:
+            - { name: knp_menu.menu, alias: section }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    #меню
+    Knp\Menu\MenuItem:
+        factory: ['App\Menu\AdminMenu', build]
+        tags:
+            - { name: knp_menu.menu, alias: admin }

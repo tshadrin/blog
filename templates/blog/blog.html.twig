@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="pl-4 pr-4">
     {% for post in posts %}
-        <div class="row border-bottom pb-1 mt-3">
-            <div class="col-12"><a class="text-dark" href="{{ path('blog.show', {'post': post.id}) }}"><h4>{{ post.title }}</h4></a></div>
-            <div class="col-12 pb-2"><i>{{ post.created|date("d-m-Y H:i") }}</i></div>
-            <div class="col-12 pb-0 mb-0">{{ post.teaser|raw }}</div>
+        <div class="border-bottom">
+            <div class="col-12"><h4 class="mb-0 mt-4">{{ post.title }}</h4></div>
+            <div class="col-12"><i><a class="text-dark" href="{{ path('blog.show', {'post': post.id}) }}">{{ post.created|date("d-m-Y H:i") }}</a></i></div>
+            <div class="col-12">{{ post.teaser|raw }}</div>
             <div class="col-12 text-right"><a href="{{ path('blog.show', {'post': post.id}) }}">Читать полностью...</a></div>
         </div>
     {% endfor %}
     <div class="col-12 pt-2">{{ knp_pagination_render(posts, null, {}, {'align': 'center', 'size': 'small'}) }}</div>
+    </div>
 {% endblock %}

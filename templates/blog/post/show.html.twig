@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row pb-1 {% if not post.published %}background-grey{% endif %}">
+    <div class="p-4{% if not post.published %} background-grey{% endif %}">
         {% if not post.published %}<div class="w-100 p-3 m-3 alert-info">Post is not published.</div>{% endif %}
         {% if is_granted("ROLE_ADMIN") %}
-            <div class="col-12">
-            <ul class="nav nav-pills border-bottom pb-1">
-                <li class="nav-item p-1">
-                    <a class="nav-link bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Edit</a>
-                </li>
-                <li class="nav-item p-1">
-                    <a class="nav-link bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Remove</a>
-                </li>
-            </ul>
+            <div class="col-12 pb-3">
+                <ul class="nav nav-pills border-bottom pb-1">
+                    <li class="nav-item p-1">
+                        <a class="nav-link bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Edit</a>
+                    </li>
+                    <li class="nav-item p-1">
+                        <a class="nav-link bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">Remove</a>
+                    </li>
+                </ul>
             </div>
         {% endif %}
         <div class="col-12"><h4 class="mb-0">{{ post.title }}</h4></div>

@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="p-4 w-100">
     {{ form_start(form, {'method': 'POST'}) }}
     {{ form_label(form.machine_name, null, {'label_attr': {'class': ''}}) }}
     {{ form_widget(form.machine_name, {'attr': {'class': 'mb-2'}}) }}
@@ -7,4 +8,5 @@
     {{ form_widget(form.name, {'attr': {'class': 'mb-2'}}) }}
     <button type="submit" class="btn btn-primary">Save</button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

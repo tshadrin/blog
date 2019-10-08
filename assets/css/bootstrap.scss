@@ -2,9 +2,7 @@ $body-bg: #f0f0f0;
 @import "~bootstrap/scss/bootstrap";
 @import "~highlight.js/scss/default";
 
-html,body {
-  height: 100%;
-}
+/*
 code,pre {
   background: #f0f0f0;
 }
@@ -14,6 +12,9 @@ code,pre {
 .background-dark-grey {
   background: #b0b0b0;
 }
+.background-green {
+    background-color: #a8ffd2;
+}
 div.background-white {
   background: #ffffff;
 }
@@ -21,6 +22,7 @@ pre {
   padding:0;
   border-left: 4px solid #b0b0b0;
   overflow:auto;
+  font-size: 0.8em;
 }
 
 code {
@@ -54,3 +56,14 @@ code .cl {
 img {
   padding-right:5px;
 }
+@media (max-width: 1377px ) {
+  pre {
+    font-size: 0.7em;
+  }
+}
+@media (max-width: 640px ) {
+  pre {
+    font-size: 0.6em;
+  }
+}
+*/

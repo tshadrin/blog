@@ -5,80 +5,108 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
     <style>
+        html {
+            min-height: 100%;
+        }
         body {
+            display: -webkit-flex;
             display: flex;
             flex-direction: column;
+            flex: auto;
+
             background-image: linear-gradient(to top, #F0F0F0, #F9F9F9);
             background-repeat: no-repeat;
         }
         header{
-            /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
-            flex: 0 0 auto;
+            display: -webkit-flex;
+            display: flex;
         }
-        .main-content{
-            /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
-            flex: 1 0 auto;
+        nav {
+            text-align: center;
+        }
+        .sidebar {
+            display: -webkit-flex;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+        }
+        .content {
+            display: -webkit-flex;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+        }
+        section.main{
+            flex: auto;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .inner {
+            width: 100%;
+            display: -webkit-flex;
+            display: flex;
         }
         footer{
-            /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
             flex: 0 0 auto;
         }
     </style>
 </head>
 <body>
-<header>
-    <div class="row m-0 justify-content-center">
-        <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 m-0 p-0 shadow background-white">
-            <div class="row justify-content-between border-bottom p-4 m-0">
-                <div class="col-6">
-                    <h1><a href="/" class="text-dark">Блог одного программиста</a></h1>
-                </div>
-                <div class="col-6">
-                    <b>Заметки о программировании преимущественно на PHP,<br> заметки о системном администрировании</b>
-                </div>
+<header class="header row justify-content-center m-0">
+    <div class="col-12 col-xl-8 m-0 shadow background-green border-bottom">
+        <div class="row justify-content-between p-4 m-0">
+            <div class="col-6">
+                <h1><a href="/" class="text-dark">Блог одного программиста</a></h1>
+            </div>
+            <div class="col-6">
+                <b>Заметки о программировании на PHP,<br> заметки о системном администрировании</b>
             </div>
         </div>
     </div>
 </header>
-    <section class="main-content">
-        <div class="row  m-0 justify-content-center h-100">
-            <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 shadow" style="background: white;">
-                {% for message in app.session.flashBag.get('notice') %}
-                    <div class="col-12 alert alert-success p-0 m-0" role="alert">
-                        {{ message|trans }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-                {% for message in app.session.flashBag.get('error') %}
-                    <div class=" col-12 alert alert-danger p-3 mt-2" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-                <div class="col-12 pt-3">
-                    <div class="row">
-                        <div class="col-9 pt-2 pl-4 pr-4 mt-0 ml-0 mr-0 mb-3">
-                            {% block body %}{% endblock %}
-                        </div>
-                        <div class="col-3 border-left pt-2 mt-0 ml-0 mr-0 mb-3">
-                            navigation
-                        </div>
-                    </div>
+<nav class="navbar row justify-content-center p-0 m-0 ">
+    <div class="col-12 col-xl-8 m-0 shadow background-white  border-bottom shadow">
+        {{  knp_menu_render('section', {'depth': 2, 'currentAsLink': true, 'currentClass': 'active'}) }}
+    </div>
+</nav>
+<section class="main row justify-content-center p-0 m-0">
+    <div class="col-12 col-xl-8 inner p-0 m-0 shadow">
+        <div class="content p-0 m-0 col-9">
+            {% for message in app.session.flashBag.get('notice') %}
+                <div class="col-12 alert alert-success p-0 m-0" role="alert">
+                    {{ message|trans }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+            {% endfor %}
+            {% for message in app.session.flashBag.get('error') %}
+                <div class=" col-12 alert alert-danger p-3 mt-2" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            {% block body %}{% endblock %}
+        </div>
+        <div class="sidebar border-left m-0 col-3 p-4">
+            <div>
+                <strong>Admin menu</strong>
+            {{ knp_menu_render('admin') }}
             </div>
         </div>
-    </section>
-    <footer>
-        <div class="row m-0 justify-content-center ">
-            <div class="col-12 col-lg-10 col-md-10 col-sm-12 col-xl-8 m-0 p-0 shadow background-white p-4 text-center border-top">
-                Все материалы разрешено использовать на свое усмотрение. <br>Привествуется указание ссылки на первоисточник.<br> 2019 <a href="mailto:s@istranet.ru">ShAM</a>
+    </div>
+</section>
+<footer class="row justify-content-center m-0">
+    <div class="col-12 col-xl-8 background-white border-top shadow">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center p-2">
+            Все материалы разрешено использовать на свое усмотрение. <br>Привествуется указание ссылки на первоисточник.<br> 2019 <a href="mailto:s@istranet.ru">ShAM</a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
     {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
 <script type="text/javascript"></script>
     </body>

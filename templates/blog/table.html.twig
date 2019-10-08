@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+    <div class="p-4 table-responsive">
     <table class="table table-bordered table-responsive">
     <thead>
     <tr>
@@ -42,4 +43,5 @@
         </tbody>
     </table>
     <div class="col-12 pt-2">{{ knp_pagination_render(posts, null, {}, {'align': 'center', 'size': 'small'}) }}</div>
+    </div>
 {% endblock %}

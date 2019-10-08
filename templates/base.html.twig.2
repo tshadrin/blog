@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    <style>
+        html, body {
+            height:100vh;
+        }
+        body {
+        }
+        header {
+            background-color: #0b93d5;
+        }
+        div.header-header {
+            background-color: #3f7506;
+        }
+        div.header-description {
+            background-color: #79c9ec;
+        }
+        nav {
+            background-color: #8e846b;
+        }
+        section {
+            background-color: #0b58a2;
+        }
+        div.footer-inner {
+            background-color: #3f7506;
+        }
+        div.sidebar {
+            background-color: #d9bb73;
+        }
+        div.content {
+            background-color: aquamarine;
+        }
+        wrapper {
+            background-color: #79c9ec;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+<wrapper class="flex-fill container-fluid">
+    <div class="row justify-content-center align-content-start">
+        <header class="col-8 shadow">
+            <div class="row">
+                <div class="header-header col-6">
+                    <h1><a class="text-dark" href="/">Блог одного программиста</a></h1>
+                </div>
+                <div class="header-description col-6">
+                    <b>Заметки о программировании на PHP,<br> заметки о системном администрировании</b>
+                </div>
+            </div>
+        </header>
+        <nav class="col-8 shadow">
+            <div class="row">
+                <div class="col-12">
+                Navigation
+                </div>
+            </div>
+        </nav>
+        <section class="col-8 container-fluid flex-fill">
+            <div class="row">
+                    <div class="sidebar col-9 offset-3">
+                        Content Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebarr
+                        Content Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar SidebarContent Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                    </div>
+                    <div class="content col-3">
+                        Content Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Content Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                        Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar Sidebar
+                    </div>
+            </div>
+        </section>
+    </div>
+</wrapper>
+<footer class="row justify-content-center no-gutters">
+    <div class="footer-inner col-8 shadow">
+        Footer
+    </div>
+</footer>
+</body>
+</html>
