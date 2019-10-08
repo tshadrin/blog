@@ -33,9 +33,10 @@ class SectionMenu
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
         foreach ($sections as $section) {
-            $menu->addChild($section->getName(), ['route' => 'blog.section', 'routeParameters' => ['section' => $section->getMachineName()],])
+            $menu->addChild($section->getName(), ['route' => 'blog.section', 'routeParameters' => ['section' => $section->getMachineName()]])
                 ->setAttribute('class', 'nav-item')
-                ->setLinkAttribute('class', 'nav-link');
+                ->setLinkAttribute('class', 'nav-link')
+                ->setExtra('translation_domain', false);
         }
         return $menu;
     }
