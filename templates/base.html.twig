@@ -5,7 +5,7 @@
     <title>{% block title %}Блог одного программиста{% endblock %}</title>
     {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
 </head>
-<body class="d-flex flex-column flex-grow-1 mr-auto w-100">
+<body class="d-flex flex-column flex-grow-1 flex-shrink-1 mr-auto w-100">
 <header class="main-header row justify-content-center no-gutters">
     <div class="col-12 col-xl-8 shadow b-green border-bottom">
         <div class="row justify-content-between p-3 m-0">
@@ -24,10 +24,10 @@
         {{  knp_menu_render('section', {'depth': 2, 'currentAsLink': true, 'currentClass': 'active'}) }}
     </div>
 </nav>
-<section class="main row justify-content-center no-gutters flex-grow-1"">
+<section class="main row justify-content-center no-gutters flex-grow-1">
     <div class="col-12 col-xl-8 p-0 m-0 shadow b-white">
-        <div class="row no-gutters h-100 flex-row-reverse align-content-start">
-            <div class="sidebar b-white border-left m-0 col-md-12 col-12 col-lg-3 col-xl-2 p-4 border-bottom">
+        <div class="row no-gutters  flex-row-reverse flex-lg-row-reverse h-100 align-content-lg-stretch align-content-md-start">
+            <div class="sidebar b-white border-left m-0 col-12 col-md-12 col-lg-3 col-xl-4 p-4 border-bottom">
                 {% if(is_granted("ROLE_ADMIN")) %}
                     <div>
                         <strong>{{ 'Admin menu'|trans }}</strong>
@@ -35,7 +35,7 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="content b-white p-0 m-0 col-12 col-lg-9 col-xl-10 h-100">
+            <div class="content b-white p-0 m-0 col-12 col-md-12 col-lg-9 col-xl-8 flex-grow-1 flex-shrink-1">
                 {% for message in app.session.flashBag.get('notice') %}
                     <div class="col-12 alert alert-success p-0 m-0" role="alert">
                         {{ message|trans }}
