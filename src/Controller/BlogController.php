@@ -52,6 +52,7 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Add\Command($form->getData()));
+            $this->addFlash('notice', 'Post saved');
             return $this->redirectToRoute("blog");
         }
         return $this->render("blog/post-add.html.twig", ['form' => $form->createView()]);
@@ -70,6 +71,7 @@ class BlogController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($post, $postDTO));
+            $this->addFlash('notice', 'Post saved');
             return $this->redirectToRoute("blog.show", ['post' => $post->getId()]);
         }
         return $this->render("blog/post-add.html.twig", ['form' => $form->createView()]);

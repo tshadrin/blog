@@ -36,6 +36,7 @@ class TagController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Add\Command($form->getData()));
+            $this->addFlash('notice', 'Tag saved');
             return $this->redirectToRoute("tag.table");
         }
         return $this->render("blog/tag/tag-add.html.twig", ['form' => $form->createView()]);
