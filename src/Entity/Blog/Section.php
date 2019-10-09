@@ -89,4 +89,12 @@ class Section
     {
         $this->machineName = $machineName;
     }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
 }

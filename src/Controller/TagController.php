@@ -5,12 +5,11 @@ namespace App\Controller;
 
 use App\Entity\Blog\Section;
 use App\Entity\Blog\Tag;
-use App\Form\Section\SectionDTO;
-use App\Form\Section\SectionForm;
-use App\Repository\Blog\SectionRepository;
+use App\Form\Tag\TagDTO;
+use App\Form\Tag\TagForm;
 use App\Repository\Blog\TagRepository;
-use App\Service\Blog\Section\Add;
-use App\Service\Blog\Section\Edit;
+use App\Service\Blog\Tag\Add;
+use App\Service\Blog\Tag\Edit;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,13 +32,13 @@ class TagController extends AbstractController
      */
     public function add(Request $request, Add\Handler $handler): Response
     {
-        $form = $this->createForm(SectionForm::class);
+        $form = $this->createForm(TagForm::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Add\Command($form->getData()));
-            return $this->redirectToRoute("blog");
+            return $this->redirectToRoute("tag.table");
         }
-        return $this->render("blog/section/section-add.html.twig", ['form' => $form->createView()]);
+        return $this->render("blog/tag/tag-add.html.twig", ['form' => $form->createView()]);
     }
 
     /**
@@ -48,15 +47,16 @@ class TagController extends AbstractController
      */
     public function edit(Tag $tag, Request $request, Edit\Handler $handler): Response
     {
-        $sectionDTO = SectionDTO::createFromSection($tag);
-        $form = $this->createForm(SectionForm::class, $sectionDTO);
+        $tagDTO = TagDTO::createFromTag($tag);
+        $form = $this->createForm(TagForm::class, $tagDTO);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $handler->handle(new Edit\Command($tag, $sectionDTO));
-            return $this->redirectToRoute("section.table", ['post' => $tag->getId()]);
+            $handler->handle(new Edit\Command($tag, $tagDTO));
+            $this->addFlash('notice', 'Tag saved');
+            return $this->redirectToRoute("tag.table", ['post' => $tag->getId()]);
         }
-        return $this->render("blog/section/section-add.html.twig", ['form' => $form->createView()]);
+        return $this->render("blog/tag/tag-add.html.twig", ['form' => $form->createView()]);
     }
 
     /**

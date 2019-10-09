@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Form\Blog;
 
-
 use App\Entity\Blog\Post;
 
 class PostDTO

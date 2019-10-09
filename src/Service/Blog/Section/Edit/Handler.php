@@ -18,7 +18,7 @@ class Handler
     public function handle(Command $command): void
     {
         $command->section->setName($command->sectionDTO->name);
-        $command->section->setMachineName($command->sectionDTO->machine_name);
+        $command->section->setMachineName($command->section->machine_name);
         $this->sectionRepository->save($command->section);
         $this->sectionRepository->flush();
     }

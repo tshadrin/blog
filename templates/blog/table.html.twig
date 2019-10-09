@@ -1,47 +1,47 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="p-4">
-    <table class="table table-responsive">
-    <thead>
-    <tr>
-        <th class=" p-2 m-0">#</th>
-        <th class=" p-2 m-0">{{ 'Title'|trans }}</th>
-        <th class=" p-2 m-0">{{ 'Created'|trans }}</th>
-        <th class=" p-2 m-0">{{ 'Section'|trans }}</th>
-        <th class=" p-2 m-0">{{ 'Author'|trans }}</th>
-        <th class=" p-2 m-0">{{ 'Tags'|trans }}</th>
-        <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
-    </tr>
-    </thead>
-        <tbody>
-    {% for post in posts %}
-            <tr class="{% if post.draft %}background-grey{% endif %}{% if post.removed %}background-dark-grey{% endif %}">
-                <td class=" p-2 m-0">{{ post.id }}</td>
-                <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': post.id}) }}">{{ post.title }}</a></td>
-                <td class=" p-2 m-0">{{ post.created|date("d-m-Y H:i") }}</td>
-                <td class=" p-2 m-0">{{ post.section }}</td>
-                <td class=" p-2 m-0">{{ post.author.username }}</td>
-                <td class=" p-2 m-0">
-                    <ul class="list-group">
-                    {% for tag in post.tags %}
-                        <li class="list-group-item p-2 m-0">{{ tag.name }}</li>
-                    {% endfor %}
-                    </ul>
-                </td>
-                <td class=" p-2 m-0">
-                    <ul class="nav nav-pills pb-1">
-                        <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Edit'|trans }}</a>
-                        </li>
-                        <li class="nav-item p-1">
-                            <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Remove'|trans }}</a>
-                        </li>
-                    </ul>
-                </td>
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th class=" p-2 m-0">#</th>
+                <th class=" p-2 m-0">{{ 'Title'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Created'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Section'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Author'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Tags'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
             </tr>
-    {% endfor %}
-        </tbody>
-    </table>
-    <div class="col-12 pt-2">{{ knp_pagination_render(posts, null, {}, {'align': 'center', 'size': 'small'}) }}</div>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr class="{% if post.draft %}background-grey{% endif %}{% if post.removed %}background-dark-grey{% endif %}">
+                    <td class=" p-2 m-0">{{ post.id }}</td>
+                    <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': post.id}) }}">{{ post.title }}</a></td>
+                    <td class=" p-2 m-0">{{ post.created|date("d-m-Y H:i") }}</td>
+                    <td class=" p-2 m-0">{{ post.section }}</td>
+                    <td class=" p-2 m-0">{{ post.author.username }}</td>
+                    <td class=" p-2 m-0">
+                        <ul class="list-group">
+                            {% for tag in post.tags %}
+                                <li class="list-group-item p-2 m-0">{{ tag.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class=" p-2 m-0">
+                        <ul class="nav nav-pills pb-1">
+                            <li class="nav-item p-1">
+                                <a class="btn btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Edit'|trans }}</a>
+                            </li>
+                            <li class="nav-item p-1">
+                                <a class="btn btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Remove'|trans }}</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="col-12 pt-2">{{ knp_pagination_render(posts, null, {}, {'align': 'center', 'size': 'small'}) }}</div>
     </div>
 {% endblock %}

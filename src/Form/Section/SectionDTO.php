@@ -9,12 +9,14 @@ class SectionDTO
 {
     public $machine_name;
     public $name;
+    public $enabled;
 
     public static function createFromSection(Section $section)
     {
         $sectionDTO = new self();
         $sectionDTO->name = $section->getName();
         $sectionDTO->machine_name = $section->getMachineName();
+        $sectionDTO->enabled = $section->isEnabled();
         return $sectionDTO;
     }
 }

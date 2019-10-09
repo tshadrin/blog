@@ -2,12 +2,8 @@
 {% block body %}
     <div class="p-4 w-100">
         {{ form_start(form, {'method': 'POST'}) }}
-        {{ form_label(form.machine_name, null, {'label_attr': {'class': ''}}) }}
-        {{ form_widget(form.machine_name, {'attr': {'class': 'mb-2'}}) }}
         {{ form_label(form.name) }}
         {{ form_widget(form.name, {'attr': {'class': 'mb-2'}}) }}
-        {{ form_label(form.enabled) }}
-        {{ form_widget(form.enabled, {'attr': {'class': 'mb-2'}}) }}
         <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
         {{ form_end(form) }}
     </div>

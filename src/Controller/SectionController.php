@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Blog\Section;
-use App\Form\Section\SectionDTO;
 use App\Form\Section\SectionForm;
 use App\Repository\Blog\SectionRepository;
 use App\Service\Blog\Section\Add;
@@ -35,7 +34,7 @@ class SectionController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Add\Command($form->getData()));
-            return $this->redirectToRoute("blog");
+            return $this->redirectToRoute("section.table");
         }
         return $this->render("blog/section/section-add.html.twig", ['form' => $form->createView()]);
     }
@@ -46,7 +45,7 @@ class SectionController extends AbstractController
      */
     public function edit(Section $section, Request $request, Edit\Handler $handler): Response
     {
-        $sectionDTO = SectionDTO::createFromSection($section);
+        $sectionDTO = TagDTO::createFromSection($section);
         $form = $this->createForm(SectionForm::class, $sectionDTO);
         $form->handleRequest($request);
 

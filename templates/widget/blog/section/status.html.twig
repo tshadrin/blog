@@ -1,0 +1,5 @@
+{% if section.enabled %}
+    <span class="badge badge-success">{{ 'Enabled'|trans }}</span>
+{% else %}
+    <span class="badge badge-danger">{{ 'Disabled'|trans }}</span>
+{% endif %}
