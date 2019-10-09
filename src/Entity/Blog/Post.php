@@ -69,14 +69,14 @@ class Post
      */
     private $teaser;
 
-    public function __construct(string $title, string $teaser, string $body, Section $section, iterable $tags, User $author)
+    public function __construct(string $title, string $teaser, \DateTimeImmutable $created, string $body, Section $section, iterable $tags, Status $status, User $author)
     {
         $this->title = $title;
         $this->body = $body;
-        $this->created = new \DateTimeImmutable();
+        $this->created = $created;
         $this->section = $section;
         $this->tags = $tags;
-        $this->status = new Status(Status::DRAFT);
+        $this->status = $status;
         $this->author = $author;
         $this->teaser = $teaser;
     }

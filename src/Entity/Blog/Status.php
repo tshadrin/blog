@@ -10,6 +10,7 @@ class Status
     public const DRAFT = 'draft';
     public const REMOVE = 'remove';
     public const PUBLISH = 'publish';
+    public const PRIVATE = 'private';
 
     public function __construct(string $name)
     {
@@ -17,7 +18,7 @@ class Status
             self::DRAFT,
             self::REMOVE,
             self::PUBLISH,
-
+            self::PRIVATE,
         ]);
         $this->name = $name;
     }
@@ -38,6 +39,7 @@ class Status
             self::PUBLISH => self::PUBLISH,
             self::DRAFT => self::DRAFT,
             self::REMOVE => self::REMOVE,
+            self::PRIVATE => self::PRIVATE,
         ];
     }
 
@@ -54,5 +56,9 @@ class Status
     public function isRemoved(): bool
     {
         return $this->getName() === self::REMOVE;
+    }
+    public function isPrivate(): bool
+    {
+        return $this->getName() == self::PRIVATE;
     }
 }
