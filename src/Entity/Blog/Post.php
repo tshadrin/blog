@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Blog;
 
+use App\Entity\Hru;
 use App\Entity\User;
 use App\Form\Blog\PostDTO;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,7 +43,6 @@ class Post
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id", nullable=false)
      */
     private $section;
-
     /**
      * @var Tag[]
      * @ORM\ManyToMany(targetEntity="App\Entity\Blog\Tag", fetch="EAGER")
@@ -51,7 +51,6 @@ class Post
      * })
      */
     private $tags;
-
     /**
      * @var Status
      * @ORM\Column(type="post_status", name="status", length=30, nullable=false)
@@ -68,6 +67,12 @@ class Post
      * @ORM\Column(type="text", nullable=true, length=1000)
      */
     private $teaser;
+    /**
+     * @var Hru
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"})
+     * @ORM\JoinColumn(name="hru_id", referencedColumnName="id", nullable=true)
+     */
+    private $hru;
 
     public function __construct(string $title, string $teaser, \DateTimeImmutable $created, string $body, Section $section, iterable $tags, Status $status, User $author)
     {
@@ -81,69 +86,46 @@ class Post
         $this->teaser = $teaser;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @return \DateTimeImmutable
-     */
     public function getCreated(): \DateTimeImmutable
     {
         return $this->created;
     }
 
-    /**
-     * @return Section
-     */
     public function getSection(): Section
     {
         return $this->section;
     }
 
-    /**
-     * @return Status
-     */
     public function getStatus(): Status
     {
         return $this->status;
     }
+
     public function getTags(): ?object
     {
         return $this->tags;
     }
 
-    /**
-     * @return User
-     */
     public function getAuthor(): User
     {
         return $this->author;
     }
 
-    /**
-     * @return string
-     */
     public function getTeaser(): ?string
     {
         return $this->teaser;
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
@@ -172,5 +154,29 @@ class Post
     public function isRemoved(): bool
     {
         return $this->status->isRemoved();
+    }
+
+    public function isPrivate(): bool
+    {
+        return $this->status->isPrivate();
+    }
+
+    public function setHru(Hru $hru): void
+    {
+        if (is_null($this->id)) {
+            throw new \DomainException("Id needed for hru. Save post before setting hru.");
+        }
+        $this->hru = $hru;
+        $hru->setEntityId($this->id);
+    }
+
+    public function getHru(): ?Hru
+    {
+        return $this->hru;
+    }
+
+    public function setStatus(Status $status): void
+    {
+        $this->status = $status;
     }
 }

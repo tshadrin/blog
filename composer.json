@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cebe/markdown": "^1.2",
+        "chan-sccp/pami": "2.*",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
         "helios-ag/fm-elfinder-bundle": "^9.3",
         "knplabs/knp-menu-bundle": "^2.3",

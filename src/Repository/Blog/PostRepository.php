@@ -37,6 +37,7 @@ class PostRepository extends ServiceEntityRepository
             ->andWhere('p.status = :status')
             ->setParameter(':section', $section->getId())
             ->setParameter(':status', 'publish')
+            ->orderBy("p.created", 'DESC')
             ->getQuery()->getResult();
     }
 
@@ -53,6 +54,7 @@ class PostRepository extends ServiceEntityRepository
             ->andWhere('p.status = :status')
             ->setParameter(':tag_id', $tag->getId())
             ->setParameter(':status', 'publish')
+            ->orderBy("p.created", 'DESC')
             ->getQuery()->getResult();
     }
 }

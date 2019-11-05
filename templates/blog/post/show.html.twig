@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% set token = csrf_token("delete") %}
 {% block body %}
     <div class="p-4{% if not post.published %} background-grey{% endif %}">
         {% if is_granted("ROLE_ADMIN") %}
@@ -9,7 +9,12 @@
                         <a class="nav-link btn-sm bg-primary text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Edit'|trans }}</a>
                     </li>
                     <li class="nav-item p-1">
-                        <a class="nav-link btn-sm bg-danger text-white" href="{{ path('blog.edit', {'post': post.id}) }}">{{ 'Remove'|trans }}</a>
+                        <form action="{{ path('blog.delete', {'post': post.id }) }}" class="delete-post-form" method="post">
+                            <input type="hidden" name="token" value="{{ token }}" />
+                            <button type="submit" class="btn btn-danger" data-toggle="confirmation">
+                                <i class="fa fa-trash" aria-hidden="true"></i>{{ 'Remove'|trans }}
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
