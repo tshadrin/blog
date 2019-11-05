@@ -1,6 +1,19 @@
 $body-bg: #f0f0f0;
 @import "~bootstrap/scss/bootstrap";
 @import "~highlight.js/scss/default";
+@include media-breakpoint-down(md) {
+  p,h2,h3,h4,h5,h6,nav {
+    font-size: 2rem;
+  }
+  .blog-description {
+    display: none;
+  }
+}
+@media (max-width: 1377px ) {
+  pre {
+    font-size: 0.7em;
+  }
+}
 
 html {
   min-height: 100%;
@@ -9,7 +22,6 @@ body {
   background-image: linear-gradient(to top, #F0F0F0, #F9F9F9);
   background-repeat: no-repeat;
 }
-
 code,pre {
   background: #f0f0f0;
 }
@@ -31,31 +43,26 @@ pre {
   overflow:auto;
   font-size: 0.8em;
 }
-
 code {
   background-color:#eee;
   overflow:auto;
   padding:0 !important;
 }
-
 code .line-number {
   //font:normal normal 12px/14px "Courier New",Courier,Monospace;
   color:black;
   display:block;
 }
-
 code .line-number {
   float:left;
   margin:0 1em 0 -1em;
   border-right:1px solid;
   text-align:right;
 }
-
 code .line-number span {
   display:block;
   padding:0 .5em 0 1em;
 }
-
 code .cl {
   display:block;
   clear:both;
@@ -64,12 +71,6 @@ img {
   padding-right:5px;
   padding-bottom:5px;
 }
-@media (max-width: 1377px ) {
-  pre {
-    font-size: 0.7em;
-  }
-}
-
 p {
   text-indent: 20px;
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Blog;
 
+use App\Entity\Hru;
 use App\Entity\User;
 use App\Form\Blog\PostDTO;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,6 +69,13 @@ class Post
      * @ORM\Column(type="text", nullable=true, length=1000)
      */
     private $teaser;
+
+    /**
+     * @var Hru
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"})
+     * @ORM\JoinColumn(name="hru_id", referencedColumnName="id", nullable=true)
+     */
+    private $hru;
 
     public function __construct(string $title, string $teaser, \DateTimeImmutable $created, string $body, Section $section, iterable $tags, Status $status, User $author)
     {
@@ -172,5 +180,16 @@ class Post
     public function isRemoved(): bool
     {
         return $this->status->isRemoved();
+    }
+
+    public function setHru(Hru $hru): void
+    {
+        $this->hru = $hru;
+        $hru->setEntityId($this->id);
+    }
+
+    public function getHru(): ?Hru
+    {
+        return $this->hru;
     }
 }

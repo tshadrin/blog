@@ -5,24 +5,21 @@ namespace App\Controller;
 
 use App\Entity\Blog\Post;
 use App\Entity\Blog\Status;
+use App\Entity\Hru;
 use App\Form\Blog\PostDTO;
 use App\Form\Blog\PostForm;
 use App\Repository\Blog\PostRepository;
-use App\Repository\UserRepository;
+use App\Repository\HruRepository;
 use App\Service\Blog\Post\Add;
 use App\Service\Blog\Post\Edit;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\NativePasswordEncoder;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\SodiumPasswordEncoder;
-use Symfony\Component\Security\Core\Tests\Encoder\PlaintextPasswordEncoderTest;
+
 
 /**
  * Class BlogController
@@ -35,7 +32,9 @@ class BlogController extends AbstractController
      * @return Response
      * @Route(path="", name="", methods={"GET"})
      */
-    public function list(PostRepository $postRepository, PaginatorInterface $paginator, Request $request, Session $session, UserRepository $userRepository): Response
+    public function list(PostRepository $postRepository,
+                         PaginatorInterface $paginator,
+                         Request $request): Response
     {
         $pagedPosts = $paginator->paginate($postRepository->findBy(['status' => Status::PUBLISH],['created' => 'DESC']), $request->query->getInt('page', 1));
         return $this->render("blog/blog.html.twig", ['posts' => $pagedPosts]);
@@ -68,11 +67,10 @@ class BlogController extends AbstractController
         $postDTO = PostDTO::createFromPost($post);
         $form = $this->createForm(PostForm::class, $postDTO);
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($post, $postDTO));
             $this->addFlash('notice', 'Post saved');
-            return $this->redirectToRoute("blog.show", ['post' => $post->getId()]);
+            return $this->redirectToRoute("blog.show.from.hru", ['prefix' => $post->getHru()->getPrefix(), 'value' => $post->getHru()->getValue()]);
         }
         return $this->render("blog/post-add.html.twig", ['form' => $form->createView()]);
     }
@@ -123,5 +121,19 @@ class BlogController extends AbstractController
     {
         $pagedPosts = $paginator->paginate($postRepository->findBy([], ['created' => "DESC"]), $request->query->getInt('page', 1));
         return $this->render("blog/table.html.twig", ['posts' => $pagedPosts]);
+    }
+
+    /**
+     * @Route("/{prefix}/{value}", name=".show.from.hru", methods={"GET"})
+     * @Entity("hru", expr="repository.findOneBy({'prefix': prefix, 'value': value})")
+     * @Entity("post", expr="repository.findOneBy({'hru': hru})")
+     */
+    public function showFromHru(Hru $hru, Post $post): Response
+    {
+        if($post->isPublished() || $this->isGranted("ROLE_ADMIN")) {
+            return $this->render('blog/post/show.html.twig', ['post' => $post]);
+        }
+        $this->addFlash('error', "Post not found.");
+        return $this->redirectToRoute('blog');
     }
 }
