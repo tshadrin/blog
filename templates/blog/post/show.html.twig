@@ -20,7 +20,7 @@
             </div>
         {% endif %}
         {% if not post.published %}<div class=" p-3 m-3 alert-info">{{ 'Post is not published'|trans }}</div>{% endif %}
-        <div class="col-12"><h4 class="mb-0">{{ post.title }}</h4></div>
+        <div class="col-12"><h1 class="mb-0">{{ post.title }}</h1></div>
         <div class="col-12 pb-2"><i>{{ post.created|date("d-m-Y H:i") }}</i></div>
         <div class="col-12">{{ post.teaser|raw }}</div>
         <div class="col-12">{{ post.body|raw }}</div>

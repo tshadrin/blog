@@ -90,7 +90,7 @@ class BlogController extends AbstractController
     /**
      * @param string $tag
      * @return Response
-     * @Route("/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -]+"})
+     * @Route("/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -]+"}, options={"utf8": true})
      */
     public function tag(string $tag, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
     {
