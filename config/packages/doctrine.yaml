@@ -11,6 +11,8 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             post_status: 'App\Entity\Blog\StatusType'
+            gamelist_os: 'App\Entity\GameList\OSType'
+            gamelist_format: 'App\Entity\GameList\FormatType'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore

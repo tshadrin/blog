@@ -44,4 +44,22 @@ document.addEventListener('DOMContentLoaded', function () {
             line_num.innerHTML += '<span>' + (j + 1) + '</span>';
         }
     }
+
+    const toggleField = document.querySelector(".toggle-field");
+    if (toggleField !== null) {
+        const target = document.querySelector(`.${toggleField.dataset.target}`);
+        const requiredValue = toggleField.dataset.needed;
+        if (toggleField.options[toggleField.options.selectedIndex].value === requiredValue && target.classList.contains('d-none')) {
+            target.classList.remove('d-none');
+        }
+        toggleField.addEventListener("change", function (e) {
+            const target = document.querySelector(`.${toggleField.dataset.target}`);
+            const requiredValue = toggleField.dataset.needed;
+            if (toggleField.options[toggleField.options.selectedIndex].value === requiredValue && target.classList.contains('d-none')) {
+                target.classList.remove('d-none');
+            } else if (toggleField.options[toggleField.options.selectedIndex].value !== requiredValue && !target.classList.contains('d-none')) {
+                target.classList.add('d-none');
+            }
+        });
+    }
 });

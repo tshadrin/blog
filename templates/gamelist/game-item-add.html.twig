@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="p-4 w-100">
+        {{ form_start(form, {'method': 'POST'}) }}
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_label(form.os) }}
+        {{ form_widget(form.os, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field', 'data-needed': 'Xbox One' }}) }}
+        <div class="target-field d-none">
+            {{ form_label(form.exchange_rate) }}
+            {{ form_widget(form.exchange_rate, {'attr': {'class': 'mb-2'}}) }}
+        </div>
+        {{ form_label(form.purchase_date) }}
+        {{ form_widget(form.purchase_date, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_label(form.cost) }}
+        {{ form_widget(form.cost, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_label(form.notes) }}
+        {{ form_widget(form.notes, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_label(form.format) }}
+        {{ form_widget(form.format, {'attr': {'class': 'mb-2'}}) }}
+        <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
