@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class BlogController
- * @Route("/blog", name="blog")
+ * @Route("/", name="blog")
  */
 class BlogController extends AbstractController
 {
@@ -43,7 +43,7 @@ class BlogController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/add", name=".add", methods={"GET","POST"})
+     * @Route("/blog/add", name=".add", methods={"GET","POST"})
      * IsGranted("ROLE_ADMIN")
      */
     public function add(Request $request, Add\Handler $handler): Response
@@ -60,7 +60,7 @@ class BlogController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/edit/{post}", name=".edit", methods={"GET","POST"})
+     * @Route("/blog/edit/{post}", name=".edit", methods={"GET","POST"})
      * IsGranted("ROLE_ADMIN")
      */
     public function edit(Post $post, Request $request, Edit\Handler $handler): Response
@@ -79,7 +79,7 @@ class BlogController extends AbstractController
     /**
      * @param string $section
      * @return Response
-     * @Route("/{section}", name=".section", methods={"GET"}, requirements={"section":"[a-z]+"})
+     * @Route("/blog/{section}", name=".section", methods={"GET"}, requirements={"section":"[a-z]+"})
      */
     public function section(string $section, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
     {
@@ -90,7 +90,7 @@ class BlogController extends AbstractController
     /**
      * @param string $tag
      * @return Response
-     * @Route("/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -]+"}, options={"utf8": true})
+     * @Route("/blog/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -]+"}, options={"utf8": true})
      */
     public function tag(string $tag, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
     {
@@ -101,7 +101,7 @@ class BlogController extends AbstractController
     /**
      * @param Post $post
      * @return Response
-     * @Route("/show/{post}", name=".show", methods={"GET"}, requirements={"post": "\d+"})
+     * @Route("/blog/show/{post}", name=".show", methods={"GET"}, requirements={"post": "\d+"})
      */
     public function showPost(Post $post): Response
     {
@@ -116,7 +116,7 @@ class BlogController extends AbstractController
     /**
      * @param Post $post
      * @return Response
-     * @Route("/list/table", name=".table", methods={"GET"})
+     * @Route("/blog/list/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
     public function table(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
@@ -127,7 +127,7 @@ class BlogController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/delete/{post}", name=".delete", methods={"POST"})
+     * @Route("/blog/delete/{post}", name=".delete", methods={"POST"})
      * IsGranted("ROLE_ADMIN")
      */
     public function delete(Post $post, Request $request, Delete\Handler $handler, TranslatorInterface $translator): Response
@@ -142,7 +142,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{prefix}/{value}", name=".show.from.hru", methods={"GET"})
+     * @Route("/blog/{prefix}/{value}", name=".show.from.hru", methods={"GET"})
      * @Entity("hru", expr="repository.findOneBy({'prefix': prefix, 'value': value})")
      * @Entity("post", expr="repository.findOneBy({'hru': hru})")
      */
