@@ -2,4 +2,6 @@
 
 User-agent: *
 Disallow: /login
+Disallow: /index.php/*
+Disallow: /blog/tag/*
 Host: shadrin.me

@@ -69,7 +69,7 @@ class Post
     private $teaser;
     /**
      * @var Hru
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"}, fetch="EAGER")
      * @ORM\JoinColumn(name="hru_id", referencedColumnName="id", nullable=true)
      */
     private $hru;

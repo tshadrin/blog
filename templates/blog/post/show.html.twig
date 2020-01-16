@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 {% set token = csrf_token("delete") %}
+{% block title %}
+    {{ post.title }} |
+    {{ parent() }}
+{% endblock %}
 {% block body %}
     <div class="p-4{% if not post.published %} background-grey{% endif %}">
         {% if is_granted("ROLE_ADMIN") %}
@@ -20,7 +24,7 @@
             </div>
         {% endif %}
         {% if not post.published %}<div class=" p-3 m-3 alert-info">{{ 'Post is not published'|trans }}</div>{% endif %}
-        <div class="col-12"><h1 class="mb-0">{{ post.title }}</h1></div>
+        <div class="col-12"><h2 class="mb-0">{{ post.title }}</h2></div>
         <div class="col-12 pb-2"><i>{{ post.created|date("d-m-Y H:i") }}</i></div>
         <div class="col-12">{{ post.teaser|raw }}</div>
         <div class="col-12">{{ post.body|raw }}</div>

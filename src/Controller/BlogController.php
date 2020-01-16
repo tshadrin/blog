@@ -105,6 +105,12 @@ class BlogController extends AbstractController
      */
     public function showPost(Post $post): Response
     {
+        if (!is_null($hru = $post->getHru())) {
+            return $this->redirectToRoute('blog.show.from.hru', [
+                'prefix' => $hru->getPrefix(),
+                'value' => $hru->getValue()
+            ], Response::HTTP_MOVED_PERMANENTLY);
+        }
         if($post->isPublished() || $this->isGranted("ROLE_ADMIN")) {
             return $this->render('blog/post/show.html.twig', ['post' => $post]);
         }
