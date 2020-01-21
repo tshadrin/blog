@@ -26,7 +26,7 @@
                 <tr>
                     <td class=" p-2 m-0">{{ game.id }}</td>
                     <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': game.id}) }}">{{ game.title }}</a></td>
-                    <td class=" p-2 m-0">{{ game.os }}</td>
+                    <td class=" p-2 m-0">{{ game_platform(game.os) }}</td>
                     <td class=" p-2 m-0">{{ game.format|trans }}</td>
                     <td class=" p-2 m-0">{{ game.purchaseDate|date("d-m-Y") }}</td>
                     <td class=" p-2 m-0">{% if game.os == 'Xbox One' %}{{  (game.cost * game.exchangeRate)|round(2) }}{% else %}{{ game.cost }}{% endif %}</td>

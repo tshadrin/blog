@@ -35,6 +35,9 @@ class AdminMenu
         $menu->addChild('Posts', ['route' => 'blog.table'])
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
+        $menu->addChild('Games', ['route' => 'game_list.table'])
+            ->setAttribute('class', 'nav-item')
+            ->setLinkAttribute('class', 'nav-link');
         $menu['Posts']->addChild('Post add', ['route' => 'blog.add'])
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');

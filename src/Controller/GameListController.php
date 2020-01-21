@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Blog\Section;
-use App\Entity\Blog\Tag;
 use App\Entity\GameList\GameItem;
 use App\Form\GameList\GameItemDTO;
 use App\Form\GameList\GameItemForm;
-use App\Repository\Blog\TagRepository;
 use App\Repository\GameList\GameItemRepository;
 use App\Service\GameList\Add;
 use App\Service\GameList\Edit;

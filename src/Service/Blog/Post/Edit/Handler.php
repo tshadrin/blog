@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Service\Blog\Post\Edit;
 
+use App\Entity\Blog\Post;
+use App\Form\Blog\PostDTO;
 use App\Repository\Blog\PostRepository;
 use App\Repository\HruRepository;
 use App\Service\HruGenerator\HruGeneratorInterface;
@@ -28,7 +30,7 @@ class Handler
 
     public function handle(Command $command): void
     {
-        if ($this->isTitleChanged($command->post->getTitle(), $command->postDTO->title) || $this->isTitleChanged($command->post->getSection()->getName(), $command->postDTO->section->getName())) {
+        if ($this->isTitleChanged($command->post, $command->postDTO) || $this->isSectionChanged($command->post, $command->postDTO)) {
             $hru = $this->hruGenerator->generate(
                 new Options(
                     $command->postDTO->section->getName(),  //prefix
@@ -44,8 +46,13 @@ class Handler
         $this->postRepository->flush();
     }
 
-    private function isTitleChanged(string $old, string $new): bool
+    private function isTitleChanged(Post $post, PostDTO $postDTO): bool
     {
-        return $old !== $new;
+        return $post->getTitle() !== $postDTO->title;
+    }
+
+    private function isSectionChanged(Post $post, PostDTO $postDTO): bool
+    {
+        return $post->getSection()->getId() !== $postDTO->section->getId();
     }
 }

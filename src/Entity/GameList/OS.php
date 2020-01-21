@@ -41,4 +41,17 @@ class OS
             self::PC => self::PC,
         ];
     }
+
+    public function isXboxOne(): bool
+    {
+        return $this->name === self::XBOX_ONE;
+    }
+    public function isPlaystation4(): bool
+    {
+        return $this->name === self::PLAYSTATION_4;
+    }
+    public function isPC(): bool
+    {
+        return $this->name === self::PC;
+    }
 }
