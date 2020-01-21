@@ -1,7 +1,7 @@
 {% if platform.xboxOne %}
-    <span class="badge badge-success">{{ platform.name|trans }}</span>
+    <span class="badge badge-success p-2">{{ platform.name|trans }}</span>
 {% elseif platform.playstation4 %}
-    <span class="badge badge-primary">{{ platform.name|trans }}</span>
+    <span class="badge badge-primary p-2">{{ platform.name|trans }}</span>
 {% elseif platform.pC %}
-    <span class="badge badge-info">{{ platform.name|trans }}</span>
+    <span class="badge badge-info p-2">{{ platform.name|trans }}</span>
 {% endif %}

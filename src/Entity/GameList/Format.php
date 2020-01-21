@@ -12,6 +12,7 @@ class Format
     public const SUBSCRIPTION = 'subscription';
     public const OTHER = 'other';
     public const ACCESSORY = 'accessory';
+    public const DLC = 'dlc';
 
     private $name;
 
@@ -23,6 +24,7 @@ class Format
             self::SUBSCRIPTION,
             self::OTHER,
             self::ACCESSORY,
+            self::DLC,
         ]);
         $this->name = $name;
     }
@@ -45,6 +47,7 @@ class Format
             self::SUBSCRIPTION => self::SUBSCRIPTION,
             self::OTHER => self::OTHER,
             self::ACCESSORY => self::ACCESSORY,
+            self::DLC => self::DLC,
         ];
     }
 
@@ -68,5 +71,9 @@ class Format
     public function isAccessory(): bool
     {
         return $this->name === self::ACCESSORY;
+    }
+    public function isDlc(): bool
+    {
+        return $this->name === self::DLC;
     }
 }
