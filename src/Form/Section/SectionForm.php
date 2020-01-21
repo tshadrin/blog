@@ -15,7 +15,8 @@ class SectionForm extends AbstractType
     {
         $builder->add('machine_name', TextType::class);
         $builder->add('name', TextType::class);
-        $builder->add('enabled', CheckboxType::class);
+        $builder->add('enabled', CheckboxType::class, ['required' => false]);
+        $builder->add('hidden', CheckboxType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Section
 {
     public const ENABLED = true;
+    public const NOT_HIDDEN = false;
     /**
      * @var int
      * @ORM\Id()
@@ -37,12 +38,18 @@ class Section
      * @ORM\Column(type="boolean")
      */
     private $enabled;
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $hidden;
 
-    public function __construct(string $machineName, string $name, bool $enabled)
+    public function __construct(string $machineName, string $name, bool $enabled, bool $hidden)
     {
         $this->machineName = $machineName;
         $this->name = $name;
         $this->enabled = $enabled;
+        $this->hidden = $hidden;
     }
 
     /**
@@ -53,9 +60,6 @@ class Section
         return $this->machineName;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -66,35 +70,36 @@ class Section
         return $this->getName();
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @param string $machineName
-     */
     public function setMachineName(string $machineName): void
     {
         $this->machineName = $machineName;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
     }
 }

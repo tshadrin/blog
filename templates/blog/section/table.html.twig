@@ -15,6 +15,7 @@
                 <th class=" p-2 m-0">{{ 'Machine name'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Name'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Enabled'|trans }}</th>
+                <th class=" p-2 m-0">{{ 'Hidden'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                     <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': section.id}) }}">{{ section.machineName }}</a></td>
                     <td class=" p-2 m-0">{{ section.name }}</td>
                     <td class=" p-2 m-0">{{ section_status(section) }}</td>
+                    <td class=" p-2 m-0">{{ section_hidden(section) }}</td>
                     <td class=" p-2 m-0">
                         <ul class="nav nav-pills pb-1">
                             <li class="nav-item p-1">

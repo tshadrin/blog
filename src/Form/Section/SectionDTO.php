@@ -10,6 +10,7 @@ class SectionDTO
     public $machine_name;
     public $name;
     public $enabled;
+    public $hidden;
 
     public static function createFromSection(Section $section)
     {
@@ -17,6 +18,7 @@ class SectionDTO
         $sectionDTO->name = $section->getName();
         $sectionDTO->machine_name = $section->getMachineName();
         $sectionDTO->enabled = $section->isEnabled();
+        $sectionDTO->hidden = $section->isHidden();
         return $sectionDTO;
     }
 }

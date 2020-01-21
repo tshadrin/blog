@@ -21,7 +21,8 @@ class Handler
         $section = new Section(
             $command->sectionDTO->machine_name,
             $command->sectionDTO->name,
-            Section::ENABLED
+            Section::ENABLED,
+            Section::NOT_HIDDEN
         );
         $this->sectionRepository->save($section);
         $this->sectionRepository->flush();

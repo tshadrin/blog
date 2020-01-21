@@ -9,6 +9,7 @@ use App\Entity\Hru;
 use App\Form\Blog\PostDTO;
 use App\Form\Blog\PostForm;
 use App\Repository\Blog\PostRepository;
+use App\Repository\Blog\SectionRepository;
 use App\Service\Blog\Post\Add;
 use App\Service\Blog\Post\Edit;
 use App\Service\Blog\Post\Delete;
@@ -34,10 +35,21 @@ class BlogController extends AbstractController
      * @Route(path="", name="", methods={"GET"})
      */
     public function list(PostRepository $postRepository,
+                         SectionRepository $sectionRepository,
                          PaginatorInterface $paginator,
                          Request $request): Response
     {
-        $pagedPosts = $paginator->paginate($postRepository->findBy(['status' => Status::PUBLISH],['created' => 'DESC']), $request->query->getInt('page', 1));
+        $section = $sectionRepository->findOneBy(['machineName' => 'own']);
+        $posts = $postRepository
+            ->createQueryBuilder('p')
+            ->where('p.status = :status')
+            ->setParameter(':status', Status::PUBLISH)
+            ->andHaving('p.section != :section')
+            ->setParameter(':section', $section->getId())
+            ->orderBy('p.created','DESC')
+            ->getQuery()
+            ->getResult();
+        $pagedPosts = $paginator->paginate($posts, $request->query->getInt('page', 1));
         return $this->render("blog/blog.html.twig", ['posts' => $pagedPosts]);
     }
 

@@ -8,6 +8,8 @@
         {{ form_widget(form.name, {'attr': {'class': 'mb-2'}}) }}
         {{ form_label(form.enabled) }}
         {{ form_widget(form.enabled, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_label(form.hidden) }}
+        {{ form_widget(form.hidden, {'attr': {'class': 'mb-2'}}) }}
         <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
         {{ form_end(form) }}
     </div>

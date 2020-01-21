@@ -33,10 +33,12 @@ class SectionMenu
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
         foreach ($sections as $section) {
-            $menu->addChild($section->getName(), ['route' => 'blog.section', 'routeParameters' => ['section' => $section->getMachineName()]])
-                ->setAttribute('class', 'nav-item')
-                ->setLinkAttribute('class', 'nav-link')
-                ->setExtra('translation_domain', false);
+            if($section->isHidden() === Section::NOT_HIDDEN || ($section->isHidden() !== Section::NOT_HIDDEN && $authorizationChecker->isGranted("ROLE_ADMIN"))) {
+                $menu->addChild($section->getName(), ['route' => 'blog.section', 'routeParameters' => ['section' => $section->getMachineName()]])
+                    ->setAttribute('class', 'nav-item')
+                    ->setLinkAttribute('class', 'nav-link')
+                    ->setExtra('translation_domain', false);
+            }
         }
         return $menu;
     }

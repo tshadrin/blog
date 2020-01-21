@@ -1,0 +1,5 @@
+{% if section.hidden %}
+    <span class="badge badge-danger">{{ 'Hidden'|trans }}</span>
+{% else %}
+    <span class="badge badge-success">{{ 'Visible'|trans }}</span>
+{% endif %}
