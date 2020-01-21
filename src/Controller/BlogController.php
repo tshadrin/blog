@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Blog\Post;
+use App\Entity\Blog\Section;
 use App\Entity\Blog\Status;
 use App\Entity\Hru;
 use App\Form\Blog\PostDTO;
@@ -42,10 +43,11 @@ class BlogController extends AbstractController
         $section = $sectionRepository->findOneBy(['machineName' => 'own']);
         $posts = $postRepository
             ->createQueryBuilder('p')
+            ->join('App:Blog\Section', 's', 'WITH', 'p.section = s.id')
             ->where('p.status = :status')
             ->setParameter(':status', Status::PUBLISH)
-            ->andHaving('p.section != :section')
-            ->setParameter(':section', $section->getId())
+            ->andWhere('s.hidden = :hidden')
+            ->setParameter(':hidden', Section::NOT_HIDDEN)
             ->orderBy('p.created','DESC')
             ->getQuery()
             ->getResult();

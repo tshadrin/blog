@@ -28,10 +28,10 @@ class Handler
 
     public function handle(Command $command): void
     {
-        if ($this->isTitleChanged($command->post->getTitle(), $command->postDTO->title)) {
+        if ($this->isTitleChanged($command->post->getTitle(), $command->postDTO->title) || $this->isTitleChanged($command->post->getSection()->getName(), $command->postDTO->section->getName())) {
             $hru = $this->hruGenerator->generate(
                 new Options(
-                    $command->post->getSection()->getName(),  //prefix
+                    $command->postDTO->section->getName(),  //prefix
                     $command->postDTO->title,                 //value
                     $command->post->getId()                   //entityId
                 )
