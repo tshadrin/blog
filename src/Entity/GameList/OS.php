@@ -54,4 +54,10 @@ class OS
     {
         return $this->name === self::PC;
     }
+
+    public static function getConstantsForRegexp(): string
+    {
+        return
+            self::XBOX_ONE;
+    }
 }

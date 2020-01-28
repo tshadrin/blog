@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class GameItem
 {
     private const DEFAULT_EXCHANGE_RATE = 1.00;
+    public const DEFAULT_DELETED_VALUE = false;
     /**
      * @var int
      * @ORM\Id()
@@ -55,6 +56,11 @@ class GameItem
      * @ORM\Column(type="gamelist_format", name="format", length=30, nullable=false)
      */
     private $format;
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $deleted;
 
 
     public function getCost(): float
@@ -97,7 +103,8 @@ class GameItem
                                 float $cost,
                                 ?string $notes,
                                 string $format,
-                                float $exchangeRate = self::DEFAULT_EXCHANGE_RATE)
+                                float $exchangeRate = self::DEFAULT_EXCHANGE_RATE,
+                                bool $deleted = self::DEFAULT_DELETED_VALUE)
     {
         $this->title = $title;
         $this->os = $os;
@@ -106,6 +113,7 @@ class GameItem
         $this->notes = $notes;
         $this->format = $format;
         $this->exchangeRate = $exchangeRate;
+        $this->deleted = $deleted;
     }
 
     /**
@@ -124,43 +132,33 @@ class GameItem
         $this->notes = $notes;
     }
 
-    /**
-     * @param OS $os
-     */
     public function setOs(OS $os): void
     {
         $this->os = $os;
     }
 
-    /**
-     * @param \DateTimeImmutable $purchaseDate
-     */
     public function setPurchaseDate(\DateTimeImmutable $purchaseDate): void
     {
         $this->purchaseDate = $purchaseDate;
     }
 
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @param Format $format
-     */
     public function setFormat(Format $format): void
     {
         $this->format = $format;
     }
 
-    /**
-     * @param float $exchangeRate
-     */
     public function setExchangeRate(float $exchangeRate): void
     {
         $this->exchangeRate = $exchangeRate;
+    }
+
+    public function setDeleted(bool $deleted): void
+    {
+        $this->deleted = $deleted;
     }
 }
