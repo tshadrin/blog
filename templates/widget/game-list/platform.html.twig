@@ -4,4 +4,6 @@
     <span class="badge badge-primary p-2">{{ platform.name|trans }}</span>
 {% elseif platform.pC %}
     <span class="badge badge-info p-2">{{ platform.name|trans }}</span>
+{% elseif platform.switch %}
+    <span class="badge badge-danger p-2">{{ platform.name|trans }}</span>
 {% endif %}

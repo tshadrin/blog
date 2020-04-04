@@ -10,6 +10,7 @@ class OS
     public const XBOX_ONE = 'Xbox One';
     public const PLAYSTATION_4 = 'Playstation 4';
     public const PC = 'PC';
+    public const SWITCH = 'Switch';
 
     private $name;
 
@@ -19,6 +20,7 @@ class OS
             self::XBOX_ONE,
             self::PLAYSTATION_4,
             self::PC,
+            self::SWITCH,
         ]);
         $this->name = $name;
     }
@@ -39,6 +41,7 @@ class OS
             self::XBOX_ONE => self::XBOX_ONE,
             self::PLAYSTATION_4 => self::PLAYSTATION_4,
             self::PC => self::PC,
+            self::SWITCH => self::SWITCH,
         ];
     }
 
@@ -53,6 +56,11 @@ class OS
     public function isPC(): bool
     {
         return $this->name === self::PC;
+    }
+
+    public function isSwitch(): bool
+    {
+        return $this->name === self::SWITCH;
     }
 
     public static function getConstantsForRegexp(): string
