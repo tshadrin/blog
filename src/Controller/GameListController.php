@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\GameList\Format;
 use App\Entity\GameList\GameItem;
 use App\Entity\GameList\OS;
 use App\Form\GameList\GameItemDTO;
@@ -105,4 +106,31 @@ class GameListController extends AbstractController
         $gameItemRepository->delete($gameItem);
         return $this->redirectToRoute('game_list.table');
     }
+
+    /**
+     * @Route("/statistics", name=".statistics", methods={"GET","POST"})
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function statistics(GameItemRepository $gameItemRepository): Response
+    {
+        $sum = 0;
+        $endDate = (new \DateTimeImmutable())->setTime(0,0,0)->modify('first day of next month');
+        for ($i = 0; $i < 24; $i++) {
+            $gamelist = $gameItemRepository->findByDateRange($endDate->modify('-1 month'), $endDate);
+            $endDate = $endDate->modify('-1 month');
+            /** @var GameItem $game */
+            foreach ($gamelist as $game) {
+                if($game->getFormat()->getName() === Format::DISC ||
+                    $game->getFormat()->getName() === Format::DIGITAL ||
+                    $game->getFormat()->getName() === Format::DLC) {
+                    echo "{$game->getTitle()} - {$game->getPurchaseDate()->format("d-m-Y")} - {$game->getCost()}<br>";
+                    $sum += $game->getCost();
+                }
+            }
+            echo "<div style=\"color: red;\">Всего за {$endDate->modify('-1 month')->format("M-Y")} месяц на игры: {$sum}</div><br>";
+            $sum = 0;
+        }
+        exit;
+    }
+
 }

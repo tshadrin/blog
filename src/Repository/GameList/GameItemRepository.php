@@ -55,4 +55,12 @@ class GameItemRepository extends ServiceEntityRepository
         $this->save($gameItem);
         $this->flush();
     }
+
+    public function findByDateRange(\DateTimeImmutable $dateFrom, \DateTimeImmutable $dateTo)
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.purchaseDate >= :dateFrom')
+            ->andWhere('g.purchaseDate <= :dateTo')->setParameter(':dateFrom', $dateFrom)
+            ->setParameter(':dateTo', $dateTo)->orderBy("g.purchaseDate", 'asc')->getQuery()->getResult();
+    }
 }

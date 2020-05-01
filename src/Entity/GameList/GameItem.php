@@ -161,4 +161,9 @@ class GameItem
     {
         $this->deleted = $deleted;
     }
+
+    public function isDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
 }
