@@ -154,6 +154,9 @@
     "monolog/monolog": {
         "version": "1.25.1"
     },
+    "n98/junit-xml": {
+        "version": "1.0.0"
+    },
     "nikic/php-parser": {
         "version": "v4.2.4"
     },
@@ -162,6 +165,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "overtrue/phplint": {
+        "version": "2.0.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -197,6 +203,18 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        },
+        "files": [
+            "./phpcs.xml.dist"
         ]
     },
     "studio-42/elfinder": {

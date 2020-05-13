@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Section\Add;
@@ -10,7 +11,6 @@ class Handler
 {
     /** @var SectionRepository  */
     private $sectionRepository;
-
     public function __construct(SectionRepository $sectionRepository)
     {
         $this->sectionRepository = $sectionRepository;

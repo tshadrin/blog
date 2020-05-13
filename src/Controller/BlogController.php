@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -23,7 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 /**
  * Class BlogController
  * @Route("/", name="blog")
@@ -35,11 +35,12 @@ class BlogController extends AbstractController
      * @return Response
      * @Route(path="", name="", methods={"GET"})
      */
-    public function list(PostRepository $postRepository,
-                         SectionRepository $sectionRepository,
-                         PaginatorInterface $paginator,
-                         Request $request): Response
-    {
+    public function list(
+        PostRepository $postRepository,
+        SectionRepository $sectionRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
         $section = $sectionRepository->findOneBy(['machineName' => 'own']);
         $posts = $postRepository
             ->createQueryBuilder('p')
@@ -48,7 +49,7 @@ class BlogController extends AbstractController
             ->setParameter(':status', Status::PUBLISH)
             ->andWhere('s.hidden = :hidden')
             ->setParameter(':hidden', Section::NOT_HIDDEN)
-            ->orderBy('p.created','DESC')
+            ->orderBy('p.created', 'DESC')
             ->getQuery()
             ->getResult();
         $pagedPosts = $paginator->paginate($posts, $request->query->getInt('page', 1));
@@ -82,7 +83,7 @@ class BlogController extends AbstractController
         $postDTO = PostDTO::createFromPost($post);
         $form = $this->createForm(PostForm::class, $postDTO);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($post, $postDTO));
             $this->addFlash('notice', 'Post saved');
             return $this->redirectToRoute("blog.show.from.hru", ['prefix' => $post->getHru()->getPrefix(), 'value' => $post->getHru()->getValue()]);
@@ -125,12 +126,11 @@ class BlogController extends AbstractController
                 'value' => $hru->getValue()
             ], Response::HTTP_MOVED_PERMANENTLY);
         }
-        if($post->isPublished() || $this->isGranted("ROLE_ADMIN")) {
+        if ($post->isPublished() || $this->isGranted("ROLE_ADMIN")) {
             return $this->render('blog/post/show.html.twig', ['post' => $post]);
         }
         $this->addFlash('error', "Post not found.");
         return $this->redirectToRoute('blog');
-
     }
 
     /**

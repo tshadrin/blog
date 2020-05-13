@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\GameList;
@@ -9,7 +10,6 @@ use Doctrine\DBAL\Types\StringType;
 class OSType extends StringType
 {
     public const NAME = 'gamelist_os';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value instanceof OS ? $value->getName() : $value;
@@ -25,7 +25,7 @@ class OSType extends StringType
         return self::NAME;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

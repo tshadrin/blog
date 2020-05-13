@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\GameList;
@@ -13,9 +14,7 @@ class Format
     public const OTHER = 'other';
     public const ACCESSORY = 'accessory';
     public const DLC = 'dlc';
-
     private $name;
-
     public function __construct(string $name)
     {
         Assert::oneOf($name, [

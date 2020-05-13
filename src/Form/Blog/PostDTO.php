@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form\Blog;
@@ -13,7 +14,6 @@ class PostDTO
     public $section;
     public $tags;
     public $status;
-
     public static function createFromPost(Post $post)
     {
         $postDTO = new self();

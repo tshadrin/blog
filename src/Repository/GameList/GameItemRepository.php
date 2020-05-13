@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository\GameList;
@@ -12,8 +13,9 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 class GameItemRepository extends ServiceEntityRepository
 {
-    public const CONSOLES_PLATFROMS = 'Consoles';
     use SaveAndFlush;
+
+    public const CONSOLES_PLATFROMS = 'Consoles';
 
     public function __construct(ManagerRegistry $registry)
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\GameList;
@@ -9,7 +10,6 @@ use Doctrine\DBAL\Types\StringType;
 class FormatType extends StringType
 {
     public const NAME = 'gamelist_format';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value instanceof Format ? $value->getName() : $value;
@@ -25,7 +25,7 @@ class FormatType extends StringType
         return self::NAME;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

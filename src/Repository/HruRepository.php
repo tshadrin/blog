@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -11,6 +12,7 @@ class HruRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Hru::class);
@@ -18,7 +20,7 @@ class HruRepository extends ServiceEntityRepository
 
     public function isExists(string $prefix, string $value): bool
     {
-        if(is_null($this->findOneBy(['prefix' => $prefix, 'value' => $value]))) {
+        if (is_null($this->findOneBy(['prefix' => $prefix, 'value' => $value]))) {
             return false;
         }
         return true;

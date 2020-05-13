@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Security;
@@ -14,7 +15,6 @@ class UserProvider implements UserProviderInterface
 {
     /** @var UserRepository  */
     private $userRepository;
-
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -27,9 +27,9 @@ class UserProvider implements UserProviderInterface
     public function loadUserByUsername($username): UserInterface
     {
         $user = $this->userRepository->findOneBy(['email' => $username]);
-
-        if(!$user instanceof User)
+        if (!$user instanceof User) {
             throw new UsernameNotFoundException('');
+        }
 
         return $user;
     }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\GameList\Add;
@@ -10,7 +11,6 @@ class Handler
 {
     /** @var GameItemRepository */
     private $gameItemRepository;
-
     public function __construct(GameItemRepository $gameItemRepository)
     {
         $this->gameItemRepository = $gameItemRepository;
@@ -25,7 +25,8 @@ class Handler
             $command->gameItemDTO->cost,
             $command->gameItemDTO->notes,
             $command->gameItemDTO->format,
-            $command->gameItemDTO->exchange_rate);
+            $command->gameItemDTO->exchange_rate
+        );
         $this->gameItemRepository->save($gameItem);
         $this->gameItemRepository->flush();
     }

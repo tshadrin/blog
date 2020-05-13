@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository\Blog;
@@ -12,11 +13,12 @@ class PostRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
-    /** @var SectionRepository  */
-    private $sectionRepository;
-    /** @var TagRepository  */
-    private $tagRepository;
+/** @var SectionRepository  */
 
+
+    private $sectionRepository;
+/** @var TagRepository  */
+    private $tagRepository;
     public function __construct(ManagerRegistry $registry, SectionRepository $sectionRepository, TagRepository $tagRepository)
     {
         parent::__construct($registry, Post::class);

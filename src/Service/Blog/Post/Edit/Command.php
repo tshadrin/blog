@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Post\Edit;
@@ -10,7 +11,6 @@ class Command
 {
     public $post;
     public $postDTO;
-
     public function __construct(Post $post, PostDTO $postDTO)
     {
         $this->post = $post;

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\HruGenerator;
@@ -10,7 +11,6 @@ class NativeHruGenerator implements HruGeneratorInterface
 {
     /** @var HruRepository */
     private $hruRepository;
-
     public function __construct(HruRepository $hruRepository)
     {
         $this->hruRepository = $hruRepository;
@@ -22,7 +22,6 @@ class NativeHruGenerator implements HruGeneratorInterface
         $value = $this->removeRestricted($options->value);
         $value = $this->replaceSpaceToDash($value);
         $value = $this->toLower($value);
-
         if ($this->hruRepository->isExists($prefix, $value)) {
             $value = $this->extend($prefix, $value);
         }
@@ -50,7 +49,7 @@ class NativeHruGenerator implements HruGeneratorInterface
     {
         $suffix = 0;
         while ($this->hruRepository->isExists($prefix, "{$value}-{$suffix}")) {
-            $suffix ++;
+            $suffix++;
         }
         return "{$value}-{$suffix}";
     }

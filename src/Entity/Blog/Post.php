@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\Blog;
@@ -74,8 +75,16 @@ class Post
      */
     private $hru;
 
-    public function __construct(string $title, string $teaser, \DateTimeImmutable $created, string $body, Section $section, iterable $tags, Status $status, User $author)
-    {
+    public function __construct(
+        string $title,
+        string $teaser,
+        \DateTimeImmutable $created,
+        string $body,
+        Section $section,
+        iterable $tags,
+        Status $status,
+        User $author
+    ) {
         $this->title = $title;
         $this->body = $body;
         $this->created = $created;

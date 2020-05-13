@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\Blog;
@@ -9,7 +10,6 @@ use Doctrine\DBAL\Types\StringType;
 class StatusType extends StringType
 {
     public const NAME = 'post_status';
-
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value instanceof Status ? $value->getName() : $value;
@@ -25,7 +25,7 @@ class StatusType extends StringType
         return self::NAME;
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform) : bool
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

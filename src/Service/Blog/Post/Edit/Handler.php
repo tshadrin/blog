@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Post\Edit;
@@ -14,15 +15,16 @@ class Handler
 {
     /** @var PostRepository  */
     private $postRepository;
-    /** @var HruGeneratorInterface */
+/** @var HruGeneratorInterface */
     private $hruGenerator;
-    /** @var HruRepository */
+/** @var HruRepository */
     private $hruRepository;
 
-    public function __construct(PostRepository $postRepository,
-                                HruGeneratorInterface $hruGenerator,
-                                HruRepository $hruRepository)
-    {
+    public function __construct(
+        PostRepository $postRepository,
+        HruGeneratorInterface $hruGenerator,
+        HruRepository $hruRepository
+    ) {
         $this->postRepository = $postRepository;
         $this->hruGenerator = $hruGenerator;
         $this->hruRepository = $hruRepository;
@@ -31,13 +33,11 @@ class Handler
     public function handle(Command $command): void
     {
         if ($this->isTitleChanged($command->post, $command->postDTO) || $this->isSectionChanged($command->post, $command->postDTO)) {
-            $hru = $this->hruGenerator->generate(
-                new Options(
-                    $command->postDTO->section->getName(),  //prefix
-                    $command->postDTO->title,                 //value
-                    $command->post->getId()                   //entityId
-                )
-            );
+            $hru = $this->hruGenerator->generate(new Options(
+                $command->postDTO->section->getName(), //prefix
+                $command->postDTO->title, //value
+                $command->post->getId()                   //entityId
+            ));
             $command->post->setHru($hru);
         }
 

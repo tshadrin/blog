@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -50,8 +51,7 @@ class SectionController extends AbstractController
         $sectionDTO = SectionDTO::createFromSection($section);
         $form = $this->createForm(SectionForm::class, $sectionDTO);
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($section, $sectionDTO));
             $this->addFlash('notice', 'Section saved');
             return $this->redirectToRoute("section.table", ['post' => $section->getId()]);

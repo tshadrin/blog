@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form\Blog;
@@ -21,7 +22,6 @@ class PostForm extends AbstractType
 {
     /** @var TokenStorageInterface  */
     private $tokenStorage;
-
     public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
@@ -30,7 +30,9 @@ class PostForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class);
-        $builder->add('teaser', CKEditorType::class,
+        $builder->add(
+            'teaser',
+            CKEditorType::class,
             [
                 'config' => [
                     'image_previewText' => '',
@@ -42,14 +44,17 @@ class PostForm extends AbstractType
                 ],
             ]
         );
-        $builder->get('teaser')->addModelTransformer(new CallbackTransformer(
-            function ($value) { return $value; },
-            function ($value) {
-                if(!is_null($value))
+        $builder->get('teaser')->addModelTransformer(new CallbackTransformer(function ($value) {
+                return $value;
+        }, function ($value) {
+
+            if (!is_null($value)) {
                 return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img>');
             }
-        ));
-        $builder->add('body', CKEditorType::class,
+        }));
+        $builder->add(
+            'body',
+            CKEditorType::class,
             [
                 'config' => [
                     'image_previewText' => '',
@@ -59,17 +64,18 @@ class PostForm extends AbstractType
                         'homeFolder' => $this->tokenStorage->getToken()->getUser()->getId()
                     ],
                 ],
-            ]
+                    ]
         );
-        $builder->get('body')->addModelTransformer(new CallbackTransformer(
-            function ($value) { return $value; },
-            function ($value) {
-                return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img>');
-            }
-        ));
+        $builder->get('body')->addModelTransformer(new CallbackTransformer(function ($value) {
+                return $value;
+        }, function ($value) {
+
+            return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img>');
+        }));
         $builder->add('section', EntityType::class, [
             'class' => Section::class,
             'query_builder' => function (EntityRepository $er) {
+
                 return $er->createQueryBuilder('s')
                     ->where('s.enabled = 1');
             },

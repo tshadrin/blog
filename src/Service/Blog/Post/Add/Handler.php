@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Post\Add;
@@ -16,21 +17,22 @@ class Handler
 {
     /** @var PostRepository */
     private $postRepository;
-    /** @var TokenStorageInterface */
+/** @var TokenStorageInterface */
     private $tokenStorage;
-    /** @var UserRepository */
+/** @var UserRepository */
     private $userRepository;
-    /** @var HruGeneratorInterface */
+/** @var HruGeneratorInterface */
     private $hruGenerator;
-    /** @var HruRepository */
+/** @var HruRepository */
     private $hruRepository;
 
-    public function __construct(PostRepository $postRepository,
-                                TokenStorageInterface $tokenStorage,
-                                UserRepository $userRepository,
-                                HruGeneratorInterface $hruGenerator,
-                                HruRepository $hruRepository)
-    {
+    public function __construct(
+        PostRepository $postRepository,
+        TokenStorageInterface $tokenStorage,
+        UserRepository $userRepository,
+        HruGeneratorInterface $hruGenerator,
+        HruRepository $hruRepository
+    ) {
         $this->postRepository = $postRepository;
         $this->tokenStorage = $tokenStorage;
         $this->userRepository = $userRepository;
@@ -50,16 +52,13 @@ class Handler
             new Status($command->postDTO->status),
             $this->userRepository->find($this->tokenStorage->getToken()->getUser()->getId())
         );
-
         $this->postRepository->save($post);
         $this->postRepository->flush();
-        $hru = $this->hruGenerator->generate(
-            new Options(
-                $post->getSection()->getName(),    //prefix
-                $post->getTitle(),                 //value
-                $post->getId()                     //entityId
-            )
-        );
+        $hru = $this->hruGenerator->generate(new Options(
+            $post->getSection()->getName(), //prefix
+            $post->getTitle(), //value
+            $post->getId()                     //entityId
+        ));
         $post->setHru($hru);
         $this->postRepository->flush();
     }

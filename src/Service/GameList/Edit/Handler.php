@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\GameList\Edit;
@@ -11,7 +12,6 @@ class Handler
 {
     /** @var GameItemRepository */
     private $gameItemRepository;
-
     public function __construct(GameItemRepository $gameItemRepository)
     {
         $this->gameItemRepository = $gameItemRepository;

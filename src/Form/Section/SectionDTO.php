@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form\Section;
@@ -11,7 +12,6 @@ class SectionDTO
     public $name;
     public $enabled;
     public $hidden;
-
     public static function createFromSection(Section $section)
     {
         $sectionDTO = new self();

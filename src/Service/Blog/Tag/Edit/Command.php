@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Tag\Edit;
@@ -10,7 +11,6 @@ class Command
 {
     public $tag;
     public $tagDTO;
-
     public function __construct(Tag $tag, TagDTO $tagDTO)
     {
         $this->tag = $tag;

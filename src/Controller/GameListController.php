@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -53,8 +54,7 @@ class GameListController extends AbstractController
         $gameDTO = GameItemDTO::createFromGameItem($game);
         $form = $this->createForm(GameItemForm::class, $gameDTO);
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($game, $gameDTO));
             $this->addFlash('notice', 'Game saved');
             return $this->redirectToRoute("game_list.table");
@@ -78,8 +78,12 @@ class GameListController extends AbstractController
      * @Route("/table-platform/{platform}", name=".table-platform", methods={"GET"}, defaults={"platform"=GameItemRepository::CONSOLES_PLATFROMS})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function gamesTableByPlatform(string $platform, GameItemRepository $gameItemRepository, Request $request, PaginatorInterface $paginator): Response
-    {
+    public function gamesTableByPlatform(
+        string $platform,
+        GameItemRepository $gameItemRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
         try {
             $platforms = OS::getConstants();
             array_push($platforms, GameItemRepository::CONSOLES_PLATFROMS);
@@ -114,15 +118,20 @@ class GameListController extends AbstractController
     public function statistics(GameItemRepository $gameItemRepository): Response
     {
         $sum = 0;
-        $endDate = (new \DateTimeImmutable())->setTime(0,0,0)->modify('first day of next month');
-        for ($i = 0; $i < 24; $i++) {
+        $endDate = (new \DateTimeImmutable())->setTime(0, 0, 0)->modify('first day of next month');
+        for (
+            $i = 0; $i < 24;
+            $i++
+        ) {
             $gamelist = $gameItemRepository->findByDateRange($endDate->modify('-1 month'), $endDate);
             $endDate = $endDate->modify('-1 month');
             /** @var GameItem $game */
             foreach ($gamelist as $game) {
-                if($game->getFormat()->getName() === Format::DISC ||
+                if (
+                    $game->getFormat()->getName() === Format::DISC ||
                     $game->getFormat()->getName() === Format::DIGITAL ||
-                    $game->getFormat()->getName() === Format::DLC) {
+                    $game->getFormat()->getName() === Format::DLC
+                ) {
                     echo "{$game->getTitle()} - {$game->getPurchaseDate()->format("d-m-Y")} - {$game->getCost()}<br>";
                     $sum += $game->getCost();
                 }
@@ -132,5 +141,4 @@ class GameListController extends AbstractController
         }
         exit;
     }
-
 }

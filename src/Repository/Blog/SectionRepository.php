@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository\Blog;
@@ -11,6 +12,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 class SectionRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
+
 
     public function __construct(ManagerRegistry $registry)
     {

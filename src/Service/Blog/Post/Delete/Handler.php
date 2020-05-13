@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service\Blog\Post\Delete;
@@ -11,7 +12,6 @@ class Handler
 {
     /** @var PostRepository  */
     private $postRepository;
-
     public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;

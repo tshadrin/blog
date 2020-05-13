@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -51,8 +52,7 @@ class TagController extends AbstractController
         $tagDTO = TagDTO::createFromTag($tag);
         $form = $this->createForm(TagForm::class, $tagDTO);
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($tag, $tagDTO));
             $this->addFlash('notice', 'Tag saved');
             return $this->redirectToRoute("tag.table", ['post' => $tag->getId()]);

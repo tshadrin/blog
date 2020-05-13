@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Form\GameList;
@@ -14,10 +15,9 @@ class GameItemDTO
     public $notes;
     public $format;
     public $exchange_rate;
-
     public static function createFromGameItem(GameItem $gameItem): self
     {
-        $gameItemDTO = new self;
+        $gameItemDTO = new self();
         $gameItemDTO->title = $gameItem->getTitle();
         $gameItemDTO->os = $gameItem->getOs();
         $gameItemDTO->purchase_date = $gameItem->getPurchaseDate();

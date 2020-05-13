@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entity\GameList;
@@ -11,9 +12,7 @@ class OS
     public const PLAYSTATION_4 = 'Playstation 4';
     public const PC = 'PC';
     public const SWITCH = 'Switch';
-
     private $name;
-
     public function __construct(string $name)
     {
         Assert::oneOf($name, [
