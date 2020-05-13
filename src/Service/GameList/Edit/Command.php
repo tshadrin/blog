@@ -11,8 +11,9 @@ class Command
 {
     /** @var GameItem */
     public $gameItem;
-/** @var GameItemDTO */
+    /** @var GameItemDTO */
     public $gameItemDTO;
+
     public function __construct(GameItem $gameItem, GameItemDTO $gameItemDTO)
     {
         $this->gameItem = $gameItem;

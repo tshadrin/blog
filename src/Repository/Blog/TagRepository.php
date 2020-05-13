@@ -13,7 +13,6 @@ class TagRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tag::class);

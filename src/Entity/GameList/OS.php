@@ -12,7 +12,10 @@ class OS
     public const PLAYSTATION_4 = 'Playstation 4';
     public const PC = 'PC';
     public const SWITCH = 'Switch';
+
+    /** @var string */
     private $name;
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [

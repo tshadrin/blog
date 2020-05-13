@@ -12,6 +12,7 @@ class Handler
 {
     /** @var PostRepository  */
     private $postRepository;
+
     public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;

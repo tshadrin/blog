@@ -76,7 +76,7 @@ class SectionMenu
 
         // sort them after first pass
         ksort($menuOrderArray);
-// handle position duplicates
+        // handle position duplicates
         if (count($alreadyTaken)) {
             foreach ($alreadyTaken as $key => $value) {
             // the ever shifting target
@@ -92,7 +92,7 @@ class SectionMenu
 
         // sort them after second pass
         ksort($menuOrderArray);
-// add items without ordernumber to the end
+        // add items without ordernumber to the end
         if (count($addLast)) {
             foreach ($addLast as $key => $value) {
                 $menuOrderArray[] = $value;

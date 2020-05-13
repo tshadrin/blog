@@ -15,29 +15,30 @@ class Section
 {
     public const ENABLED = true;
     public const NOT_HIDDEN = false;
-/**
+
+    /**
      * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", name="machine_name", length=50)
      */
     private $machineName;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", length=50)
      */
     private $name;
-/**
+    /**
      * @var bool
      * @ORM\Column(type="boolean")
      */
     private $enabled;
-/**
+    /**
      * @var bool
      * @ORM\Column(type="boolean")
      */

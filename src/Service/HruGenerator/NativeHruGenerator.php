@@ -11,6 +11,7 @@ class NativeHruGenerator implements HruGeneratorInterface
 {
     /** @var HruRepository */
     private $hruRepository;
+
     public function __construct(HruRepository $hruRepository)
     {
         $this->hruRepository = $hruRepository;

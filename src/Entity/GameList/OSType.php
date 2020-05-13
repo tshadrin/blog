@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\StringType;
 class OSType extends StringType
 {
     public const NAME = 'gamelist_os';
+
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value instanceof OS ? $value->getName() : $value;

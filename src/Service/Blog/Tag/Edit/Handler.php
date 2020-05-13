@@ -10,6 +10,7 @@ class Handler
 {
     /** @var TagRepository  */
     private $tagRepository;
+
     public function __construct(TagRepository $tagRepository)
     {
         $this->tagRepository = $tagRepository;

@@ -13,7 +13,6 @@ class SectionRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Section::class);

@@ -12,6 +12,7 @@ class Handler
 {
     /** @var GameItemRepository */
     private $gameItemRepository;
+
     public function __construct(GameItemRepository $gameItemRepository)
     {
         $this->gameItemRepository = $gameItemRepository;

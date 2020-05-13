@@ -12,6 +12,7 @@ class Status
     public const REMOVE = 'remove';
     public const PUBLISH = 'publish';
     public const PRIVATE = 'private';
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [

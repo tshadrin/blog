@@ -14,7 +14,10 @@ class Format
     public const OTHER = 'other';
     public const ACCESSORY = 'accessory';
     public const DLC = 'dlc';
+
+    /** @var string */
     private $name;
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [

@@ -20,21 +20,22 @@ class Hru
      * @ORM\Column(type="integer")
      */
     private $id;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", length=300)
      */
     private $value;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", length=300)
      */
     private $prefix;
-/**
+    /**
      * @var integer
      * @ORM\Column(type="integer", nullable=false, name="entity_id")
      */
     private $entityId;
+
     public function getValue(): string
     {
         return $this->value;

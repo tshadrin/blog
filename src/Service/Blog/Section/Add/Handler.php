@@ -11,6 +11,7 @@ class Handler
 {
     /** @var SectionRepository  */
     private $sectionRepository;
+
     public function __construct(SectionRepository $sectionRepository)
     {
         $this->sectionRepository = $sectionRepository;

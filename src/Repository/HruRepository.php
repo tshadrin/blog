@@ -12,7 +12,6 @@ class HruRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
-
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Hru::class);

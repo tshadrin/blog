@@ -17,13 +17,13 @@ class Handler
 {
     /** @var PostRepository */
     private $postRepository;
-/** @var TokenStorageInterface */
+    /** @var TokenStorageInterface */
     private $tokenStorage;
-/** @var UserRepository */
+    /** @var UserRepository */
     private $userRepository;
-/** @var HruGeneratorInterface */
+    /** @var HruGeneratorInterface */
     private $hruGenerator;
-/** @var HruRepository */
+    /** @var HruRepository */
     private $hruRepository;
 
     public function __construct(
@@ -56,8 +56,8 @@ class Handler
         $this->postRepository->flush();
         $hru = $this->hruGenerator->generate(new Options(
             $post->getSection()->getName(), //prefix
-            $post->getTitle(), //value
-            $post->getId()                     //entityId
+            $post->getTitle(),              //value
+            $post->getId()                  //entityId
         ));
         $post->setHru($hru);
         $this->postRepository->flush();

@@ -8,7 +8,9 @@ use App\Form\Blog\PostDTO;
 
 class Command
 {
+    /** @var PostDTO */
     public $postDTO;
+
     public function __construct(PostDTO $postDTO)
     {
         $this->postDTO = $postDTO;

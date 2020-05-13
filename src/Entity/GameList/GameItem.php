@@ -15,53 +15,55 @@ class GameItem
 {
     private const DEFAULT_EXCHANGE_RATE = 1.00;
     public const DEFAULT_DELETED_VALUE = false;
-/**
+
+    /**
      * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", length=300)
      */
     private $title;
-/**
+    /**
      * @var OS
      * @ORM\Column(type="gamelist_os", name="os", length=30, nullable=false)
      */
     private $os;
-/**
+    /**
      * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
     private $purchaseDate;
-/**
+    /**
      * @var float
      * @ORM\Column(type="float")
      */
     private $cost;
-/**
+    /**
      * @var float
      * @ORM\Column(type="float")
      */
     private $exchangeRate;
-/**
+    /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
      */
     private $notes;
-/**
+    /**
      * @var Format
      * @ORM\Column(type="gamelist_format", name="format", length=30, nullable=false)
      */
     private $format;
-/**
+    /**
      * @var bool
      * @ORM\Column(type="boolean")
      */
     private $deleted;
+
     public function getCost(): float
     {
         return $this->cost;

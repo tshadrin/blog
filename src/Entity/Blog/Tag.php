@@ -21,11 +21,12 @@ class Tag
      * @ORM\Column(type="integer")
      */
     private $id;
-/**
+    /**
      * @var string
      * @ORM\Column(type="string", length=50, unique=true)
      */
     private $name;
+
     public function __construct(string $name)
     {
         $this->name = $name;

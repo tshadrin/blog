@@ -15,9 +15,9 @@ class Handler
 {
     /** @var PostRepository  */
     private $postRepository;
-/** @var HruGeneratorInterface */
+    /** @var HruGeneratorInterface */
     private $hruGenerator;
-/** @var HruRepository */
+    /** @var HruRepository */
     private $hruRepository;
 
     public function __construct(

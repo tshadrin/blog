@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\StringType;
 class FormatType extends StringType
 {
     public const NAME = 'gamelist_format';
+
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return $value instanceof Format ? $value->getName() : $value;

@@ -8,10 +8,11 @@ class Options
 {
     /** @var string */
     public $prefix;
-/** @var string */
+    /** @var string */
     public $value;
-/** @var int */
+    /** @var int */
     public $entityId;
+
     public function __construct(string $prefix, string $value, int $entityId)
     {
         $this->prefix = $prefix;
