@@ -6,12 +6,9 @@ namespace App\Service\HruGenerator;
 
 class Options
 {
-    /** @var string */
-    public $prefix;
-    /** @var string */
-    public $value;
-    /** @var int */
-    public $entityId;
+    public string $prefix;
+    public string $value;
+    public int $entityId;
 
     public function __construct(string $prefix, string $value, int $entityId)
     {

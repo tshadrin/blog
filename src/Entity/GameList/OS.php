@@ -13,8 +13,7 @@ class OS
     public const PC = 'PC';
     public const SWITCH = 'Switch';
 
-    /** @var string */
-    private $name;
+    private string $name;
 
     public function __construct(string $name)
     {

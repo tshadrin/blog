@@ -8,19 +8,8 @@ use App\Repository\Blog\SectionRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 
-/**
- * Строитель меню
- * Class Builder
- * @package MenuBundle\Menu
- */
 class AdminMenu
 {
-    /**
-     * Построение начального варианта меню и
-     * добавление события создания меню
-     * @param FactoryInterface $factory
-     * @return ItemInterface
-     */
     public function build(
         SectionRepository $sectionRepository,
         FactoryInterface $factory
@@ -44,9 +33,6 @@ class AdminMenu
         return $menu;
     }
 
-    /**
-     * @param $menu
-     */
     public function reorderMenuItems(ItemInterface $menu): void
     {
         $menuOrderArray = [];

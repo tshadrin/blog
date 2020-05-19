@@ -7,7 +7,6 @@ namespace App\Entity\Blog;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Section
  * @ORM\Entity(repositoryClass="App\Repository\Blog\SectionRepository")
  * @ORM\Table(name="sections")
  */
@@ -17,32 +16,28 @@ class Section
     public const NOT_HIDDEN = false;
 
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
     /**
-     * @var string
      * @ORM\Column(type="string", name="machine_name", length=50)
      */
-    private $machineName;
+    private string $machineName;
     /**
-     * @var string
      * @ORM\Column(type="string", length=50)
      */
-    private $name;
+    private string $name;
     /**
-     * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $enabled;
+    private bool $enabled;
     /**
-     * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $hidden;
+    private bool $hidden;
+
     public function __construct(string $machineName, string $name, bool $enabled, bool $hidden)
     {
         $this->machineName = $machineName;
@@ -51,9 +46,6 @@ class Section
         $this->hidden = $hidden;
     }
 
-    /**
-     * @return string
-     */
     public function getMachineName(): string
     {
         return $this->machineName;

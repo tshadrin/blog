@@ -8,8 +8,7 @@ use App\Form\Section\SectionDTO;
 
 class Command
 {
-    /** @var SectionDTO */
-    public $sectionDTO;
+    public SectionDTO $sectionDTO;
 
     public function __construct(SectionDTO $sectionDTO)
     {

@@ -15,16 +15,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class Handler
 {
-    /** @var PostRepository */
-    private $postRepository;
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-    /** @var UserRepository */
-    private $userRepository;
-    /** @var HruGeneratorInterface */
-    private $hruGenerator;
-    /** @var HruRepository */
-    private $hruRepository;
+    private PostRepository $postRepository;
+    private TokenStorageInterface $tokenStorage;
+    private UserRepository $userRepository;
+    private HruGeneratorInterface $hruGenerator;
+    private HruRepository $hruRepository;
 
     public function __construct(
         PostRepository $postRepository,

@@ -10,19 +10,8 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-/**
- * Строитель меню
- * Class Builder
- * @package MenuBundle\Menu
- */
 class SectionMenu
 {
-    /**
-     * Построение начального варианта меню и
-     * добавление события создания меню
-     * @param FactoryInterface $factory
-     * @return ItemInterface
-     */
     public function build(
         SectionRepository $sectionRepository,
         FactoryInterface $factory,
@@ -48,9 +37,6 @@ class SectionMenu
         return $menu;
     }
 
-    /**
-     * @param $menu
-     */
     public function reorderMenuItems(ItemInterface $menu): void
     {
         $menuOrderArray = [];

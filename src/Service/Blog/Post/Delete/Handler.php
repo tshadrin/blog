@@ -10,8 +10,7 @@ use App\Repository\Blog\PostRepository;
 
 class Handler
 {
-    /** @var PostRepository  */
-    private $postRepository;
+    private PostRepository $postRepository;
 
     public function __construct(PostRepository $postRepository)
     {

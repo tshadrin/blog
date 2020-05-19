@@ -8,8 +8,7 @@ use App\Form\Tag\TagDTO;
 
 class Command
 {
-    /** @var TagDTO */
-    public $tagDTO;
+    public TagDTO $tagDTO;
 
     public function __construct(TagDTO $tagDTO)
     {

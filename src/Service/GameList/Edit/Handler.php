@@ -10,8 +10,7 @@ use App\Repository\GameList\GameItemRepository;
 
 class Handler
 {
-    /** @var GameItemRepository */
-    private $gameItemRepository;
+    private GameItemRepository $gameItemRepository;
 
     public function __construct(GameItemRepository $gameItemRepository)
     {

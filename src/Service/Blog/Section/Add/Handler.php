@@ -9,8 +9,7 @@ use App\Repository\Blog\SectionRepository;
 
 class Handler
 {
-    /** @var SectionRepository  */
-    private $sectionRepository;
+    private SectionRepository $sectionRepository;
 
     public function __construct(SectionRepository $sectionRepository)
     {

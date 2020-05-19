@@ -9,8 +9,7 @@ use App\Repository\HruRepository;
 
 class NativeHruGenerator implements HruGeneratorInterface
 {
-    /** @var HruRepository */
-    private $hruRepository;
+    private HruRepository $hruRepository;
 
     public function __construct(HruRepository $hruRepository)
     {

@@ -13,10 +13,8 @@ class PostRepository extends ServiceEntityRepository
 {
     use SaveAndFlush;
 
-    /** @var SectionRepository  */
-    private $sectionRepository;
-    /** @var TagRepository  */
-    private $tagRepository;
+    private SectionRepository $sectionRepository;
+    private TagRepository $tagRepository;
 
     public function __construct(ManagerRegistry $registry, SectionRepository $sectionRepository, TagRepository $tagRepository)
     {

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Service\GameList\Add;
 
+use App\Entity\GameList\Format;
 use App\Entity\GameList\GameItem;
+use App\Entity\GameList\OS;
 use App\Repository\GameList\GameItemRepository;
 
 class Handler
 {
-    /** @var GameItemRepository */
-    private $gameItemRepository;
+    private GameItemRepository $gameItemRepository;
 
     public function __construct(GameItemRepository $gameItemRepository)
     {
@@ -21,11 +22,11 @@ class Handler
     {
         $gameItem = new GameItem(
             $command->gameItemDTO->title,
-            $command->gameItemDTO->os,
+            new OS($command->gameItemDTO->os),
             $command->gameItemDTO->purchase_date,
             $command->gameItemDTO->cost,
             $command->gameItemDTO->notes,
-            $command->gameItemDTO->format,
+            new Format($command->gameItemDTO->format),
             $command->gameItemDTO->exchange_rate
         );
         $this->gameItemRepository->save($gameItem);

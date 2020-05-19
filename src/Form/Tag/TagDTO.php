@@ -8,7 +8,7 @@ use App\Entity\Blog\Tag;
 
 class TagDTO
 {
-    public $name;
+    public string $name;
     public static function createFromTag(Tag $tag)
     {
         $tagDTO = new self();

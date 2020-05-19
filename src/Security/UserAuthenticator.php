@@ -25,14 +25,10 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-    /** @var CsrfTokenManagerInterface */
-    private $csrfTokenManager;
-    /** @var UserPasswordEncoderInterface */
-    private $passwordEncoder;
+    private EntityManagerInterface $entityManager;
+    private UrlGeneratorInterface $urlGenerator;
+    private CsrfTokenManagerInterface $csrfTokenManager;
+    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         EntityManagerInterface $entityManager,

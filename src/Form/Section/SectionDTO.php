@@ -8,10 +8,10 @@ use App\Entity\Blog\Section;
 
 class SectionDTO
 {
-    public $machine_name;
-    public $name;
-    public $enabled;
-    public $hidden;
+    public string $machine_name;
+    public string $name;
+    public bool $enabled;
+    public bool $hidden;
     public static function createFromSection(Section $section)
     {
         $sectionDTO = new self();

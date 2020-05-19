@@ -7,73 +7,63 @@ namespace App\Entity\Blog;
 use App\Entity\Hru;
 use App\Entity\User;
 use App\Form\Blog\PostDTO;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Post
  * @ORM\Entity(repositoryClass="App\Repository\Blog\PostRepository")
  * @ORM\Table(name="posts")
  */
 class Post
 {
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
     /**
-     * @var string
      * @ORM\Column(type="string")
      */
-    private $title;
+    private string $title;
     /**
-     * @var string
      * @ORM\Column(type="text")
      */
-    private $body;
+    private string $body;
     /**
-     * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created;
+    private \DateTimeImmutable $created;
     /**
-     * @var Section
      * @ORM\ManyToOne(targetEntity="App\Entity\Blog\Section")
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id", nullable=false)
      */
-    private $section;
+    private Section $section;
     /**
-     * @var Tag[]
      * @ORM\ManyToMany(targetEntity="App\Entity\Blog\Tag", fetch="EAGER")
      * @ORM\JoinTable(name="posts_tags", joinColumns={
      *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * })
      */
-    private $tags;
+    private Collection $tags;
     /**
-     * @var Status
      * @ORM\Column(type="post_status", name="status", length=30, nullable=false)
      */
-    private $status;
+    private Status $status;
     /**
-     * @var User
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      */
-    private $author;
+    private User $author;
     /**
-     * @var string
      * @ORM\Column(type="text", nullable=true, length=1000)
      */
-    private $teaser;
+    private ?string $teaser;
     /**
-     * @var Hru
      * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"}, fetch="EAGER")
      * @ORM\JoinColumn(name="hru_id", referencedColumnName="id", nullable=true)
      */
-    private $hru;
+    private ?Hru $hru = null;
 
     public function __construct(
         string $title,
@@ -81,7 +71,7 @@ class Post
         \DateTimeImmutable $created,
         string $body,
         Section $section,
-        iterable $tags,
+        Collection $tags,
         Status $status,
         User $author
     ) {
@@ -120,7 +110,7 @@ class Post
         return $this->status;
     }
 
-    public function getTags(): ?object
+    public function getTags(): Collection
     {
         return $this->tags;
     }
@@ -146,7 +136,7 @@ class Post
         $this->teaser = $postDTO->teaser;
         $this->body = $postDTO->body;
         $this->section = $postDTO->section;
-        $this->status = $postDTO->status;
+        $this->status = new Status($postDTO->status);
         $this->tags = $postDTO->tags;
     }
 

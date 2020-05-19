@@ -7,7 +7,6 @@ namespace App\Entity\GameList;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Post
  * @ORM\Entity(repositoryClass="App\Repository\GameList\GameItemRepository")
  * @ORM\Table(name="gamelist")
  */
@@ -17,52 +16,43 @@ class GameItem
     public const DEFAULT_DELETED_VALUE = false;
 
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
     /**
-     * @var string
      * @ORM\Column(type="string", length=300)
      */
-    private $title;
+    private string $title;
     /**
-     * @var OS
      * @ORM\Column(type="gamelist_os", name="os", length=30, nullable=false)
      */
-    private $os;
+    private OS $os;
     /**
-     * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
-    private $purchaseDate;
+    private \DateTimeImmutable $purchaseDate;
     /**
-     * @var float
      * @ORM\Column(type="float")
      */
-    private $cost;
+    private float $cost;
     /**
-     * @var float
      * @ORM\Column(type="float")
      */
-    private $exchangeRate;
+    private float $exchangeRate;
     /**
-     * @var string
      * @ORM\Column(type="text", nullable=true)
      */
-    private $notes;
+    private ?string $notes;
     /**
-     * @var Format
      * @ORM\Column(type="gamelist_format", name="format", length=30, nullable=false)
      */
-    private $format;
+    private Format $format;
     /**
-     * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $deleted;
+    private bool $deleted = self::DEFAULT_DELETED_VALUE;
 
     public function getCost(): float
     {
@@ -100,11 +90,11 @@ class GameItem
 
     public function __construct(
         string $title,
-        string $os,
+        OS $os,
         \DateTimeImmutable $purchaseDate,
         float $cost,
         ?string $notes,
-        string $format,
+        Format $format,
         float $exchangeRate = self::DEFAULT_EXCHANGE_RATE,
         bool $deleted = self::DEFAULT_DELETED_VALUE
     ) {
@@ -115,7 +105,6 @@ class GameItem
         $this->notes = $notes;
         $this->format = $format;
         $this->exchangeRate = $exchangeRate;
-        $this->deleted = $deleted;
     }
 
     /**

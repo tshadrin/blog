@@ -13,12 +13,9 @@ use App\Service\HruGenerator\Options;
 
 class Handler
 {
-    /** @var PostRepository  */
-    private $postRepository;
-    /** @var HruGeneratorInterface */
-    private $hruGenerator;
-    /** @var HruRepository */
-    private $hruRepository;
+    private PostRepository $postRepository;
+    private HruGeneratorInterface $hruGenerator;
+    private HruRepository $hruRepository;
 
     public function __construct(
         PostRepository $postRepository,
@@ -36,7 +33,7 @@ class Handler
             $hru = $this->hruGenerator->generate(new Options(
                 $command->postDTO->section->getName(), //prefix
                 $command->postDTO->title, //value
-                $command->post->getId()                   //entityId
+                $command->post->getId() //entityId
             ));
             $command->post->setHru($hru);
         }

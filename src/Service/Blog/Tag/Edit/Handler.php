@@ -8,8 +8,7 @@ use App\Repository\Blog\TagRepository;
 
 class Handler
 {
-    /** @var TagRepository  */
-    private $tagRepository;
+    private TagRepository $tagRepository;
 
     public function __construct(TagRepository $tagRepository)
     {

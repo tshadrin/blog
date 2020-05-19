@@ -9,10 +9,8 @@ use App\Form\Blog\PostDTO;
 
 class Command
 {
-    /** @var Post */
-    public $post;
-    /** @var PostDTO */
-    public $postDTO;
+    public Post $post;
+    public PostDTO $postDTO;
 
     public function __construct(Post $post, PostDTO $postDTO)
     {
