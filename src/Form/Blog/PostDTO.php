@@ -8,6 +8,7 @@ use App\Entity\Blog\Post;
 use App\Entity\Blog\Section;
 use App\Entity\Blog\Tag;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints;
 use Webmozart\Assert\Assert;
 
 class PostDTO
@@ -18,6 +19,9 @@ class PostDTO
     /** @var Section */
     public $section;
     public string $status = '';
+    /**
+     * @Constraints\NotBlank()
+     */
     public $tags2 = '';
 
     public static function createFromPost(Post $post)

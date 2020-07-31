@@ -6,7 +6,6 @@ namespace App\Form\Blog;
 
 use App\Entity\Blog\Section;
 use App\Entity\Blog\Status;
-use App\Entity\Blog\Tag;
 use Doctrine\ORM\EntityRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -81,7 +80,7 @@ class PostForm extends AbstractType
                     ->where('s.enabled = 1');
             },
         ]);
-        $builder->add('tags2', TextType::class);
+        $builder->add('tags2', TextType::class, ['required' => true,]);
         $builder->add('status', ChoiceType::class, ['choices' => Status::getConstants()]);
     }
 
