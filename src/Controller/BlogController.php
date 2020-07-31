@@ -25,14 +25,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class BlogController
  * @Route("/", name="blog")
  */
 class BlogController extends AbstractController
 {
     /**
-     * Last blog records
-     * @return Response
      * @Route(path="", name="", methods={"GET"})
      */
     public function list(
@@ -57,7 +54,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/blog/add", name=".add", methods={"GET","POST"})
      * IsGranted("ROLE_ADMIN")
      */
@@ -74,7 +70,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/blog/edit/{post}", name=".edit", methods={"GET","POST"})
      * IsGranted("ROLE_ADMIN")
      */
@@ -92,8 +87,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param string $section
-     * @return Response
      * @Route("/blog/{section}", name=".section", methods={"GET"}, requirements={"section":"[a-z]+"})
      */
     public function section(string $section, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
@@ -103,8 +96,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param string $tag
-     * @return Response
      * @Route("/blog/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -]+"}, options={"utf8": true})
      */
     public function tag(string $tag, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
@@ -114,8 +105,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param Post $post
-     * @return Response
      * @Route("/blog/show/{post}", name=".show", methods={"GET"}, requirements={"post": "\d+"})
      */
     public function showPost(Post $post): Response
@@ -134,8 +123,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param Post $post
-     * @return Response
      * @Route("/blog/list/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -146,7 +133,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/blog/delete/{post}", name=".delete", methods={"POST"})
      * IsGranted("ROLE_ADMIN")
      */

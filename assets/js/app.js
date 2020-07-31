@@ -9,11 +9,19 @@
 require('../css/bootstrap.scss');
 require("bootstrap");
 const hljs = require('highlight.js');
+require('selectize/dist/css/selectize.css');
+require('selectize');
+global.jQuery = require('jquery');
+
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 // const $ = require('jquery');
 
 document.addEventListener('DOMContentLoaded', function () {
     if (typeof CKEDITOR !== 'undefined') {
+        CKEDITOR.editorConfig = function( config ) {
+            config.language = 'ru';
+            config.uiColor = '#AADC6E';
+        };
         CKEDITOR.on('instanceReady', function (evt) {
             evt.editor.dataProcessor.htmlFilter.addRules({
                 elements: {
@@ -62,4 +70,105 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    const tagsField = document.querySelector('#post_form_tags2');
+    if (tagsField !== null) {
+        jQuery.ajax({
+            url: tagsField.dataset.tagsUrl,
+            type: 'GET',
+            dataType: 'json',
+            error: function () {
+                jQuery(tagsField).html("Cities API error!");
+            },
+            success: function (res) {
+                jQuery(tagsField).selectize({
+                    plugins: ['remove_button'],
+                    delimiter: '^',
+                    valueField: 'id',
+                    searchField: 'name',
+                    labelField: 'name',
+                    options: res.tags,
+                    create: function (item) {
+                        return {id: 'new' + item, name: item};
+                    },
+                });
+            }
+        });
+    }
+    /*
+    let citiesval = jQuery('#site_notification_form_cities').val();
+    if (citiesval !== "") {
+        var cities = citiesval.split('^');
+        jQuery.ajax({
+            url: 'https://api.istranet.ru/notify/cities/count',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({ cities }),
+            error: function() {
+                jQuery('#count-lk').html("");
+                jQuery('#count-push').html("");
+                jQuery('#site_notification_form_cities').html("Cities API error!");
+            },
+            success: function(res) {
+                jQuery('#count-lk').html("В личном кабинете увидят: <b>" + res.notify + "</b>");
+                jQuery('#count-push').html("Push уведомление получат: <b>" + res.push + "</b>");
+            }
+        });
+    } else {
+        jQuery('#count-lk').html("В личном кабинете увидят: <b>Все абоненты</b>");
+        jQuery('#count-push').html("Push уведомление получат: <b>Никто</b>");
+    }
+
+    jQuery.ajax({
+        url: 'https://api.istranet.ru/notify/cities',
+        type: 'GET',
+        dataType: 'json',
+        error: function() {
+            jQuery('#site_notification_form_cities').html("Cities API error!");
+        },
+        success: function(res) {
+            var options = [];
+
+            res.forEach((city) => {
+                options.push({ city });
+            });
+            console.log(cities);
+
+            var select = jQuery('#site_notification_form_cities');
+
+            select.selectize({
+                plugins: ['remove_button'],
+                delimiter: '^',
+                valueField: 'city',
+                labelField: 'city',
+                searchField: 'city',
+                options,
+                onChange: function(value) {
+                    if (value === "") {
+                        jQuery('#count-lk').html("В личном кабинете увидят: <b>Все абоненты</b>");
+                        jQuery('#count-push').html("Push уведомление получат: <b>Никто</b>");
+                    } else {
+                        var cities = value.split('^');
+
+                        jQuery.ajax({
+                            url: 'https://api.istranet.ru/notify/cities/count',
+                            type: 'POST',
+                            dataType: "json",
+                            data: JSON.stringify({cities}),
+                            error: function () {
+                                jQuery('#count-lk').html("");
+                                jQuery('#count-push').html("");
+                                jQuery('#site_notification_form_cities').html("Cities API error!");
+                            },
+                            success: function (res) {
+                                jQuery('#count-lk').html("В личном кабинете увидят: <b>" + res.notify + "</b>");
+                                jQuery('#count-push').html("Push уведомление получат: <b>" + res.push + "</b>");
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+     */
 });

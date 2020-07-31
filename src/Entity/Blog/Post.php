@@ -45,7 +45,7 @@ class Post
      *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * })
      */
-    private Collection $tags;
+    private iterable $tags;
     /**
      * @ORM\Column(type="post_status", name="status", length=30, nullable=false)
      */
@@ -71,7 +71,7 @@ class Post
         \DateTimeImmutable $created,
         string $body,
         Section $section,
-        Collection $tags,
+        iterable $tags,
         Status $status,
         User $author
     ) {
@@ -137,7 +137,11 @@ class Post
         $this->body = $postDTO->body;
         $this->section = $postDTO->section;
         $this->status = new Status($postDTO->status);
-        $this->tags = $postDTO->tags;
+    }
+
+    public function setTags(iterable $tags): void
+    {
+        $this->tags = $tags;
     }
 
     public function isPublished(): bool

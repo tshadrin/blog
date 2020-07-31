@@ -1,25 +1,24 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.28.0",
+        "bootstrap": "4",
+        "ckeditor": "^4.12.1",
         "core-js": "^3.0.0",
+        "highlight.js": "^9.15.10",
+        "jquery": "^3.4.1",
         "node-sass": "^4.12.0",
+        "popper.js": "^1.15.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "7.0.1",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.6.0",
+        "selectize": "^0.12.6"
     },
-    "license": "UNLICENSED",
+    "license": "Apache-2.0",
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    },
-    "dependencies": {
-        "bootstrap": "4",
-        "ckeditor": "^4.12.1",
-        "highlight.js": "^9.15.10",
-        "jquery": "^3.4.1",
-        "popper.js": "^1.15.0"
     }
 }

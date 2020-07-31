@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Service\Blog\Post\Edit;
 
 use App\Entity\Blog\Post;
+use App\Entity\Blog\Tag;
 use App\Form\Blog\PostDTO;
 use App\Repository\Blog\PostRepository;
+use App\Repository\Blog\TagRepository;
 use App\Repository\HruRepository;
 use App\Service\HruGenerator\HruGeneratorInterface;
 use App\Service\HruGenerator\Options;
@@ -16,15 +18,18 @@ class Handler
     private PostRepository $postRepository;
     private HruGeneratorInterface $hruGenerator;
     private HruRepository $hruRepository;
+    private TagRepository $tagRepository;
 
     public function __construct(
         PostRepository $postRepository,
         HruGeneratorInterface $hruGenerator,
-        HruRepository $hruRepository
+        HruRepository $hruRepository,
+        TagRepository $tagRepository
     ) {
         $this->postRepository = $postRepository;
         $this->hruGenerator = $hruGenerator;
         $this->hruRepository = $hruRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function handle(Command $command): void
@@ -37,8 +42,8 @@ class Handler
             ));
             $command->post->setHru($hru);
         }
-
         $command->post->updateFieldsByDTO($command->postDTO);
+        $command->post->setTags($this->tagRepository->getTagsFromSelectable($command->postDTO->tags2));
         $this->postRepository->save($command->post);
         $this->postRepository->flush();
     }

@@ -22,14 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Webmozart\Assert\Assert;
 
 /**
- * Class SectionController
- * @package App\Controller
  * @Route(name="game_list", path="/game-list")
  */
 class GameListController extends AbstractController
 {
     /**
-     * @return RedirectResponse
      * @Route("/add", name=".add", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -46,7 +43,6 @@ class GameListController extends AbstractController
     }
 
     /**
-     * @return RedirectResponse
      * @Route("/edit/{game}", name=".edit", methods={"GET","POST"})
      */
     public function edit(GameItem $game, Request $request, Edit\Handler $handler): Response
@@ -63,7 +59,6 @@ class GameListController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -74,7 +69,6 @@ class GameListController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/table-platform/{platform}", name=".table-platform", methods={"GET"}, defaults={"platform"=GameItemRepository::CONSOLES_PLATFROMS})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -97,7 +91,6 @@ class GameListController extends AbstractController
     }
 
     /**
-     * @return RedirectResponse
      * @Route("/delete/{gameItem}", name=".delete", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */

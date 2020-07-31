@@ -14,20 +14,18 @@ use App\Service\Blog\Tag\Edit;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class SectionController
- * @package App\Controller
  * @Route(name="tag", path="/tag")
  */
 class TagController extends AbstractController
 {
     /**
-     * @return RedirectResponse
      * @Route("/add", name=".add", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -44,7 +42,6 @@ class TagController extends AbstractController
     }
 
     /**
-     * @return RedirectResponse
      * @Route("/edit/{tag}", name=".edit", methods={"GET","POST"})
      */
     public function edit(Tag $tag, Request $request, Edit\Handler $handler): Response
@@ -61,7 +58,6 @@ class TagController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/list/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -69,5 +65,15 @@ class TagController extends AbstractController
     {
         $pagedTags = $paginator->paginate($tagRepository->findAll(), $request->query->getInt('page', 1));
         return $this->render("blog/tag/table.html.twig", ['tags' => $pagedTags]);
+    }
+
+    /**
+     * @Route("/all/json", name=".json", methods={"GET"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function jsonTags(TagRepository $tagRepository): JsonResponse
+    {
+        $tags = $tagRepository->findAll();
+        return $this->json(['tags' => $tags,]);
     }
 }

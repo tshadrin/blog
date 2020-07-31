@@ -16,15 +16,16 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 
 class PostForm extends AbstractType
 {
-    /** @var TokenStorageInterface  */
-    private $tokenStorage;
-    public function __construct(TokenStorageInterface $tokenStorage)
+    /** @var Security */
+    private Security $security;
+
+    public function __construct(Security $security)
     {
-        $this->tokenStorage = $tokenStorage;
+        $this->security = $security;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -39,7 +40,7 @@ class PostForm extends AbstractType
                     'filebrowserBrowseRoute' => 'elfinder',
                     'filebrowserBrowseRouteParameters' => [
                         'instance' => 'default',
-                        'homeFolder' => $this->tokenStorage->getToken()->getUser()->getId()
+                        'homeFolder' => $this->security->getUser()->getId()
                     ],
                 ],
             ]
@@ -61,7 +62,7 @@ class PostForm extends AbstractType
                     'filebrowserBrowseRoute' => 'elfinder',
                     'filebrowserBrowseRouteParameters' => [
                         'instance' => 'default',
-                        'homeFolder' => $this->tokenStorage->getToken()->getUser()->getId()
+                        'homeFolder' => $this->security->getUser()->getId()
                     ],
                 ],
                     ]
@@ -80,7 +81,7 @@ class PostForm extends AbstractType
                     ->where('s.enabled = 1');
             },
         ]);
-        $builder->add('tags', EntityType::class, ['class' => Tag::class, 'multiple' => true]);
+        $builder->add('tags2', TextType::class);
         $builder->add('status', ChoiceType::class, ['choices' => Status::getConstants()]);
     }
 

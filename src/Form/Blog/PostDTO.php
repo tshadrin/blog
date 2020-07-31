@@ -6,18 +6,19 @@ namespace App\Form\Blog;
 
 use App\Entity\Blog\Post;
 use App\Entity\Blog\Section;
-use App\Entity\Blog\Status;
 use App\Entity\Blog\Tag;
 use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 
 class PostDTO
 {
-    public string $title;
-    public ?string $teaser;
-    public string $body;
-    public Section $section;
-    public Collection $tags;
-    public string $status;
+    public string $title = '';
+    public ?string $teaser = '';
+    public string $body = '';
+    /** @var Section */
+    public $section;
+    public string $status = '';
+    public $tags2 = '';
 
     public static function createFromPost(Post $post)
     {
@@ -26,8 +27,21 @@ class PostDTO
         $postDTO->teaser = $post->getTeaser();
         $postDTO->body = $post->getBody();
         $postDTO->section = $post->getSection();
-        $postDTO->tags = $post->getTags();
         $postDTO->status = $post->getStatus()->getName();
+        $postDTO->tags2 = $postDTO->convertToSelectize($post->getTags());
         return $postDTO;
+    }
+
+    private function convertToSelectize(Collection $tags): string
+    {
+        Assert::allIsInstanceOf($tags, Tag::class);
+        $tags2 = '';
+        /** @var Tag $tag */
+        foreach ($tags as $tag) {
+            $tags2 .= "{$tag->getId()}^";
+        }
+        $tags2 = mb_substr($tags2, 0, -1);
+
+        return $tags2;
     }
 }

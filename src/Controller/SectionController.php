@@ -19,14 +19,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class SectionController
- * @package App\Controller
  * @Route(name="section", path="/section")
  */
 class SectionController extends AbstractController
 {
     /**
-     * @return RedirectResponse
      * @Route("/add", name=".add", methods={"GET","POST"})
      * @IsGranted("ROLE_ADMIN")
      */
@@ -43,7 +40,6 @@ class SectionController extends AbstractController
     }
 
     /**
-     * @return RedirectResponse
      * @Route("/edit/{section}", name=".edit", methods={"GET","POST"})
      */
     public function edit(Section $section, Request $request, Edit\Handler $handler): Response
@@ -60,7 +56,6 @@ class SectionController extends AbstractController
     }
 
     /**
-     * @return Response
      * @Route("/list/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */

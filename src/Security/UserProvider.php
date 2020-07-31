@@ -44,6 +44,7 @@ class UserProvider implements UserProviderInterface
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', get_class($user)));
         }
+        $user = $this->userRepository->findOneBy(['id' => $user->getId()]);
 
         return $user;
     }

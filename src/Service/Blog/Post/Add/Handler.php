@@ -6,46 +6,54 @@ namespace App\Service\Blog\Post\Add;
 
 use App\Entity\Blog\Post;
 use App\Entity\Blog\Status;
+use App\Entity\Blog\Tag;
+use App\Entity\User;
 use App\Repository\Blog\PostRepository;
+use App\Repository\Blog\TagRepository;
 use App\Repository\HruRepository;
 use App\Repository\UserRepository;
 use App\Service\HruGenerator\HruGeneratorInterface;
 use App\Service\HruGenerator\Options;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 
 class Handler
 {
     private PostRepository $postRepository;
-    private TokenStorageInterface $tokenStorage;
+    private User $user;
     private UserRepository $userRepository;
     private HruGeneratorInterface $hruGenerator;
     private HruRepository $hruRepository;
+    private TagRepository $tagRepository;
 
     public function __construct(
         PostRepository $postRepository,
-        TokenStorageInterface $tokenStorage,
+        Security $security,
         UserRepository $userRepository,
         HruGeneratorInterface $hruGenerator,
-        HruRepository $hruRepository
+        HruRepository $hruRepository,
+        TagRepository $tagRepository
     ) {
         $this->postRepository = $postRepository;
-        $this->tokenStorage = $tokenStorage;
+        /** @var User $this->user */
+        $this->user = $security->getUser();
         $this->userRepository = $userRepository;
         $this->hruGenerator = $hruGenerator;
         $this->hruRepository = $hruRepository;
+        $this->tagRepository = $tagRepository;
     }
 
     public function handle(Command $command): void
     {
+
         $post = new Post(
             $command->postDTO->title,
             $command->postDTO->teaser,
             new \DateTimeImmutable(),
             $command->postDTO->body,
             $command->postDTO->section,
-            $command->postDTO->tags,
+            $this->tagRepository->getTagsFromSelectable($command->postDTO->tags2),
             new Status($command->postDTO->status),
-            $this->userRepository->find($this->tokenStorage->getToken()->getUser()->getId())
+            $this->userRepository->find($this->user->getId())
         );
         $this->postRepository->save($post);
         $this->postRepository->flush();

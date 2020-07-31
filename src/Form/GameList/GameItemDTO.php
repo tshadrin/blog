@@ -8,13 +8,14 @@ use App\Entity\GameList\GameItem;
 
 class GameItemDTO
 {
-    public string $title;
-    public string $os;
-    public \DateTimeImmutable $purchase_date;
-    public float $cost;
-    public ?string $notes;
-    public string $format;
-    public ?float $exchange_rate;
+    public string $title = '';
+    public string $os = '';
+    /** @var \DateTimeImmutable */
+    public $purchase_date;
+    public float $cost = 0;
+    public ?string $notes = null;
+    public string $format = '';
+    public ?float $exchange_rate = null;
 
     public static function createFromGameItem(GameItem $gameItem): self
     {
