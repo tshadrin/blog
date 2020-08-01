@@ -5,7 +5,7 @@
         {{ form_label(form.title) }}
         {{ form_widget(form.title, {'attr': {'class': 'mb-2'}}) }}
         {{ form_label(form.os) }}
-        {{ form_widget(form.os, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field', 'data-needed': 'Xbox One' }}) }}
+        {{ form_widget(form.os, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field', 'data-needed': constant('App\\Entity\\GameList\\OS::XBOX_ONE') }}) }}
         <div class="target-field d-none">
             {{ form_label(form.exchange_rate) }}
             {{ form_widget(form.exchange_rate, {'attr': {'class': 'mb-2'}}) }}
@@ -17,9 +17,11 @@
         {{ form_label(form.notes) }}
         {{ form_widget(form.notes, {'attr': {'class': 'mb-2'}}) }}
         {{ form_label(form.format) }}
-        {{ form_widget(form.format, {'attr': {'class': 'mb-2'}}) }}
-        {{ form_label(form.owned) }}
-        {{ form_widget(form.owned, {'attr': {'class': 'mb-2'}}) }}
+        {{ form_widget(form.format, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field-owned', 'data-needed': constant("App\\Entity\\GameList\\Format::DISC") ~ '|' ~ constant("App\\Entity\\GameList\\Format::DIGITAL"), 'data-separator': '|'}}) }}
+        <div class="target-field-owned d-none">
+            {{ form_label(form.owned) }}
+            {{ form_widget(form.owned, {'attr': {'class': 'mb-2'}}) }}
+        </div>
         <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
         {{ form_end(form) }}
     </div>

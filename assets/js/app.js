@@ -53,23 +53,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    const toggleField = document.querySelector(".toggle-field");
-    if (toggleField !== null) {
+    const toggleFields = document.querySelectorAll(".toggle-field");
+    toggleFields.forEach(function (toggleField) {
         const target = document.querySelector(`.${toggleField.dataset.target}`);
-        const requiredValue = toggleField.dataset.needed;
-        if (toggleField.options[toggleField.options.selectedIndex].value === requiredValue && target.classList.contains('d-none')) {
+        const requiredValues = toggleField.dataset.needed.split(toggleField.dataset.separator);
+        console.log(requiredValues);
+        if (requiredValues.includes(toggleField.options[toggleField.options.selectedIndex].value) && target.classList.contains('d-none')) {
             target.classList.remove('d-none');
         }
         toggleField.addEventListener("change", function (e) {
             const target = document.querySelector(`.${toggleField.dataset.target}`);
-            const requiredValue = toggleField.dataset.needed;
-            if (toggleField.options[toggleField.options.selectedIndex].value === requiredValue && target.classList.contains('d-none')) {
+            const requiredValues = toggleField.dataset.needed.split(toggleField.dataset.separator);
+            if (requiredValues.includes(toggleField.options[toggleField.options.selectedIndex].value) && target.classList.contains('d-none')) {
                 target.classList.remove('d-none');
-            } else if (toggleField.options[toggleField.options.selectedIndex].value !== requiredValue && !target.classList.contains('d-none')) {
+            } else if (!requiredValues.includes(toggleField.options[toggleField.options.selectedIndex].value) && !target.classList.contains('d-none')) {
                 target.classList.add('d-none');
+                return false;
             }
         });
-    }
+    });
 
     const tagsField = document.querySelector('#post_form_tags2');
     if (tagsField !== null) {
