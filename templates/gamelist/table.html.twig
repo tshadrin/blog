@@ -19,6 +19,7 @@
                 <th class=" p-2 m-0">{{ 'Purchase date'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Cost'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Notes'|trans }}</th>
+                <th class="p-2 m-0 text-nowrap">{{ 'Owned'|trans }}</th>
                 <th class=" p-2 m-0">{{ 'Actions'|trans }}</th>
             </tr>
             </thead>
@@ -32,6 +33,13 @@
                     <td class=" p-2 m-0">{{ game.purchaseDate|date("d-m-Y") }}</td>
                     <td class=" p-2 m-0">{% if game.os == 'Xbox One' %}{{  (game.cost * game.exchangeRate)|round(2) }}{% else %}{{ game.cost }}{% endif %}</td>
                     <td class=" p-2 m-0">{{ game.notes }}</td>
+                    <td class="p-2 m-0">
+                        {% if game.owned is not null %}
+                            <span class="badge {% if game.owned %}badge-success{% else %}badge-warning{% endif %} p-2">
+                            {% if game.owned %}Да{% else %}Нет{% endif %}
+                        </span>
+                        {% endif %}
+                    </td>
                     <td class=" p-2 m-0">
                         <ul class="nav nav-pills pb-1">
                             <li class="nav-item p-1">
@@ -47,6 +55,7 @@
                             </li>
                         </ul>
                     </td>
+
                 </tr>
             {% endfor %}
             </tbody>

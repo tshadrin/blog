@@ -123,13 +123,14 @@ class GameListController extends AbstractController
                 if (
                     $game->getFormat()->getName() === Format::DISC ||
                     $game->getFormat()->getName() === Format::DIGITAL ||
-                    $game->getFormat()->getName() === Format::DLC
+                    $game->getFormat()->getName() === Format::DLC ||
+                    $game->getFormat()->getName() === Format::SUBSCRIPTION
                 ) {
                     echo "{$game->getTitle()} - {$game->getPurchaseDate()->format("d-m-Y")} - {$game->getCost()}<br>";
                     $sum += $game->getCost();
                 }
             }
-            echo "<div style=\"color: red;\">Всего за {$endDate->modify('-1 month')->format("M-Y")} месяц на игры: {$sum}</div><br>";
+            echo "<div style=\"color: red;\">Всего за {$endDate->format("M-Y")} месяц на игры: {$sum}</div><br>";
             $sum = 0;
         }
         exit;

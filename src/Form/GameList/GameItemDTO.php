@@ -16,6 +16,7 @@ class GameItemDTO
     public ?string $notes = null;
     public string $format = '';
     public ?float $exchange_rate = null;
+    public ?bool $owned = null;
 
     public static function createFromGameItem(GameItem $gameItem): self
     {
@@ -27,6 +28,7 @@ class GameItemDTO
         $gameItemDTO->notes = $gameItem->getNotes();
         $gameItemDTO->format = $gameItem->getFormat()->getName();
         $gameItemDTO->exchange_rate = $gameItem->getExchangeRate();
+        $gameItemDTO->owned = $gameItem->isOwned();
         return $gameItemDTO;
     }
 }

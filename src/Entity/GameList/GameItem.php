@@ -54,6 +54,11 @@ class GameItem
      */
     private bool $deleted = self::DEFAULT_DELETED_VALUE;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $owned;
+
     public function getCost(): float
     {
         return $this->cost;
@@ -95,8 +100,7 @@ class GameItem
         float $cost,
         ?string $notes,
         Format $format,
-        float $exchangeRate = self::DEFAULT_EXCHANGE_RATE,
-        bool $deleted = self::DEFAULT_DELETED_VALUE
+        float $exchangeRate = self::DEFAULT_EXCHANGE_RATE
     ) {
         $this->title = $title;
         $this->os = $os;
@@ -153,8 +157,18 @@ class GameItem
         $this->deleted = $deleted;
     }
 
-    public function isDeleted(): ?bool
+    public function setOwned(?bool $owned): void
+    {
+        $this->owned = $owned;
+    }
+
+    public function isDeleted(): bool
     {
         return $this->deleted;
+    }
+
+    public function isOwned(): ?bool
+    {
+        return $this->owned;
     }
 }

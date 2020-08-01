@@ -7,6 +7,7 @@ namespace App\Form\GameList;
 use App\Entity\GameList\Format;
 use App\Entity\GameList\OS;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -32,6 +33,7 @@ class GameItemForm extends AbstractType
             'data' => array_key_exists('data', $options) ? $options['data']->exchange_rate : 1,
         ]);
         $builder->add('format', ChoiceType::class, ['choices' => Format::getConstants()]);
+        $builder->add('owned', CheckboxType::class, ['required' => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
