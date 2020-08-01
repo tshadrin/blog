@@ -29,7 +29,10 @@ class Handler
             new Format($command->gameItemDTO->format),
             $command->gameItemDTO->exchange_rate
         );
-        if ($command->gameItemDTO->format === Format::DISC || $command->gameItemDTO->format === Format::DIGITAL) {
+        if ($command->gameItemDTO->format === Format::DISC ||
+            $command->gameItemDTO->format === Format::DIGITAL ||
+            $command->gameItemDTO->format === Format::DLC
+        ) {
             $gameItem->setOwned($command->gameItemDTO->owned);
         }
         $this->gameItemRepository->save($gameItem);

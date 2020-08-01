@@ -26,7 +26,10 @@ class Handler
         $command->gameItem->setOs(new OS($command->gameItemDTO->os));
         $command->gameItem->setPurchaseDate($command->gameItemDTO->purchase_date);
         $command->gameItem->setFormat(new Format($command->gameItemDTO->format));
-        if ($command->gameItemDTO->format === Format::DISC || $command->gameItemDTO->format === Format::DIGITAL) {
+        if ($command->gameItemDTO->format === Format::DISC ||
+            $command->gameItemDTO->format === Format::DIGITAL ||
+            $command->gameItemDTO->format === Format::DLC
+        ) {
             $command->gameItem->setOwned($command->gameItemDTO->owned);
         }
         $this->gameItemRepository->save($command->gameItem);
