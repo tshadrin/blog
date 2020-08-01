@@ -17,7 +17,8 @@
         {{ form_label(form.notes) }}
         {{ form_widget(form.notes, {'attr': {'class': 'mb-2'}}) }}
         {{ form_label(form.format) }}
-        {{ form_widget(form.format, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field-owned', 'data-needed': constant("App\\Entity\\GameList\\Format::DISC") ~ '|' ~ constant("App\\Entity\\GameList\\Format::DIGITAL"), 'data-separator': '|'}}) }}
+        {{ form_widget(form.format, {'attr': {'class': 'mb-2 toggle-field', 'data-target': 'target-field-owned',
+            'data-needed': constant("App\\Entity\\GameList\\Format::DISC") ~ '|' ~ constant("App\\Entity\\GameList\\Format::DIGITAL") ~ '|' ~ constant("App\\Entity\\GameList\\Format::DLC") , 'data-separator': '|'}}) }}
         <div class="target-field-owned d-none">
             {{ form_label(form.owned) }}
             {{ form_widget(form.owned, {'attr': {'class': 'mb-2'}}) }}

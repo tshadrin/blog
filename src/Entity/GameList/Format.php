@@ -14,6 +14,7 @@ class Format
     public const OTHER = 'other';
     public const ACCESSORY = 'accessory';
     public const DLC = 'dlc';
+    public const CURRENCY = 'currency';
 
     private string $name;
 
@@ -26,6 +27,7 @@ class Format
             self::OTHER,
             self::ACCESSORY,
             self::DLC,
+            self::CURRENCY,
         ]);
         $this->name = $name;
     }
@@ -49,6 +51,7 @@ class Format
             self::OTHER => self::OTHER,
             self::ACCESSORY => self::ACCESSORY,
             self::DLC => self::DLC,
+            self::CURRENCY => self::CURRENCY,
         ];
     }
 
@@ -76,5 +79,9 @@ class Format
     public function isDlc(): bool
     {
         return $this->name === self::DLC;
+    }
+    public function isCurrency(): bool
+    {
+        return $this->name === self::CURRENCY;
     }
 }
