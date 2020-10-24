@@ -9,7 +9,7 @@
                 </li>
             </ul>
         </div>
-        <table class="table w-100 table-bordered">
+        <table class="table w-100 table-bordered table-responsive">
             <thead>
             <tr>
                 <th class=" p-2 m-0">#</th>
@@ -43,7 +43,7 @@
                     <td class=" p-2 m-0">
                         <ul class="nav nav-pills pb-1">
                             <li class="nav-item p-1">
-                                <a class="btn btn-sm bg-primary text-white" href="{{ path('game_list.edit', {'game': game.id}) }}">{{ 'Edit'|trans }}</a>
+                                <a class="btn btn-sm bg-primary text-white" href="{{ path('game_list.edit', {'game': game.id}|merge(app.request.query.all)) }}">{{ 'Edit'|trans }}</a>
                             </li>
                             <li class="nav-item p-1">
                                 <form action="{{ path('game_list.delete', {'gameItem': game.id }) }}" class="delete-game-item-form" method="post">

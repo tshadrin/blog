@@ -15,7 +15,6 @@ use App\Service\GameList\Edit;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,19 +52,25 @@ class GameListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $handler->handle(new Edit\Command($game, $gameDTO));
             $this->addFlash('notice', 'Game saved');
-            return $this->redirectToRoute("game_list.table");
+            return $this->redirectToRoute("game_list.table", $request->query->all());
         }
-        return $this->render("gamelist/game-item-add.html.twig", ['form' => $form->createView()]);
+        return $this->render("gamelist/game-item-add.html.twig", array_merge(['form' => $form->createView()], $request->query->all()));
     }
 
     /**
      * @Route("/table", name=".table", methods={"GET"})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function table(GameItemRepository $gameItemRepository, PaginatorInterface $paginator, Request $request): Response
-    {
-        $pagedGames = $paginator->paginate($gameItemRepository->findAll(), $request->query->getInt('page', 1));
-        return $this->render("gamelist/table.html.twig", ['games' => $pagedGames]);
+    public function table(
+        GameItemRepository $gameItemRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        $games = $paginator->paginate(
+            $gameItemRepository->findAll(),
+            $request->query->getInt('page', 1)
+        );
+        return $this->render("gamelist/table.html.twig", compact('games'));
     }
 
     /**

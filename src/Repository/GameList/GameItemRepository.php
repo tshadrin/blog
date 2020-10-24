@@ -65,4 +65,12 @@ class GameItemRepository extends ServiceEntityRepository
             ->andWhere('g.purchaseDate <= :dateTo')->setParameter(':dateFrom', $dateFrom)
             ->setParameter(':dateTo', $dateTo)->orderBy("g.purchaseDate", 'asc')->getQuery()->getResult();
     }
+
+    public function getAllNotDeleted(): array
+    {
+        if (!$games = $this->findBy(['deleted' => false,])) {
+            throw new \DomainException('Games not found');
+        }
+        return $games;
+    }
 }
