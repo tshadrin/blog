@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace App\Menu;
 
-use App\Repository\Blog\SectionRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 
 class AdminMenu
 {
-    public function build(
-        SectionRepository $sectionRepository,
-        FactoryInterface $factory
-    ): ItemInterface {
-        $menu = $factory->createItem('Home', ['route' => 'blog', 'childrenAttributes' => ['class' => 'navbar-nav',]]);
+    /** @var FactoryInterface */
+    private FactoryInterface $factory;
+
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    public function build(array $options): ItemInterface
+    {
+        $menu = $this->factory->createItem('Home', ['route' => 'blog', 'childrenAttributes' => ['class' => 'navbar-nav',]]);
         $menu->addChild('Sections', ['route' => 'section.table'])
             ->setAttribute('class', 'nav-item')
             ->setLinkAttribute('class', 'nav-link');
@@ -38,45 +43,49 @@ class AdminMenu
         $menuOrderArray = [];
         $addLast = [];
         $alreadyTaken = [];
-        foreach ($menu->getChildren() as $key => $menuItem) {
+
+        foreach ($menu->getChildren() as $menuItem) {
             if ($menuItem->hasChildren()) {
                 $this->reorderMenuItems($menuItem);
             }
 
             $orderNumber = $menuItem->getExtra('orderNumber');
-            if ($orderNumber != null) {
-                if (!isset($menuOrderArray[$orderNumber])) {
+            if (!is_null($orderNumber)) {
+                if (!array_key_exists($orderNumber, $menuOrderArray)) {
                     $menuOrderArray[$orderNumber] = $menuItem->getName();
                 } else {
                     $alreadyTaken[$orderNumber] = $menuItem->getName();
-                // $alreadyTaken[] = array('orderNumber' => $orderNumber, 'name' => $menuItem->getName());
+                    // $alreadyTaken[] = ['orderNumber' => $orderNumber, 'name' => $menuItem->getName()];
                 }
             } else {
                 $addLast[] = $menuItem->getName();
             }
         }
-
-        // sort them after first pass
         ksort($menuOrderArray);
-        // handle position duplicates
+
+        // если есть элементы с дублирующимися номерами,
+        // то они добавляются согласно номеру
         if (count($alreadyTaken)) {
             foreach ($alreadyTaken as $key => $value) {
-            // the ever shifting target
+                // the ever shifting target
                 $keysArray = array_keys($menuOrderArray);
                 $position = array_search($key, $keysArray);
                 if ($position === false) {
                     continue;
                 }
 
-                $menuOrderArray = array_merge(array_slice($menuOrderArray, 0, $position), [$value], array_slice($menuOrderArray, $position));
+                $menuOrderArray = array_merge(
+                    array_slice($menuOrderArray, 0, $position),
+                    [$value],
+                    array_slice($menuOrderArray, $position)
+                );
             }
         }
-
-        // sort them after second pass
         ksort($menuOrderArray);
-        // add items without ordernumber to the end
+
+        // в конец добавляются элементы без указания позиции
         if (count($addLast)) {
-            foreach ($addLast as $key => $value) {
+            foreach ($addLast as $value) {
                 $menuOrderArray[] = $value;
             }
         }
