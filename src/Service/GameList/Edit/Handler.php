@@ -19,6 +19,7 @@ class Handler
 
     public function handle(Command $command): void
     {
+        dump($command);
         $command->gameItem->setTitle($command->gameItemDTO->title);
         $command->gameItem->setCost($command->gameItemDTO->cost);
         $command->gameItem->setExchangeRate($command->gameItemDTO->exchange_rate);
@@ -26,6 +27,7 @@ class Handler
         $command->gameItem->setOs(new OS($command->gameItemDTO->os));
         $command->gameItem->setPurchaseDate($command->gameItemDTO->purchase_date);
         $command->gameItem->setFormat(new Format($command->gameItemDTO->format));
+        $command->gameItem->setDeleted($command->gameItemDTO->deleted);
         if ($command->gameItemDTO->format === Format::DISC ||
             $command->gameItemDTO->format === Format::DIGITAL ||
             $command->gameItemDTO->format === Format::DLC

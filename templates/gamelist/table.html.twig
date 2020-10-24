@@ -9,7 +9,7 @@
                 </li>
             </ul>
         </div>
-        <table class="table w-100 table-bordered table-responsive">
+        <table class="table w-100 table-bordered table-responsive table-hover">
             <thead>
             <tr>
                 <th class=" p-2 m-0">#</th>
@@ -25,7 +25,7 @@
             </thead>
             <tbody>
             {% for game in games %}
-                <tr {% if game.deleted %}class="bg-info"{% endif %}>
+                <tr class="{% if game.deleted %}table-danger{% endif %} {% if game.owned is not null and not game.owned %}table-warning{% endif %}">
                     <td class=" p-2 m-0">{{ game.id }}</td>
                     <td class=" p-2 m-0"><a class="text-dark" href="{{ path('blog.show', {'post': game.id}) }}">{{ game.title }}</a></td>
                     <td class=" p-2 m-0">{{ game_platform(game.os) }}</td>

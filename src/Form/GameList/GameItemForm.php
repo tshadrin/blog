@@ -21,7 +21,7 @@ class GameItemForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class);
-        $builder->add('os', ChoiceType::class, ['choices' => OS::getConstants()]);
+        $builder->add('os', ChoiceType::class, ['choices' => OS::getConstants(), 'translation_domain' => false]);
         $builder->add('purchase_date', DateType::class, [
             'input' => 'datetime_immutable',
             'html5' => true,
@@ -34,6 +34,7 @@ class GameItemForm extends AbstractType
         ]);
         $builder->add('format', ChoiceType::class, ['choices' => Format::getConstants()]);
         $builder->add('owned', CheckboxType::class, ['required' => false,]);
+        $builder->add('deleted', CheckboxType::class, ['required' => false,]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
