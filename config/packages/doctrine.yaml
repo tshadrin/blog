@@ -1,6 +1,7 @@
 doctrine:
     dbal:
         # configure these for your database server
+        schema_filter: ~^(?!rememberme_token)~
         driver: 'pdo_mysql'
         server_version: '5.7'
         charset: utf8mb4
