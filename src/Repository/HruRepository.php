@@ -6,7 +6,7 @@ namespace App\Repository;
 
 use App\Entity\Hru;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 class HruRepository extends ServiceEntityRepository
 {

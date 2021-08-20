@@ -7,7 +7,7 @@ namespace App\Repository\Blog;
 use App\Entity\Blog\Post;
 use App\Repository\SaveAndFlush;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 class PostRepository extends ServiceEntityRepository
 {

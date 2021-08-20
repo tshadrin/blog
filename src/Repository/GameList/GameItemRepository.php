@@ -9,7 +9,7 @@ use App\Entity\GameList\GameItem;
 use App\Entity\GameList\OS;
 use App\Repository\SaveAndFlush;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 class GameItemRepository extends ServiceEntityRepository
 {
