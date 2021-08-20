@@ -13,8 +13,7 @@
         {{ form_label(form.tags2) }}
         <div class="col-sm-12 p-0 form-inline">
             <input type="text" id="{{ form.tags2.vars.id }}" name="{{ form.tags2.vars.full_name }}" class="w-100" value="{{ form.tags2.vars.value }}" data-tags-url="{{ absolute_url(path('tag.json')) }}">
-            {% do form.tags2.setRendered %}
-            {{ form_widget(form.tags2,{'attr':{'class':'w-100'}}) }}
+            {{ form_widget(form.tags2,{'attr':{'class':'w-100 d-none'}}) }}
         </div>
         {{ form_label(form.status) }}
         {{ form_widget(form.status, {'attr': {'class': 'mb-2'}}) }}
