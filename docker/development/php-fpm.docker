@@ -1,0 +1,19 @@
+FROM php:7.4-fpm
+
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install bcmath
+RUN apt-get update && apt-get install -y libpng-dev libzip-dev libssh2-1-dev libssh2-1 autoconf g++ make
+RUN docker-php-ext-install gd
+RUN apt-get install -y sox
+#RUN pecl install xdebug \
+#    && docker-php-ext-enable xdebug
+RUN rm -rf /tmp/pear
+
+RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
+
+COPY ./php/default.ini /usr/local/etc/php/php.ini
+COPY ./php/conf.d /usr/local/etc/php/conf.d
+COPY ./php-fpm/conf.d /usr/local/etc/php/conf.d
+
+WORKDIR /app
