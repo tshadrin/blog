@@ -1,12 +1,23 @@
 $body-bg: #f0f0f0;
 $h1-font-size: 1.7rem;
 $h2-font-size: 1.5rem;
+$paragraph-margin-bottom: 1rem;
+
 @import "~bootstrap/scss/bootstrap";
 @import "~highlight.js/scss/default";
 
 @include media-breakpoint-down(md) {
-  p,h2,h3,h4,h5,h6,nav {
+  h1 {
     font-size: 2rem;
+  }
+  h2,h3,h4,h5,h6,nav {
+    font-size: 1.5rem;
+  }
+  p,a.readmore {
+    font-size: 1.15rem;
+  }
+  a.nav-link {
+    font-size: 1.15rem;
   }
   .blog-description {
     display: none;
@@ -29,6 +40,16 @@ body {
   -webkit-animation: Gradient 45s ease infinite;
   -moz-animation: Gradient 45s ease infinite;
   animation: Gradient 45s ease infinite;
+}
+div.wordwrap {
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
 }
 
 @-webkit-keyframes Gradient {
@@ -92,6 +113,7 @@ code {
   background-color:#eee;
   overflow:auto;
   padding:0 !important;
+  word-wrap:normal;
 }
 code .line-number {
   //font:normal normal 12px/14px "Courier New",Courier,Monospace;
@@ -116,6 +138,6 @@ img {
   padding-right:5px;
   padding-bottom:5px;
 }
-p {
+p{
   text-indent: 20px;
 }
