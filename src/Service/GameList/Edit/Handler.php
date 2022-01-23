@@ -19,7 +19,6 @@ class Handler
 
     public function handle(Command $command): void
     {
-        dump($command);
         $command->gameItem->setTitle($command->gameItemDTO->title);
         $command->gameItem->setCost($command->gameItemDTO->cost);
         $command->gameItem->setExchangeRate($command->gameItemDTO->exchange_rate);
