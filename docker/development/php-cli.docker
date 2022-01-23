@@ -1,0 +1,25 @@
+FROM php:7.4-cli
+
+RUN apt-get update && apt-get install -y libpng-dev libzip-dev zlib1g-dev zip libssh2-1-dev libssh2-1 supervisor
+RUN apt-get install -y sox zip wget
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install gd
+#RUN pecl install xdebug \
+#  && docker-php-ext-enable xdebug
+RUN rm -rf /tmp/pear
+
+COPY ./development/php/default.ini /usr/local/etc/php/php.ini
+COPY ./development/php/conf.d /usr/local/etc/php/conf.d
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
+COPY ./development/php/composer_config.json /root/.composer/config.json
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+WORKDIR /app
+
+# xml
+# curl
+# zip

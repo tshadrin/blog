@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="pl-4 pr-4">
+    <div class="pl-2 pr-2">
         {% for post in posts %}
             {% if post.hru is not null %}
                 {% set post_path = path('blog.show.from.hru', {'prefix': post.hru.prefix, 'value': post.hru.value}) %}
@@ -10,7 +10,7 @@
             <div class="border-bottom clearfix">
                 <div class="col-12"><h2 class="mb-0 mt-4"><a href="{{ post_path }}">{{ post.title }}</a></h2></div>
                 <div class="col-12"><i><a class="text-dark" href="{{ path('blog.show', {'post': post.id}) }}">{{ post.created|date("d-m-Y H:i") }}</a></i></div>
-                <div class="col-12">{{ post.teaser|raw }}</div>
+                <div class="col-12 wordwrap">{{ post.teaser|raw }}</div>
                 <div class="col-12 text-right"><a href="{{ post_path }}">{{ 'read more'|trans }}</a></div>
             </div>
         {% endfor %}

@@ -3,7 +3,7 @@ fm_elfinder:
         default:
             editor: ckeditor
             locale: '%locale%'
-            include_assets: true
+            cors_support: true
             relative_path: true
             connector:
                 roots:

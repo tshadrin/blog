@@ -29,3 +29,7 @@ services:
         tags: [{ name: knp_menu.menu_builder, method: build, alias: section }]
     App\Menu\AdminMenu:
         tags: [{ name: knp_menu.menu_builder, method: build, alias: admin }]
+
+    # remember me
+    Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider: ~
+

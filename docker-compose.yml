@@ -1,0 +1,69 @@
+version: '3'
+services:
+    blog-nginx:
+        build:
+            context: ./docker/development
+            dockerfile: nginx.docker
+        volumes:
+            - ./:/app
+        depends_on:
+            - blog-php-fpm
+            - blog-phpmyadmin
+        ports:
+            - "8088:80"
+    blog-php-fpm:
+        build:
+            context: ./docker/development
+            dockerfile: php-fpm.docker
+        environment:
+            APP_DEBUG: 1
+            BLOG_DATABASE_URL: mysql://root:root@blog-mysql:3306/blog
+        volumes:
+            - ./:/app
+        depends_on:
+            - blog-mysql
+    blog-php-cli:
+        build:
+            context: ./docker
+            dockerfile: development/php-cli.docker
+        environment:
+            APP_DEBUG: 1
+            BLOG_DATABASE_URL: mysql://root:root@blog-mysql:3306/blog
+        volumes:
+            - ./:/app
+            - composer:/root/.composer/cache
+        depends_on:
+            - blog-mysql
+    blog-node:
+        build:
+            context: ./docker/development
+            dockerfile: node.docker
+        volumes:
+            - ./:/app
+        working_dir: /app
+    blog-mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: blog
+            MYSQL_USER: test
+            MYSQL_PASSWORD: 123
+        volumes:
+            - ./docker/development/mysql:/docker-entrypoint-initdb.d
+    blog-node-watch:
+        image: node:14.17-alpine
+        volumes:
+            - ./:/app
+        working_dir: /app
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && yarn encore dev --watch"
+    blog-phpmyadmin:
+        image: phpmyadmin:5.1-apache
+        environment:
+            PMA_HOST: blog-mysql
+            PMA_ABSOLUTE_URI: /pma/
+            PMA_USER: root
+            PMA_PASSWORD: root
+        depends_on:
+            - blog-mysql
+volumes:
+    composer:
