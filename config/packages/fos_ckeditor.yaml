@@ -10,4 +10,10 @@ fos_ck_editor:
         default:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
-            extraPlugins: 'codesnippet'
+            extraPlugins:
+                - "codesnippet"
+                - "youtube"
+    plugins:
+        youtube:
+            path:     "/build/youtube/"
+            filename: "plugin.js"

@@ -10,8 +10,8 @@
         "popper.js": "^1.15.0",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "7.0.1",
-        "webpack-notifier": "^1.6.0",
-        "selectize": "^0.12.6"
+        "selectize": "^0.12.6",
+        "webpack-notifier": "^1.6.0"
     },
     "license": "Apache-2.0",
     "private": true,
@@ -20,5 +20,11 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "ckeditor-youtube-plugin": "^2.1.19",
+        "jquery-ui-dist": "^1.12.1",
+        "jquery-ui-themes": "^1.12.0",
+        "requirejs": "^2.3.6"
     }
 }
