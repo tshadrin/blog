@@ -49,7 +49,7 @@ class PostForm extends AbstractType
         }, function ($value) {
 
             if (!is_null($value)) {
-                return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img>');
+                return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody>');
             }
         }));
         $builder->add(
@@ -70,7 +70,7 @@ class PostForm extends AbstractType
                 return $value;
         }, function ($value) {
 
-            return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img>');
+            return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody>');
         }));
         $builder->add('section', EntityType::class, [
             'class' => Section::class,
