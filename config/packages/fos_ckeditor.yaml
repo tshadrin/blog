@@ -10,6 +10,7 @@ fos_ck_editor:
         default:
             filebrowserBrowseRoute: elfinder
             filebrowserBrowseRouteParameters: []
+            allowedContent: true
             extraPlugins:
                 - "codesnippet"
                 - "youtube"

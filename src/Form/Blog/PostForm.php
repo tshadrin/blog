@@ -47,9 +47,8 @@ class PostForm extends AbstractType
         $builder->get('teaser')->addModelTransformer(new CallbackTransformer(function ($value) {
                 return $value;
         }, function ($value) {
-
             if (!is_null($value)) {
-                return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody>');
+                return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody><iframe><ul><li><b><span><div><br>');
             }
         }));
         $builder->add(
@@ -69,8 +68,7 @@ class PostForm extends AbstractType
         $builder->get('body')->addModelTransformer(new CallbackTransformer(function ($value) {
                 return $value;
         }, function ($value) {
-
-            return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody>');
+            return strip_tags($value, '<p><strong><em><s><ol><li><ul><a><blockquote><hr><pre><code><img><table><th><tr><td><tbody><iframe><ul><li><b><span><div><br>');
         }));
         $builder->add('section', EntityType::class, [
             'class' => Section::class,

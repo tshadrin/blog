@@ -67,7 +67,7 @@ class Post
 
     public function __construct(
         string $title,
-        string $teaser,
+        ?string $teaser,
         \DateTimeImmutable $created,
         string $body,
         Section $section,
