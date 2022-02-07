@@ -1,7 +1,7 @@
 FROM php:7.4-cli
 
 RUN apt-get update && apt-get install -y libpng-dev libzip-dev zlib1g-dev zip libssh2-1-dev libssh2-1 supervisor
-RUN apt-get install -y sox zip wget
+RUN apt-get install -y zip wget
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath

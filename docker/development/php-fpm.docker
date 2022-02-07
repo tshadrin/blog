@@ -5,7 +5,6 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install bcmath
 RUN apt-get update && apt-get install -y libpng-dev libzip-dev libssh2-1-dev libssh2-1 autoconf g++ make
 RUN docker-php-ext-install gd
-RUN apt-get install -y sox
 
 RUN rm -rf /tmp/pear
 
