@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cebe/markdown": "^1.2",
@@ -105,5 +105,6 @@
             "allow-contrib": false,
             "require": "5.4.*"
         }
-    }
+    },
+    "platform": {"php": "7.4"}
 }
