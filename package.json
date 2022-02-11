@@ -9,7 +9,7 @@
         "jquery": "^3.4.1",
         "jquery-ui-dist": "^1.12.1",
         "jquery-ui-themes": "^1.12.0",
-        "node-sass": "^6.0.0",
+        "node-sass": "^7.0.0",
         "popper.js": "^1.15.0",
         "regenerator-runtime": "^0.13.2",
         "requirejs": "^2.3.6",
