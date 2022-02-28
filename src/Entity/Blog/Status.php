@@ -13,6 +13,8 @@ class Status
     public const PUBLISH = 'publish';
     public const PRIVATE = 'private';
 
+    private string $name;
+
     public function __construct(string $name)
     {
         Assert::oneOf($name, [
@@ -21,6 +23,7 @@ class Status
             self::PUBLISH,
             self::PRIVATE,
         ]);
+
         $this->name = $name;
     }
 
@@ -58,6 +61,7 @@ class Status
     {
         return $this->getName() === self::REMOVE;
     }
+
     public function isPrivate(): bool
     {
         return $this->getName() == self::PRIVATE;

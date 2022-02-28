@@ -35,6 +35,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    public function __construct(string $email, array $roles)
+    {
+        $this->email = $email;
+        $this->roles = $roles;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
