@@ -25,5 +25,7 @@
     "watch": "encore dev --watch",
     "build": "encore production --progress"
   },
-  "dependencies": {}
+  "dependencies": {
+    "file-loader": "^6.2.0"
+  }
 }
