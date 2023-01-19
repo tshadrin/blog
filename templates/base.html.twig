@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="d-flex">
+<html lang="ru" class="d-flex">
 <head>
     <meta charset="UTF-8">
     <meta name="yandex-verification" content="{{ yandex_verification }}" />
@@ -7,11 +7,17 @@
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>{% block title %}Блог одного программиста{% endblock %}</title>
+    <style>
+        * {
+            hyphens: auto;
+            word-wrap: break-word;
+        }
+    </style>
     {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
 </head>
 <body class="d-flex flex-column flex-grow-1 flex-shrink-1 mr-auto w-100">
 <header class="main-header row justify-content-center no-gutters">
-    <div class="col-12 col-xl-8 shadow b-green border-bottom">
+    <div class="col-12 col-xl-8 shadow b-green border-bottom" style="max-width: 1240px;">
         <div class="row justify-content-between p-3 m-0">
             <div class="col-12 col-md-6">
                 <h1><a href="/" class="text-dark">Блог одного программиста</a></h1>
@@ -24,12 +30,12 @@
     </div>
 </header>
 <nav class="row justify-content-center no-gutters">
-    <div class="col-12 col-xl-8 shadow b-white border-bottom shadow">
+    <div class="col-12 col-xl-8 shadow b-white border-bottom shadow" style="max-width: 1240px;">
         {{  knp_menu_render('section', {'depth': 2, 'currentAsLink': true, 'currentClass': 'active'}) }}
     </div>
 </nav>
 <section class="main row justify-content-center no-gutters flex-grow-1">
-    <div class="col-12 col-xl-8 p-0 m-0 shadow b-white">
+    <div class="col-12 col-xl-8 p-0 m-0 shadow b-white" style="max-width: 1240px;">
         <div class="row no-gutters  flex-row-reverse flex-lg-row-reverse h-100 align-content-lg-stretch align-content-md-start">
             <div class="sidebar b-white border-left m-0 col-12 col-md-12 col-lg-3 col-xl-3 p-4 border-bottom">
                 {% if(is_granted("ROLE_ADMIN")) %}
@@ -66,7 +72,7 @@
     </div>
 </section>
 <footer class="row justify-content-center m-0">
-    <div class="col-12 col-xl-8 b-white border-top shadow">
+    <div class="col-12 col-xl-8 b-white border-top shadow" style="max-width: 1240px;">
         <div class="row justify-content-center">
             <div class="col-12 text-center p-2">
                 Все материалы разрешено использовать на свое усмотрение. <br>Привествуется указание ссылки на первоисточник.<br> 2019 <a href="mailto:s@istranet.ru">ShAM</a>
