@@ -16,6 +16,7 @@ class SectionFixture extends Fixture
             enabled: true,
             hidden: false
         );
+
         $manager->persist($section);
     }
 }

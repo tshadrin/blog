@@ -23,7 +23,6 @@ class Status
             self::PUBLISH,
             self::PRIVATE,
         ]);
-
         $this->name = $name;
     }
 

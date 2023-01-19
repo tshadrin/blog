@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-
 use App\Repository\HruRepository;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -18,7 +17,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 #[UniqueConstraint(name: "prefix_value", columns: ["prefix", "value"])]
 class Hru
 {
-
     #[Id]
     #[GeneratedValue(strategy: "AUTO")]
     #[Column(type: "integer")]

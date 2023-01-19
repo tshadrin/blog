@@ -32,7 +32,7 @@ class PostRepository extends ServiceEntityRepository
         if (is_null($section)) {
             return null;
         }
-        
+
         return $this->createQueryBuilder('p')
             ->select("p")
             ->innerJoin('p.tags', 't')

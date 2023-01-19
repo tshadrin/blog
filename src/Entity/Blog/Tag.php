@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 
-
 #[Entity(repositoryClass: TagRepository::class)]
 #[Table(name: "tags")]
 class Tag

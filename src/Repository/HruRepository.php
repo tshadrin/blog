@@ -22,7 +22,6 @@ class HruRepository extends ServiceEntityRepository
         if (is_null($this->findOneBy(['prefix' => $prefix, 'value' => $value]))) {
             return false;
         }
-        
         return true;
     }
 }

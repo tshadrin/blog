@@ -42,7 +42,6 @@ class GameItemRepository extends ServiceEntityRepository
             $query->andWhere('g.os = :platform')
                 ->setParameter(':platform', $platform);
         }
-        
         if ($platform === self::CONSOLES_PLATFROMS) {
             $query->andWhere('g.os IN(:xbox, :ps4)')
                 ->setParameter(':xbox', OS::XBOX_ONE)

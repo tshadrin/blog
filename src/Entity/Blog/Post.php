@@ -19,12 +19,10 @@ use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 
-
 #[Entity(repositoryClass: PostRepository::class)]
 #[Table(name: "posts")]
 class Post
 {
-
     #[Id]
     #[GeneratedValue(strategy: "AUTO")]
     #[Column(type: "integer")]

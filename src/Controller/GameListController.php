@@ -34,6 +34,7 @@ class GameListController extends AbstractController
             $this->addFlash('notice', 'Tag saved');
             return $this->redirectToRoute("game_list.table");
         }
+
         return $this->render("gamelist/game-item-add.html.twig", ['form' => $form->createView()]);
     }
 

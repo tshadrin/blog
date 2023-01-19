@@ -26,7 +26,7 @@ class PostForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class);
-        
+
         $builder->add(
             'teaser',
             CKEditorType::class,
