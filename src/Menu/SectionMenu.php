@@ -12,23 +12,11 @@ use Symfony\Component\Security\Core\Security;
 
 class SectionMenu
 {
-    /** @var SectionRepository */
-    private SectionRepository $sectionRepository;
-    /** @var FactoryInterface */
-    private FactoryInterface $factory;
-    /** @var Security */
-    private Security $security;
-
     public function __construct(
-        SectionRepository $sectionRepository,
-        FactoryInterface $factory,
-        Security $security
-    ) {
-
-        $this->sectionRepository = $sectionRepository;
-        $this->factory = $factory;
-        $this->security = $security;
-    }
+        private SectionRepository $sectionRepository,
+        private FactoryInterface  $factory,
+        private Security          $security
+    ) {}
 
     public function build(array $options): ItemInterface {
         /** @var Section[] $sections */

@@ -9,12 +9,9 @@ use App\Repository\HruRepository;
 
 class NativeHruGenerator implements HruGeneratorInterface
 {
-    private HruRepository $hruRepository;
-
-    public function __construct(HruRepository $hruRepository)
-    {
-        $this->hruRepository = $hruRepository;
-    }
+    public function __construct(
+        private HruRepository $hruRepository
+    ) {}
 
     public function generate(Options $options): Hru
     {

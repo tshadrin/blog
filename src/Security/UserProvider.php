@@ -7,18 +7,15 @@ namespace App\Security;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
+    public function __construct(
+        private UserRepository $userRepository
+    ) {}
 
     /**
      * Symfony вызывает этот метод если вы используете
@@ -28,7 +25,7 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->userRepository->findOneBy(['email' => $username]);
         if (!$user instanceof User) {
-            throw new UsernameNotFoundException('');
+            throw new UserNotFoundException('');
         }
 
         return $user;

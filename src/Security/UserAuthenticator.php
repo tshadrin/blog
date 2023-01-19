@@ -25,22 +25,12 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
-    private EntityManagerInterface $entityManager;
-    private UrlGeneratorInterface $urlGenerator;
-    private CsrfTokenManagerInterface $csrfTokenManager;
-    private UserPasswordHasherInterface $passwordHasher;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordHasherInterface $passwordHasher
-    ) {
-        $this->entityManager = $entityManager;
-        $this->urlGenerator = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordHasher = $passwordHasher;
-    }
+        private EntityManagerInterface      $entityManager,
+        private UrlGeneratorInterface       $urlGenerator,
+        private CsrfTokenManagerInterface   $csrfTokenManager,
+        private UserPasswordHasherInterface $passwordHasher
+    ) {}
 
     public function supports(Request $request)
     {

@@ -9,12 +9,9 @@ use App\Repository\Blog\SectionRepository;
 
 class Handler
 {
-    private SectionRepository $sectionRepository;
-
-    public function __construct(SectionRepository $sectionRepository)
-    {
-        $this->sectionRepository = $sectionRepository;
-    }
+    public function __construct(
+        private SectionRepository $sectionRepository
+    ) {}
 
     public function handle(Command $command): void
     {

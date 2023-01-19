@@ -16,8 +16,11 @@ class PostRepository extends ServiceEntityRepository
     private SectionRepository $sectionRepository;
     private TagRepository $tagRepository;
 
-    public function __construct(ManagerRegistry $registry, SectionRepository $sectionRepository, TagRepository $tagRepository)
-    {
+    public function __construct(
+        ManagerRegistry   $registry,
+        SectionRepository $sectionRepository,
+        TagRepository     $tagRepository
+    ) {
         parent::__construct($registry, Post::class);
         $this->sectionRepository = $sectionRepository;
         $this->tagRepository = $tagRepository;

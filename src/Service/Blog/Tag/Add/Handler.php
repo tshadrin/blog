@@ -9,12 +9,9 @@ use App\Repository\Blog\TagRepository;
 
 class Handler
 {
-    private TagRepository $tagRepository;
-
-    public function __construct(TagRepository $tagRepository)
-    {
-        $this->tagRepository = $tagRepository;
-    }
+    public function __construct(
+        private TagRepository $tagRepository
+    ) {}
 
     public function handle(Command $command): void
     {

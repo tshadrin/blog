@@ -10,12 +10,9 @@ use App\Repository\Blog\PostRepository;
 
 class Handler
 {
-    private PostRepository $postRepository;
-
-    public function __construct(PostRepository $postRepository)
-    {
-        $this->postRepository = $postRepository;
-    }
+    public function __construct(
+        private PostRepository $postRepository
+    ) {}
 
     public function handle(Post $post): void
     {
