@@ -4,59 +4,50 @@ declare(strict_types=1);
 
 namespace App\Entity\GameList;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GameList\GameItemRepository;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\GameList\GameItemRepository")
- * @ORM\Table(name="gamelist")
- */
+#[Entity(repositoryClass: GameItemRepository::class)]
+#[Table(name: "gamelist")]
 class GameItem
 {
     private const DEFAULT_EXCHANGE_RATE = 1.00;
     public const DEFAULT_DELETED_VALUE = false;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[Id]
+    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: "integer")]
     private int $id;
-    /**
-     * @ORM\Column(type="string", length=300)
-     */
+
+    #[Column(type: "string", length: 300)]
     private string $title;
-    /**
-     * @ORM\Column(type="gamelist_os", name="os", length=30, nullable=false)
-     */
+
+    #[Column(type: "gamelist_os", name: "os", length: 30, nullable: false)]
     private OS $os;
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
+
+    #[Column(type: "datetime_immutable")]
     private \DateTimeImmutable $purchaseDate;
-    /**
-     * @ORM\Column(type="float")
-     */
+
+    #[Column(type: "float")]
     private float $cost;
-    /**
-     * @ORM\Column(type="float")
-     */
+
+    #[Column(type: "float")]
     private float $exchangeRate;
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+
+    #[Column(type: "text", nullable: true)]
     private ?string $notes;
-    /**
-     * @ORM\Column(type="gamelist_format", name="format", length=30, nullable=false)
-     */
+
+    #[Column(type: "gamelist_format", name: "format", length: 30, nullable: false)]
     private Format $format;
-    /**
-     * @ORM\Column(type="boolean")
-     */
+
+    #[Column(type: "boolean")]
     private bool $deleted = self::DEFAULT_DELETED_VALUE;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
+    #[Column(type: "boolean", nullable: true)]
     private ?bool $owned;
 
     public function getCost(): float

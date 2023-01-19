@@ -7,62 +7,59 @@ namespace App\Entity\Blog;
 use App\Entity\Hru;
 use App\Entity\User;
 use App\Form\Blog\PostDTO;
+use App\Repository\Blog\PostRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\Table;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\Blog\PostRepository")
- * @ORM\Table(name="posts")
- */
+
+#[Entity(repositoryClass: PostRepository::class)]
+#[Table(name: "posts")]
 class Post
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+
+    #[Id]
+    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: "integer")]
     private int $id;
-    /**
-     * @ORM\Column(type="string")
-     */
+
+    #[Column(type: "string")]
     private string $title;
-    /**
-     * @ORM\Column(type="text")
-     */
+
+    #[Column(type: "text")]
     private string $body;
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
+
+    #[Column(type: "datetime_immutable")]
     private \DateTimeImmutable $created;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Blog\Section")
-     * @ORM\JoinColumn(name="section_id", referencedColumnName="id", nullable=false)
-     */
+
+    #[ManyToOne(targetEntity: Section::class)]
+    #[JoinColumn(name: "section_id", referencedColumnName: "id", nullable: false)]
     private Section $section;
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Blog\Tag", fetch="EAGER")
-     * @ORM\JoinTable(name="posts_tags", joinColumns={
-     *     @ORM\JoinColumn(name="post_id", referencedColumnName="id")
-     * })
-     */
+
+    #[ManyToMany(targetEntity: Tag::class, fetch: "EAGER")]
+    #[JoinTable(name: "posts_tags")]
+    #[JoinColumn(name: "post_id", referencedColumnName: "id")]
     private iterable $tags;
-    /**
-     * @ORM\Column(type="post_status", name="status", length=30, nullable=false)
-     */
+
+    #[Column(type: "post_status", name: "status", length: 30, nullable: false)]
     private Status $status;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     */
+
+    #[ManyToOne(targetEntity: User::class)]
+    #[JoinColumn(name: "author_id", referencedColumnName: "id", nullable: false)]
     private User $author;
-    /**
-     * @ORM\Column(type="text", nullable=true, length=1000)
-     */
+
+    #[Column(type: "text", nullable: true, length: 1000)]
     private ?string $teaser;
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hru", cascade={"PERSIST"}, fetch="EAGER")
-     * @ORM\JoinColumn(name="hru_id", referencedColumnName="id", nullable=true)
-     */
+
+    #[ManyToOne(targetEntity: Hru::class, cascade: ["PERSIST"], fetch: "EAGER")]
+    #[JoinColumn(name: "hru_id", referencedColumnName: "id", nullable: true)]
     private ?Hru $hru = null;
 
     public function __construct(

@@ -4,38 +4,36 @@ declare(strict_types=1);
 
 namespace App\Entity\Blog;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Blog\SectionRepository;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\Entity;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\Blog\SectionRepository")
- * @ORM\Table(name="sections")
- */
+#[Entity(repositoryClass: SectionRepository::class)]
+#[Table(name: "sections")]
 class Section
 {
     public const ENABLED = true;
     public const NOT_HIDDEN = false;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+
+    #[Id]
+    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: "integer")]
     private int $id;
-    /**
-     * @ORM\Column(type="string", name="machine_name", length=50)
-     */
+
+    #[Column(type: "string", name: "machine_name", length: 50)]
     private string $machineName;
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
+
+    #[Column(type: "string", length: 50)]
     private string $name;
-    /**
-     * @ORM\Column(type="boolean")
-     */
+
+    #[Column(type: "boolean")]
     private bool $enabled;
-    /**
-     * @ORM\Column(type="boolean")
-     */
+
+    #[Column(type: "boolean")]
     private bool $hidden;
 
     public function __construct(string $machineName, string $name, bool $enabled, bool $hidden)

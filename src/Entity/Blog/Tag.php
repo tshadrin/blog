@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace App\Entity\Blog;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Blog\TagRepository;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Table;
 
-/**
- * Class Tag
- * @package App\Entity\Blog
- * @ORM\Entity(repositoryClass="App\Repository\Blog\TagRepository")
- * @ORM\Table("tags")
- */
+
+#[Entity(repositoryClass: TagRepository::class)]
+#[Table(name: "tags")]
 class Tag
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[Id]
+    #[GeneratedValue(strategy: "AUTO")]
+    #[Column(type: "integer")]
     private int $id;
-    /**
-     * @ORM\Column(type="string", length=50, unique=true)
-     */
+
+    #[Column(type: "string", length: 50, unique: true)]
     private string $name;
 
     public function __construct(string $name)
