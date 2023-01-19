@@ -30,6 +30,7 @@ class TagRepository extends ServiceEntityRepository
     {
         $tagIds = explode('^', $selectable);
         $tags = $this->findInById($tagIds);
+        
         foreach ($tagIds as $id) {
             if (mb_strpos($id, 'new') === 0) {
                 [,$tag] = explode('new', $id);
@@ -38,6 +39,7 @@ class TagRepository extends ServiceEntityRepository
                 $tags[] = $tag;
             }
         }
+
         return $tags;
     }
 }

@@ -18,7 +18,8 @@ class SectionMenu
         private Security          $security
     ) {}
 
-    public function build(array $options): ItemInterface {
+    public function build(array $options): ItemInterface
+    {
         /** @var Section[] $sections */
         $sections = $this->sectionRepository->findBy(['enabled' => true]);
         $menu = $this->factory->createItem('Home', ['route' => 'blog', 'childrenAttributes' => ['class' => 'nav',]]);

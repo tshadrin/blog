@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping\Table;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-
 #[Entity(repositoryClass: UserRepository::class)]
 #[Table(name: "users")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface

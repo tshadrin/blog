@@ -33,6 +33,7 @@ class PostDTO
         $postDTO->section = $post->getSection();
         $postDTO->status = $post->getStatus()->getName();
         $postDTO->tags2 = $postDTO->convertToSelectize($post->getTags());
+        
         return $postDTO;
     }
 

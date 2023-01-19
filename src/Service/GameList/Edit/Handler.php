@@ -24,7 +24,8 @@ class Handler
         $command->gameItem->setPurchaseDate($command->gameItemDTO->purchase_date);
         $command->gameItem->setFormat(new Format($command->gameItemDTO->format));
         $command->gameItem->setDeleted($command->gameItemDTO->deleted);
-        if ($command->gameItemDTO->format === Format::DISC ||
+        if (
+            $command->gameItemDTO->format === Format::DISC ||
             $command->gameItemDTO->format === Format::DIGITAL ||
             $command->gameItemDTO->format === Format::DLC
         ) {
