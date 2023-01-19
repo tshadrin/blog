@@ -1,29 +1,31 @@
 {
-    "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.0",
-        "bootstrap": "4",
-        "ckeditor": "^4.12.1",
-        "ckeditor-youtube-plugin": "^2.1.19",
-        "core-js": "^3.0.0",
-        "highlight.js": "^9.15.10",
-        "jquery": "^3.4.1",
-        "jquery-ui-dist": "^1.12.1",
-        "jquery-ui-themes": "^1.12.0",
-        "node-sass": "^6.0.0",
-        "popper.js": "^1.15.0",
-        "regenerator-runtime": "^0.13.2",
-        "requirejs": "^2.3.6",
-        "sass-loader": "7.0.1",
-        "selectize": "^0.12.6",
-        "webpack-notifier": "^1.6.0"
-    },
-    "license": "Apache-2.0",
-    "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    },
-    "dependencies": {}
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.8.1",
+    "bootstrap": "4",
+    "ckeditor": "^4.12.1",
+    "ckeditor-youtube-plugin": "^2.1.19",
+    "core-js": "^3.0.0",
+    "highlight.js": "^9.15.10",
+    "jquery": "^3.4.1",
+    "jquery-ui-dist": "^1.12.1",
+    "jquery-ui-themes": "^1.12.0",
+    "node-sass": "^7.0.1",
+    "popper.js": "^1.15.0",
+    "regenerator-runtime": "^0.13.2",
+    "requirejs": "^2.3.6",
+    "sass-loader": "^12.6.0",
+    "selectize": "^0.12.6",
+    "webpack-notifier": "^1.6.0"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+    "file-loader": "^6.2.0"
+  }
 }

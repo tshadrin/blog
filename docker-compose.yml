@@ -42,7 +42,7 @@ services:
             - ./:/app
         working_dir: /app
     blog-mysql:
-        image: mysql:5.7
+        image: arm64v8/mariadb
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: blog
