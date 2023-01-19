@@ -51,7 +51,7 @@ services:
         volumes:
             - ./docker/development/mysql:/docker-entrypoint-initdb.d
     blog-node-watch:
-        image: node:14.17-alpine
+        image: node:18-alpine
         volumes:
             - ./:/app
         working_dir: /app
