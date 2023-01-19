@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@symfony/webpack-encore": "^1.8.1",
+    "@symfony/webpack-encore": "^4.0.0",
     "bootstrap": "4",
     "ckeditor": "^4.12.1",
     "ckeditor-youtube-plugin": "^2.1.19",
@@ -9,12 +9,13 @@
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "jquery-ui-themes": "^1.12.0",
-    "node-sass": "^7.0.1",
+    "node-sass": "^8.0.0",
     "popper.js": "^1.15.0",
     "regenerator-runtime": "^0.13.2",
     "requirejs": "^2.3.6",
-    "sass-loader": "^12.6.0",
+    "sass-loader": "^13.0.0",
     "selectize": "^0.12.6",
+    "webpack-cli": "^5.0.1",
     "webpack-notifier": "^1.6.0"
   },
   "license": "Apache-2.0",
@@ -26,6 +27,9 @@
     "build": "encore production --progress"
   },
   "dependencies": {
-    "file-loader": "^6.2.0"
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "file-loader": "^6.2.0",
+    "webpack": "^5.75.0"
   }
 }
