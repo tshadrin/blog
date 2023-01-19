@@ -95,8 +95,8 @@
             "@auto-scripts"
         ],
         "lint": "phplint",
-        "cs-check": "phpcs",
-        "cs-fix": "phpcbf"
+        "phpcs": "phpcs --standard=phpcs.xml",
+        "phpcbf": "phpcbf --standard=phpcs.xml"
     },
     "conflict": {
         "symfony/symfony": "*"
