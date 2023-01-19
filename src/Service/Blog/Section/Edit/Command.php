@@ -9,12 +9,8 @@ use App\Form\Section\SectionDTO;
 
 class Command
 {
-    public Section $section;
-    public SectionDTO $sectionDTO;
-
-    public function __construct(Section $section, SectionDTO $sectionDTO)
-    {
-        $this->section = $section;
-        $this->sectionDTO = $sectionDTO;
-    }
+    public function __construct(
+        public Section $section,
+        public SectionDTO $sectionDTO
+    ) {}
 }

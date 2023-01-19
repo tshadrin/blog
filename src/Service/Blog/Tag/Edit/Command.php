@@ -9,12 +9,8 @@ use App\Form\Tag\TagDTO;
 
 class Command
 {
-    public Tag $tag;
-    public TagDTO $tagDTO;
-
-    public function __construct(Tag $tag, TagDTO $tagDTO)
-    {
-        $this->tag = $tag;
-        $this->tagDTO = $tagDTO;
-    }
+    public function __construct(
+        public Tag $tag,
+        public TagDTO $tagDTO
+    ) {}
 }

@@ -9,12 +9,8 @@ use App\Form\GameList\GameItemDTO;
 
 class Command
 {
-    public GameItem $gameItem;
-    public GameItemDTO $gameItemDTO;
-
-    public function __construct(GameItem $gameItem, GameItemDTO $gameItemDTO)
-    {
-        $this->gameItem = $gameItem;
-        $this->gameItemDTO = $gameItemDTO;
-    }
+    public function __construct(
+        public GameItem $gameItem,
+        public GameItemDTO $gameItemDTO
+    ) {}
 }
