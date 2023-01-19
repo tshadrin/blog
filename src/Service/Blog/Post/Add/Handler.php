@@ -58,9 +58,9 @@ class Handler
         $this->postRepository->save($post);
         $this->postRepository->flush();
         $hru = $this->hruGenerator->generate(new Options(
-            $post->getSection()->getName(), //prefix
-            $post->getTitle(),              //value
-            $post->getId()                  //entityId
+            prefix: $post->getSection()->getName(),
+            value: $post->getTitle(),
+            entityId: $post->getId()
         ));
         $post->setHru($hru);
         $this->postRepository->flush();

@@ -36,9 +36,9 @@ class Handler
     {
         if ($this->isTitleChanged($command->post, $command->postDTO) || $this->isSectionChanged($command->post, $command->postDTO)) {
             $hru = $this->hruGenerator->generate(new Options(
-                $command->postDTO->section->getName(), //prefix
-                $command->postDTO->title, //value
-                $command->post->getId() //entityId
+                prefix: $command->postDTO->section->getName(),
+                value: $command->postDTO->title,
+                entityId: $command->post->getId()
             ));
             $command->post->setHru($hru);
         }
