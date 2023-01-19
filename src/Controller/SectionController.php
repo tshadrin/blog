@@ -13,20 +13,15 @@ use App\Service\Blog\Section\Edit;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route(name="section", path="/section")
- */
+#[Route("/section", name: "section")]
 class SectionController extends AbstractController
 {
-    /**
-     * @Route("/add", name=".add", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/add", name: ".add", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function add(Request $request, Add\Handler $handler): Response
     {
         $form = $this->createForm(SectionForm::class);
@@ -39,9 +34,8 @@ class SectionController extends AbstractController
         return $this->render("blog/section/section-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/edit/{section}", name=".edit", methods={"GET","POST"})
-     */
+    #[Route("/edit/{section}", name: ".edit", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function edit(Section $section, Request $request, Edit\Handler $handler): Response
     {
         $sectionDTO = SectionDTO::createFromSection($section);
@@ -55,10 +49,8 @@ class SectionController extends AbstractController
         return $this->render("blog/section/section-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/list/table", name=".table", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/list/table", name: ".table", methods: ["GET"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function table(SectionRepository $sectionRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagedSections = $paginator->paginate($sectionRepository->findAll(), $request->query->getInt('page', 1));

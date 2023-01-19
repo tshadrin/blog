@@ -20,15 +20,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Webmozart\Assert\Assert;
 
-/**
- * @Route(name="game_list", path="/game-list")
- */
+#[Route("/game-list", name: "game_list")]
 class GameListController extends AbstractController
 {
-    /**
-     * @Route("/add", name=".add", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/add", name: ".add", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function add(Request $request, Add\Handler $handler): Response
     {
         $form = $this->createForm(GameItemForm::class);
@@ -41,9 +37,7 @@ class GameListController extends AbstractController
         return $this->render("gamelist/game-item-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/edit/{game}", name=".edit", methods={"GET","POST"})
-     */
+    #[Route("/edit/{game}", name: ".edit", methods: ["GET", "POST"])]
     public function edit(GameItem $game, Request $request, Edit\Handler $handler): Response
     {
         $gameDTO = GameItemDTO::createFromGameItem($game);
@@ -57,10 +51,8 @@ class GameListController extends AbstractController
         return $this->render("gamelist/game-item-add.html.twig", array_merge(['form' => $form->createView()], $request->query->all()));
     }
 
-    /**
-     * @Route("/table", name=".table", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/table", name: ".table", methods: ["GET"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function table(
         GameItemRepository $gameItemRepository,
         PaginatorInterface $paginator,
@@ -73,10 +65,8 @@ class GameListController extends AbstractController
         return $this->render("gamelist/table.html.twig", compact('games'));
     }
 
-    /**
-     * @Route("/table-platform/{platform}", name=".table-platform", methods={"GET"}, defaults={"platform"=GameItemRepository::CONSOLES_PLATFROMS})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/table-platform/{platform}", name: ".table-platform", methods: ["GET"], defaults: ["platform" => GameItemRepository::CONSOLES_PLATFROMS])]
+    #[IsGranted("ROLE_ADMIN")]
     public function gamesTableByPlatform(
         string $platform,
         GameItemRepository $gameItemRepository,
@@ -95,10 +85,8 @@ class GameListController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/delete/{gameItem}", name=".delete", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/delete/{gameItem}", name: ".delete", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function delete(GameItem $gameItem, Request $request, GameItemRepository $gameItemRepository): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
@@ -109,10 +97,8 @@ class GameListController extends AbstractController
         return $this->redirectToRoute('game_list.table');
     }
 
-    /**
-     * @Route("/statistics", name=".statistics", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/statistics", name: ".statistics", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function statistics(GameItemRepository $gameItemRepository): Response
     {
         $sum = 0;

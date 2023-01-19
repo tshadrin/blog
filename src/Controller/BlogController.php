@@ -24,14 +24,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * @Route("/", name="blog")
- */
+
+#[Route("/", name: "blog")]
 class BlogController extends AbstractController
 {
-    /**
-     * @Route(path="", name="", methods={"GET"})
-     */
+    #[Route("", name: "", methods: ["GET"])]
     public function list(
         PostRepository $postRepository,
         SectionRepository $sectionRepository,
@@ -53,10 +50,8 @@ class BlogController extends AbstractController
         return $this->render("blog/blog.html.twig", ['posts' => $pagedPosts]);
     }
 
-    /**
-     * @Route("/blog/add", name=".add", methods={"GET","POST"})
-     * IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/blog/add", name: ".add", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function add(Request $request, Add\Handler $handler): Response
     {
         $form = $this->createForm(PostForm::class);
@@ -69,10 +64,8 @@ class BlogController extends AbstractController
         return $this->render("blog/post-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/blog/edit/{post}", name=".edit", methods={"GET","POST"})
-     * IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/blog/edit/{post}", name: ".edit", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function edit(Post $post, Request $request, Edit\Handler $handler): Response
     {
         $postDTO = PostDTO::createFromPost($post);
@@ -86,27 +79,21 @@ class BlogController extends AbstractController
         return $this->render("blog/post-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/blog/{section}", name=".section", methods={"GET"}, requirements={"section":"[a-z]+"})
-     */
+    #[Route("/blog/{section}", name: ".section", methods: ["GET"], requirements: ["section" => "[a-z]+"])]
     public function section(string $section, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
     {
         $pagedPosts = $paginator->paginate($postRepository->findBySection($section), $request->query->getInt('page', 1));
         return $this->render("blog/blog.html.twig", ['posts' => $pagedPosts]);
     }
 
-    /**
-     * @Route("/blog/tag/{tag}", name=".tag", methods={"GET"}, requirements={"tag":"^[ёЁA-zА-я0-9 -’]+"}, options={"utf8": true})
-     */
+    #[Route("/blog/tag/{tag}", name: ".tag", methods: ["GET"], requirements: ["tag" => "^[ёЁA-zА-я0-9 -’]+"], options: ["utf8" => true])]
     public function tag(string $tag, PaginatorInterface $paginator, PostRepository $postRepository, Request $request): Response
     {
         $pagedPosts = $paginator->paginate($postRepository->findByTag($tag), $request->query->getInt('page', 1));
         return $this->render("blog/blog.html.twig", ['posts' => $pagedPosts]);
     }
 
-    /**
-     * @Route("/blog/show/{post}", name=".show", methods={"GET"}, requirements={"post": "\d+"})
-     */
+    #[Route("/blog/show/{post}", name: ".show", methods: ["GET"], requirements: ["post" => "\d+"])]
     public function showPost(Post $post): Response
     {
         if (!is_null($hru = $post->getHru())) {
@@ -122,20 +109,16 @@ class BlogController extends AbstractController
         return $this->redirectToRoute('blog');
     }
 
-    /**
-     * @Route("/blog/list/table", name=".table", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/blog/list/table", name: ".table", methods: ["GET"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function table(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagedPosts = $paginator->paginate($postRepository->findBy([], ['created' => "DESC"]), $request->query->getInt('page', 1));
         return $this->render("blog/table.html.twig", ['posts' => $pagedPosts]);
     }
 
-    /**
-     * @Route("/blog/delete/{post}", name=".delete", methods={"POST"})
-     * IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/blog/delete/{post}", name: ".delete", methods: ["POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function delete(Post $post, Request $request, Delete\Handler $handler, TranslatorInterface $translator): Response
     {
         if (!$this->isCsrfTokenValid('delete', $request->request->get('token'))) {
@@ -147,11 +130,9 @@ class BlogController extends AbstractController
         return $this->redirectToRoute("blog");
     }
 
-    /**
-     * @Route("/blog/{prefix}/{value}", name=".show.from.hru", methods={"GET"})
-     * @Entity("hru", expr="repository.findOneBy({'prefix': prefix, 'value': value})")
-     * @Entity("post", expr="repository.findOneBy({'hru': hru})")
-     */
+    #[Route("/blog/{prefix}/{value}", name: ".show.from.hru", methods: ["GET"])]
+    #[Entity("hru", expr: "repository.findOneBy({'prefix': prefix, 'value': value})")]
+    #[Entity("post", expr: "repository.findOneBy({'hru': hru})")]
     public function showFromHru(Hru $hru, Post $post): Response
     {
         if ($post->isPublished() || $this->isGranted("ROLE_ADMIN")) {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Blog\Section;
 use App\Entity\Blog\Tag;
 use App\Form\Tag\TagDTO;
 use App\Form\Tag\TagForm;
@@ -15,20 +14,16 @@ use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route(name="tag", path="/tag")
- */
+
+#[Route("/tag", name: "tag")]
 class TagController extends AbstractController
 {
-    /**
-     * @Route("/add", name=".add", methods={"GET","POST"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/add", name: ".add", methods: ["GET", "POST"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function add(Request $request, Add\Handler $handler): Response
     {
         $form = $this->createForm(TagForm::class);
@@ -41,9 +36,7 @@ class TagController extends AbstractController
         return $this->render("blog/tag/tag-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/edit/{tag}", name=".edit", methods={"GET","POST"})
-     */
+    #[Route("/edit/{tag}", name: ".edit", methods: ["GET", "POST"])]
     public function edit(Tag $tag, Request $request, Edit\Handler $handler): Response
     {
         $tagDTO = TagDTO::createFromTag($tag);
@@ -57,20 +50,16 @@ class TagController extends AbstractController
         return $this->render("blog/tag/tag-add.html.twig", ['form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/list/table", name=".table", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
-     */
+    #[Route("/list/table", name: ".table", methods: ["GET"])]
+    #[IsGranted("ROLE_ADMIN")]
     public function table(TagRepository $tagRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagedTags = $paginator->paginate($tagRepository->findAll(), $request->query->getInt('page', 1));
         return $this->render("blog/tag/table.html.twig", ['tags' => $pagedTags]);
     }
 
-    /**
-     * @Route("/all/json", name=".json", methods={"GET"})
-     * @IsGranted("ROLE_USER")
-     */
+    #[Route("/all/json", name: ".json", methods: ["GET"])]
+    #[IsGranted("ROLE_USER")]
     public function jsonTags(TagRepository $tagRepository): JsonResponse
     {
         $tags = $tagRepository->findAll();
