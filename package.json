@@ -30,6 +30,6 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "file-loader": "^6.2.0",
-    "webpack": "^5.75.0"
+    "webpack": "^5.76.0"
   }
 }
